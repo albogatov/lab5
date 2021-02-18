@@ -1,0 +1,4 @@
+name,x,y,salary,endDate,position,status,organization,orgType,annualTurnover,street,postalCode
+Steven,204,206,22,2021-11-11,ENGINEER,HIRED,ITMO,COMMERCIAL,100,Venice,664092  
+Rick,203,250,44,2021-11-11,LABORER,FIRED,ITMO,COMMERCIAL,100,Venice,664092 
+Rick,203,250,44,2021-11-11,LABORER,FIRED,ITMOO,COMMERCIAL,100,Venice,664092 
