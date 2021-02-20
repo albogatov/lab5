@@ -8,7 +8,6 @@ import java.util.*;
 import elements.*;
 import interaction.Storage;
 import com.opencsv.CSVParser;
-import elements.*;
 
 public class ReadyCSVParser {
     protected static CSVParser parser = new CSVParser();
@@ -59,11 +58,20 @@ public class ReadyCSVParser {
     public static HashSet<Worker> readWorkers(File file, HashSet<Worker> workers, Storage storage) throws IOException {
         FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = new BufferedInputStream(fis);
-        DataInputStream dis = new DataInputStream(bis);
-        int counter = 1;
-        ReadyCSVParser.readKeyLine(dis.readLine());
-        while (dis.available() != 0) {
-            Worker worker = readWorker(dis.readLine());
+        /*
+        This method does not properly convert bytes to characters. As of JDK 1.1, the preferred way to read lines of text is via the BufferedReader.readLine() method. Programs that use the DataInputStream class to read lines can be converted to use the BufferedReader class by replacing code of the form:
+      DataInputStream d = new DataInputStream(in);
+with:
+      BufferedReader d           = new BufferedReader(new InputStreamReader(in));
+         */
+        //DataInputStream dis = new DataInputStream(bis);
+        //{orgtype=8, enddate=4, street=10, postalcode=11, organization=7, name=0, x=1, y=2, position=5, salary=3, status=6, annualturnover=9}
+        //{orgtype=8, enddate=4, street=10, postalcode=11, organization=7, name=0, x=1, y=2, position=5, salary=3, status=6, annualturnover=9}
+        BufferedReader br = new BufferedReader(new InputStreamReader(bis));
+        String line;
+        ReadyCSVParser.readKeyLine(br.readLine());
+        while ((line = br.readLine()) != null) {
+            Worker worker = readWorker(line);
             if (worker != null) workers.add(worker);
             storage.generateId(worker);
         }
