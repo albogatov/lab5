@@ -1,7 +1,6 @@
 package app;
 
 import commands.*;
-import exceptions.MoreArgumentsRequiredException;
 import exceptions.NonExistingCommandException;
 import interaction.InteractionInterface;
 import interaction.UserInterface;
@@ -57,7 +56,7 @@ public class CommandCenter {
         return commands.keySet().stream().map(x -> (commands.get(x))).collect(Collectors.toList());
     }
 
-    public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException, MoreArgumentsRequiredException {
+    public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException {
         Command cmd = getCmd(line);
         String[] args = fullLine.split(" ");
         cmd.execute(ui, args, interactiveStorage);

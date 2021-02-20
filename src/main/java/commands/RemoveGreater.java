@@ -3,7 +3,6 @@ package commands;
 import app.Command;
 import elements.Worker;
 import interaction.InteractionInterface;
-import exceptions.MoreArgumentsRequiredException;
 import interaction.UserInterface;
 
 import java.io.IOException;
@@ -15,9 +14,7 @@ public class RemoveGreater extends Command {
         description = "удалить из коллекции все элементы, превышающие заданный";
     }
 
-    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException {
-        if (arguments.length < 3)
-            throw new MoreArgumentsRequiredException("Введено слишком мало аргументов");
+    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         int size1 = interactiveStorage.getSize();
         Worker worker = ui.readWorker(arguments, 1);
         interactiveStorage.remove_greater(worker);

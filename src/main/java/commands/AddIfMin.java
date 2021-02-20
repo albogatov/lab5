@@ -3,7 +3,6 @@ package commands;
 import app.Command;
 import elements.Worker;
 import interaction.InteractionInterface;
-import exceptions.MoreArgumentsRequiredException;
 import interaction.UserInterface;
 
 import java.io.IOException;
@@ -16,9 +15,7 @@ public class AddIfMin extends Command {
                 "ввести имя, оклад сотрудника";
     }
 
-    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException {
-        if (arguments.length < 3)
-            throw new MoreArgumentsRequiredException("Введено слишком мало аргументов");
+    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         int size1 = interactiveStorage.getSize();
         Worker worker = ui.readWorker(arguments, 1);
         interactiveStorage.add_if_min(worker);

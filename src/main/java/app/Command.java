@@ -1,6 +1,5 @@
 package app;
 
-import exceptions.MoreArgumentsRequiredException;
 import exceptions.NonExistingCommandException;
 import interaction.InteractionInterface;
 import interaction.UserInterface;
@@ -11,7 +10,7 @@ public abstract class Command {
     protected String cmdLine;
     protected String description;
 
-    public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException, NonExistingCommandException;
+    public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException;
 
     public Command() {
 

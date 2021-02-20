@@ -1,7 +1,6 @@
 package commands;
 
 import app.Command;
-import exceptions.MoreArgumentsRequiredException;
 import interaction.InteractionInterface;
 import interaction.UserInterface;
 import elements.Worker;
@@ -15,10 +14,7 @@ public class Add extends Command {
                 "ввести имя, оклад сотрудника";
     }
 
-    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException {
-        if (arguments.length < 3) {
-            throw new MoreArgumentsRequiredException("Введено слишком мало аргументов");
-        }
+    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         Worker worker = ui.readWorker(arguments, 1);
         interactiveStorage.add(worker);
         ui.displayMessage("Сотрудник успешно добавлен");

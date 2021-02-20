@@ -1,14 +1,16 @@
 package elements;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Worker {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Integer salary; //Поле не может быть null, Значение поля должно быть больше 0
-    private java.time.LocalDate endDate; //Поле может быть null
+    private LocalDate endDate; //Поле может быть null
     private Position position; //Поле может быть null
     private Status status; //Поле может быть null
     private Organization organization; //Поле может быть null

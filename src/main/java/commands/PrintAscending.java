@@ -2,7 +2,6 @@ package commands;
 
 import app.Command;
 import interaction.InteractionInterface;
-import exceptions.MoreArgumentsRequiredException;
 import interaction.UserInterface;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class PrintAscending extends Command {
         description = "вывести элементы коллекции в порядке возрастания";
     }
 
-    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException {
+    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         interactiveStorage.print_ascending();
     }
 }

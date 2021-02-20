@@ -38,9 +38,9 @@ public class ReadyCSVParser {
         List<String> values = ReadyCSVParser.readLine(line);
         String name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
         Coordinates coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
-        java.time.ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+        ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
         Integer salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
-        java.time.LocalDate endDate = LocalDate.parse(values.get(keySet.get("enddate")));//Поле может быть null
+        LocalDate endDate = LocalDate.parse(values.get(keySet.get("enddate")));//Поле может быть null
         Position position = Position.valueOf(values.get(keySet.get("position")).toUpperCase()); //Поле может быть null
         Status status = Status.valueOf(values.get(keySet.get("status")).toUpperCase()); //Поле может быть null
         Organization organization = new Organization(Long.parseLong(values.get(keySet.get("annualturnover"))),
