@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -40,14 +41,13 @@ public class ReadyCSVParser {
         Coordinates coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
         java.time.ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
         Integer salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
-        // java.time.LocalDate endDate = MyCSVParser.readCSVDate("endDate", line); //Поле может быть null
+        java.time.LocalDate endDate = LocalDate.parse(values.get(keySet.get("enddate")));//Поле может быть null
         Position position = Position.valueOf(values.get(keySet.get("position")).toUpperCase()); //Поле может быть null
         Status status = Status.valueOf(values.get(keySet.get("status")).toUpperCase()); //Поле может быть null
         Organization organization = new Organization(Long.parseLong(values.get(keySet.get("annualturnover"))),
                 OrganizationType.valueOf(values.get(keySet.get("orgtype")).toUpperCase()),
                 new Address(values.get(keySet.get("street")), values.get(keySet.get("postalcode"))),
                 values.get(keySet.get("organization")));
-        java.time.LocalDate endDate = null;
         if (name == null || name.equals("") || coordinates == null || salary == null || salary <= 0) {
             System.out.println("Данные неверны");
             return null;
