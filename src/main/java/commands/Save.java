@@ -17,7 +17,7 @@ public class Save extends Command {
     }
 
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException {
-        if(arguments.length < 2)
+        if (arguments.length < 2)
             throw new MoreArgumentsRequiredException("Введено слишком мало аргументов");
         String filePath = arguments[1];
         PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));

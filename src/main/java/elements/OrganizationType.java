@@ -2,7 +2,7 @@ package elements;
 
 public enum OrganizationType {
     COMMERCIAL("COMMERCIAL", "Коммерческая"),
-    PRIVATE_LIMITED_COMPANY("PRIVATE_LIMITED_COMPANY","Общество с ограниченной ответственностью"),
+    PRIVATE_LIMITED_COMPANY("PRIVATE_LIMITED_COMPANY", "Общество с ограниченной ответственностью"),
     OPEN_JOINT_STOCK_COMPANY("OPEN_JOINT_STOCK_COMPANY", "Открытое акционерное общество");
 
     private String text;

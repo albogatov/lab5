@@ -35,44 +35,56 @@ public class Main {
          line = in.nextLine();
          } */
         UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);
-        if (args[0] == null) {
-            System.out.println("Путь к исходным данным не задан");
-        } else {
-            while (true) {
-                try {
-                    File dataFile = new File(args[0]);
-                    Storage storage = new Storage();
-                    StorageInteraction interactiveStorage = new StorageInteraction(storage);
-                    ReadyCSVParser.readWorkers(dataFile, storage.getCollection(), storage);
-                    if (storage.getCollection().size() < 1) {
-                        System.out.println("Пустая коллекция" + "\n");
-                        System.exit(0);
+        boolean firstOpening = true;
+        try {
+            if (args[0] == null) {
+                System.out.println("Путь к исходным данным не задан");
+            } else {
+                while (true) {
+                    try {
+                        File dataFile = new File(args[0]);
+                        Storage storage = new Storage();
+                        StorageInteraction interactiveStorage = new StorageInteraction(storage);
+                        try{
+                            ReadyCSVParser.readWorkers(dataFile, storage.getCollection(), storage);
+                        } catch (NullPointerException e) {
+                            userInteraction.displayMessage("Ключевая строка введена неверно");
+                            System.exit(0);
+                        }
+                        if (storage.getCollection().size() < 1) {
+                            System.out.println("Пустая коллекция" + "\n");
+                            System.exit(0);
+                        }
+                        // System.out.println(storage.getCollection());
+                        if (firstOpening)
+                            userInteraction.displayMessage("Введите команду, полный список команд можно получить с помощью команды help.");
+                        firstOpening = false;
+                        String line;
+                        do {
+                            line = userInteraction.read();
+                            String cmd = line.split(" ")[0];
+                            CommandCenter.getInstance().executeCommand(userInteraction, cmd, line, interactiveStorage);
+                        } while (userInteraction.hasNextLine());
+                    } catch (NonExistingCommandException e) {
+                        userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
+                    } catch (MoreArgumentsRequiredException e) {
+                        userInteraction.displayMessage("Было введено слишком мало аргументов, перепроверьте ввод");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения");
+                    } catch (NumberFormatException e) {
+                        userInteraction.displayMessage("Неправильно введены числовые данные");
+                    } catch (IOException e) {
+                        userInteraction.displayMessage("Ввод некорректен");
+                    } catch (InvalidParameterException e) {
+                        userInteraction.displayMessage(e.getMessage());
+                    } catch (Exception e) {
+                        userInteraction.displayMessage("Ох не повезло, не повезло");
+                        e.printStackTrace();
                     }
-                    // System.out.println(storage.getCollection());
-                    userInteraction.displayMessage("Введите команду, полный список команд можно получить с помощью команды help.");
-                    String line;
-                    do {
-                        line = userInteraction.read();
-                        String cmd = line.split(" ")[0];
-                        CommandCenter.getInstance().executeCommand(userInteraction, cmd, line, interactiveStorage);
-                    } while (userInteraction.hasNextLine());
-                } catch (NonExistingCommandException e) {
-                    userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
-                } catch (MoreArgumentsRequiredException e) {
-                    userInteraction.displayMessage("Было введено слишком мало аргументов, перепроверьте ввод");
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения");
-                } catch (NumberFormatException e) {
-                    userInteraction.displayMessage("Неправильно введены числовые данные");
-                } catch (IOException e) {
-                    userInteraction.displayMessage("Ввод некорректен");
-                } catch (InvalidParameterException e) {
-                    userInteraction.displayMessage(e.getMessage());
-                } catch (Exception e) {
-                    userInteraction.displayMessage("Ох неповезло неповезло");
-                    e.printStackTrace();
                 }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            userInteraction.displayMessage("Не указан путь изначального файла");
         }
     }
 }

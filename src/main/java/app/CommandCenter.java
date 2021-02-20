@@ -41,14 +41,14 @@ public class CommandCenter {
     }
 
     public Command getCmd(String cmdLine) throws NonExistingCommandException {
-        if(!commands.containsKey(cmdLine)) {
+        if (!commands.containsKey(cmdLine)) {
             throw new NonExistingCommandException("Такой команды не существует");
         }
         return commands.getOrDefault(cmdLine, null);
     }
 
     public static CommandCenter getInstance() {
-        if(commandCenter == null)
+        if (commandCenter == null)
             return new CommandCenter();
         return commandCenter;
     }
@@ -60,11 +60,11 @@ public class CommandCenter {
     public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException, MoreArgumentsRequiredException {
         Command cmd = getCmd(line);
         String[] args = fullLine.split(" ");
-        cmd.execute(ui, args,interactiveStorage);
+        cmd.execute(ui, args, interactiveStorage);
     }
 
     /** public Command retrieveCommand(String line) {
-        Command cmd = getCmd(line);
-        return cmd;
-    } */
+     Command cmd = getCmd(line);
+     return cmd;
+     } */
 }

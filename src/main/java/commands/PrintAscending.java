@@ -10,7 +10,7 @@ import java.io.IOException;
 public class PrintAscending extends Command {
 
     public PrintAscending() {
-        cmdLine = "print_ascending";
+        cmdLine = "printAscending";
         description = "вывести элементы коллекции в порядке возрастания";
     }
 

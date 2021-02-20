@@ -1,7 +1,7 @@
 package elements;
 
 public enum Status {
-    FIRED("FIRED","Уволен"),
+    FIRED("FIRED", "Уволен"),
     HIRED("HIRED", "Нанят"),
     RECOMMENDED_FOR_PROMOTION("RECOMMENDED_FOR_PROMOTION", "Рекомендован к повышению"),
     REGULAR("REGULAR", "Регулярное выражение"),

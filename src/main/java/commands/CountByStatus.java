@@ -11,12 +11,12 @@ import java.io.IOException;
 public class CountByStatus extends Command {
 
     public CountByStatus() {
-        cmdLine = "count_by_status";
+        cmdLine = "countByStatus";
         description = "вывести количество элементов, значение поля status которых равно заданному";
     }
 
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException {
-        if(arguments.length < 2)
+        if (arguments.length < 2)
             throw new MoreArgumentsRequiredException("Введено слишком мало аргументов");
         Status status = Status.valueOf(arguments[1].toUpperCase());
         int result = interactiveStorage.count_by_status(status);

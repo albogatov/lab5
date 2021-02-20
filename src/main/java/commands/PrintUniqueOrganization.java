@@ -12,14 +12,14 @@ import java.util.List;
 public class PrintUniqueOrganization extends Command {
 
     public PrintUniqueOrganization() {
-        cmdLine = "print_unique_organization";
+        cmdLine = "printUniqueOrganization";
         description = "вывести уникальные значения поля organization всех элементов в коллекции";
     }
 
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, MoreArgumentsRequiredException {
         List<String> result = interactiveStorage.print_unique_organization();
         Iterator itr = result.iterator();
-        while(itr.hasNext()) {
+        while (itr.hasNext()) {
             ui.displayMessage(itr.next().toString());
         }
     }

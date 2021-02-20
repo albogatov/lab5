@@ -11,7 +11,7 @@ import java.io.IOException;
 public class RemoveGreater extends Command {
 
     public RemoveGreater() {
-        cmdLine = "remove_greater";
+        cmdLine = "removeGreater";
         description = "удалить из коллекции все элементы, превышающие заданный";
     }
 

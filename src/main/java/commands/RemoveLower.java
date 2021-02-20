@@ -11,7 +11,7 @@ import java.io.IOException;
 public class RemoveLower extends Command {
 
     public RemoveLower() {
-        cmdLine = "remove_lower";
+        cmdLine = "removeLower";
         description = "удалить из коллекции все элементы, меньшие, чем заданный";
     }
 

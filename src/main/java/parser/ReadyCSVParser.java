@@ -2,10 +2,7 @@ package parser;
 
 import java.io.*;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import elements.*;
 import interaction.Storage;
@@ -14,7 +11,7 @@ import elements.*;
 
 public class ReadyCSVParser {
     protected static CSVParser parser = new CSVParser();
-    protected static List<String> lines = new ArrayList<>();
+    protected static HashMap<String, Integer> keySet = new HashMap<>();
 
     public ReadyCSVParser() {
 
@@ -26,30 +23,12 @@ public class ReadyCSVParser {
      * @return
      */
 
-    /**
-     * public static List<String> readKeyLine(File file) {
-     * try {
-     * BufferedReader reader = new BufferedReader(new FileReader(file));
-     * String line = reader.readLine();
-     * List<String> keys = Arrays.asList(parser.parseLine(line));
-     * for(String s : keys) {
-     * switch (s) {
-     * case "name":
-     * <p>
-     * }
-     * }
-     * return keys;
-     * while ((line = reader.readLine()) != null) {
-     * lines.add(line);
-     * }
-     * System.out.println(lines.get(0));
-     * }
-     * catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     * return null;
-     * }
-     */
+     public static void readKeyLine(String line) throws IOException {
+         List<String> keyLineValues = Arrays.asList(parser.parseLine(line));
+         for(String s : keyLineValues) {
+             keySet.put(s.toLowerCase(), keyLineValues.indexOf(s));
+         }
+     }
 
     public static List<String> readLine(String line) throws IOException {
         return Arrays.asList(parser.parseLine(line));
@@ -57,17 +36,17 @@ public class ReadyCSVParser {
 
     public static Worker readWorker(String line) throws IOException {
         List<String> values = ReadyCSVParser.readLine(line);
-        String name = values.get(0); //Поле не может быть null, Строка не может быть пустой
-        Coordinates coordinates = new Coordinates(Integer.parseInt(values.get(1)), Integer.parseInt(values.get(2))); //Поле не может быть null
+        String name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
+        Coordinates coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
         java.time.ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-        Integer salary = Integer.parseInt(values.get(3)); //Поле не может быть null, Значение поля должно быть больше 0
+        Integer salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
         // java.time.LocalDate endDate = MyCSVParser.readCSVDate("endDate", line); //Поле может быть null
-        Position position = Position.valueOf(values.get(5).toUpperCase()); //Поле может быть null
-        Status status = Status.valueOf(values.get(6).toUpperCase()); //Поле может быть null
-        Organization organization = new Organization(Long.parseLong(values.get(9)),
-                OrganizationType.valueOf(values.get(8).toUpperCase()),
-                new Address(values.get(10), values.get(11)),
-                values.get(7));
+        Position position = Position.valueOf(values.get(keySet.get("position")).toUpperCase()); //Поле может быть null
+        Status status = Status.valueOf(values.get(keySet.get("status")).toUpperCase()); //Поле может быть null
+        Organization organization = new Organization(Long.parseLong(values.get(keySet.get("annualturnover"))),
+                OrganizationType.valueOf(values.get(keySet.get("orgtype")).toUpperCase()),
+                new Address(values.get(keySet.get("street")), values.get(keySet.get("postalcode"))),
+                values.get(keySet.get("organization")));
         java.time.LocalDate endDate = null;
         if (name == null || name.equals("") || coordinates == null || salary == null || salary <= 0) {
             System.out.println("Данные неверны");
@@ -82,7 +61,7 @@ public class ReadyCSVParser {
         BufferedInputStream bis = new BufferedInputStream(fis);
         DataInputStream dis = new DataInputStream(bis);
         int counter = 1;
-        String keyLine = dis.readLine();
+        ReadyCSVParser.readKeyLine(dis.readLine());
         while (dis.available() != 0) {
             Worker worker = readWorker(dis.readLine());
             if (worker != null) workers.add(worker);

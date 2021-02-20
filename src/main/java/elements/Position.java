@@ -1,7 +1,7 @@
 package elements;
 
 public enum Position {
-    LABORER("LABORER","Разнорабочий"),
+    LABORER("LABORER", "Разнорабочий"),
     ENGINEER("ENGINEER", "Инженер"),
     CLEANER("CLEANER", "Уборщик");
 
