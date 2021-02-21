@@ -55,6 +55,8 @@ public class Main {
                         userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу");
                     } catch (IOException e) {
                         userInteraction.displayMessage("Ввод некорректен");
+                    } catch (StackOverflowError e) {
+                        userInteraction.displayMessage("Дальнейшее исполнение скрипта приведет к рекурсии");
                     } catch (Exception e) {
                         userInteraction.displayMessage("Ох не повезло, не повезло");
                         e.printStackTrace();

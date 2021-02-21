@@ -62,8 +62,4 @@ public class CommandCenter {
         cmd.execute(ui, args, interactiveStorage);
     }
 
-    /** public Command retrieveCommand(String line) {
-     Command cmd = getCmd(line);
-     return cmd;
-     } */
 }

@@ -1,42 +1,8 @@
-add Nicky 1000
+add Donald 27
 
 111
 111
 hired
 engineer
 
-add_if_min Ronald 11
-2021-11-11
-111
-111
-fired
-engineer
-ITMO
-1090
-COMMERCIAL
-Venice
-664082
-count_by_status Fired
-help
-info
-print_ascending
-print_unique_organization
-remove_by_id 1
-remove_greater Donald 27
-
-111
-111
-hired
-engineer
-
-remove_lower Francine 20
-
-111
-111
-hired
-engineer
-
-show
-exit
-yes
-
+executeScript C:\Users\lifep\OneDrive\Documents\Занятия\Прога\lab5\secondScript.txt

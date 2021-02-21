@@ -26,7 +26,8 @@ public class Update extends Command {
             }
             worker = ui.readWorker(arguments, 0);
             interactiveStorage.update(id, worker);
-            ui.displayMessage("Сотрудник добавлен");
+            ui.displayMessage("Сотрудник обновлен");
         }
+        else System.out.println("Сотрудника с таким идентификатором нет");
     }
 }

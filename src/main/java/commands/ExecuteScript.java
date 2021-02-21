@@ -7,8 +7,10 @@ import interaction.InteractionInterface;
 import interaction.UserInterface;
 
 import java.io.*;
+import java.util.HashSet;
 
 public class ExecuteScript extends Command {
+    private static final HashSet<String> paths = new HashSet<>();
 
     public ExecuteScript() {
         cmdLine = "executeScript";
@@ -16,14 +18,29 @@ public class ExecuteScript extends Command {
     }
 
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException {
-        File file = new File(arguments[1]); // рекурсия рассмотреть
-        UserInterface scriptInteraction = new UserInterface(new FileReader(file), new OutputStreamWriter(System.out), false);
+        UserInterface scriptInteraction = new UserInterface(new FileReader(new File(arguments[1])), new OutputStreamWriter(System.out), false);
         String line;
-        do {
+        String path = arguments[1];
+        boolean success = true;
+        while (scriptInteraction.hasNextLine()) {
             line = scriptInteraction.read();
             String cmd = line.split(" ")[0];
-            CommandCenter.getInstance().executeCommand(scriptInteraction, cmd, line, interactiveStorage);
-        } while (scriptInteraction.hasNextLine());
-        ui.displayMessage("Скрипт выполнен");
+            if(cmd.equals("executeScript")) {
+                if(!paths.contains(path)) {
+                    paths.add(path);
+                    CommandCenter.getInstance().executeCommand(scriptInteraction, cmd, line, interactiveStorage);
+                }
+                else {
+                    paths.clear();
+                    throw new StackOverflowError("Выполнение скрипта приостановлено, т.к. возможна рекурсия");
+                }
+            }
+            else CommandCenter.getInstance().executeCommand(scriptInteraction, cmd, line, interactiveStorage);
+        }
+        paths.clear();
+        if(success)
+            ui.displayMessage("Скрипт выполнен");
+        else ui.displayMessage("Скрипт не выполнен");
     }
 }
+
