@@ -7,7 +7,6 @@ import interaction.UserInterface;
 import parser.ReadyCSVParser;
 
 import java.io.*;
-import java.security.InvalidParameterException;
 import java.time.format.DateTimeParseException;
 
 public class Main {
@@ -52,6 +51,8 @@ public class Main {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения");
                     } catch (NumberFormatException e) {
                         userInteraction.displayMessage("Неправильно введены числовые данные");
+                    } catch(FileNotFoundException e) {
+                        userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу");
                     } catch (IOException e) {
                         userInteraction.displayMessage("Ввод некорректен");
                     } catch (Exception e) {
