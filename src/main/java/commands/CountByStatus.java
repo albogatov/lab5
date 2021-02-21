@@ -7,16 +7,27 @@ import interaction.UserInterface;
 
 import java.io.IOException;
 
+/**
+ * Класс команды countByStatus
+ */
 public class CountByStatus extends Command {
-
+    /**
+     * Стандартный конструктор, добавляющий строку вызова и описание команды
+     */
     public CountByStatus() {
         cmdLine = "countByStatus";
         description = "вывести количество элементов, значение поля status которых равно заданному";
     }
-
+    /**
+     * Метод исполнения
+     * @param ui - объект, через который ведется взаимодействие с пользователем
+     * @param arguments - необходимые для исполнения аргументы
+     * @param interactiveStorage - объект для взаимодействия с коллекцией
+     * @throws IOException - в случае некорректного ввода
+     */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         Status status = Status.valueOf(arguments[1].toUpperCase());
-        int result = interactiveStorage.count_by_status(status);
+        int result = interactiveStorage.countByStatus(status);
         ui.displayMessage("Элементов с таким статусом: " + String.valueOf(result));
     }
 }

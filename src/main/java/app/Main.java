@@ -9,8 +9,17 @@ import parser.ReadyCSVParser;
 import java.io.*;
 import java.time.format.DateTimeParseException;
 
-public class Main {
+/**
+ * Главный класс консольного приложения.
+ * @author Alexandr Bogatov
+ */
 
+public class Main {
+    /**
+     * Метод, запускающий приложение.
+     * @param args - путь к изначальному файлу с данными
+     * @throws IOException - в случае неверного пользовательского ввода
+     */
     public static void main(String[] args) throws IOException {
         UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);
         boolean firstOpening = true;
@@ -52,7 +61,7 @@ public class Main {
                     } catch (NumberFormatException e) {
                         userInteraction.displayMessage("Неправильно введены числовые данные");
                     } catch(FileNotFoundException e) {
-                        userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу");
+                        userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу или доступ к файлу закрыт");
                     } catch (IOException e) {
                         userInteraction.displayMessage("Ввод некорректен");
                     } catch (StackOverflowError e) {

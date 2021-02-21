@@ -3,10 +3,12 @@ package interaction;
 import elements.Status;
 import elements.Worker;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Интерфейс для классов, управляющих взаимодействием с коллекцией
+ */
 public interface InteractionInterface {
 
     String info();
@@ -17,7 +19,7 @@ public interface InteractionInterface {
 
     void update(long id, Worker worker);
 
-    void remove_by_id(long id);
+    void removeById(long id);
 
     void clear();
 
@@ -25,17 +27,17 @@ public interface InteractionInterface {
 
     void exit();
 
-    void add_if_min(Worker worker);
+    void addIfMin(Worker worker);
 
-    void remove_greater(Worker worker);
+    void removeGreater(Worker worker);
 
-    void remove_lower(Worker worker);
+    void removeLower(Worker worker);
 
-    int count_by_status(Status status);
+    int countByStatus(Status status);
 
-    List<String> print_ascending();
+    List<String> printAscending();
 
-    List<String> print_unique_organization();
+    List<String> printUniqueOrganization();
 
     int getSize();
 

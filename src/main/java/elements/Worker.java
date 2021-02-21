@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Класс Worker
+ */
 public class Worker {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -15,6 +18,17 @@ public class Worker {
     private Status status; //Поле может быть null
     private Organization organization; //Поле может быть null
 
+    /**
+     * Стандартный конструктор
+     * @param name - имя рабочего
+     * @param coordinates - координаты
+     * @param creationDate - дата добавления в базу
+     * @param salary - оклад
+     * @param endDate - дата расторжения контракта
+     * @param position - должность
+     * @param status - статус
+     * @param organization - организация
+     */
     public Worker(String name, Coordinates coordinates, java.time.ZonedDateTime creationDate, Integer salary, java.time.LocalDate endDate, Position position, Status status, Organization organization) {
         this.name = name;
         this.coordinates = coordinates;

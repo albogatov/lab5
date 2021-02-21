@@ -1,25 +1,34 @@
 package interaction;
 
 import com.opencsv.CSVWriter;
-import interaction.InteractionInterface;
 import elements.Status;
 import elements.Worker;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Класс-реализация взаимодействия с коллекцией
+ */
 public class StorageInteraction implements InteractionInterface {
 
     private static Storage storage;
 
+    /**
+     * Стандартный конструктор, задает коллекцию, с которой будет работа
+     * @param storage
+     */
     public StorageInteraction(Storage storage) {
         StorageInteraction.storage = storage;
     }
 
+    /**
+     * Метод, реализующий команду info
+     * @return - информация о коллекции
+     */
     public String info() {
         System.out.println("Дата создания коллекции: " + storage.getInitializationDate() + "\n"
                 + "Тип коллекции: " + storage.getCollection().getClass() + "\n"
@@ -27,6 +36,10 @@ public class StorageInteraction implements InteractionInterface {
         return null;
     }
 
+    /**
+     * Метод, реализующий команду show
+     * @return - строковое представление объектов коллекции
+     */
     public String show() {
         for (Worker w : storage.getCollection()) {
             w.displayWorker();
@@ -34,11 +47,20 @@ public class StorageInteraction implements InteractionInterface {
         return null;
     }
 
+    /**
+     * Метод, реализующий команду add
+     * @param worker - добавляемый объект
+     */
     public void add(Worker worker) {
         worker = storage.generateId(worker);
         storage.put(worker);
     }
 
+    /**
+     * Метод, реализующий команду update
+     * @param id - ID обновляемого объекта
+     * @param worker - новый объект коллекции
+     */
     public void update(long id, Worker worker) {
         Iterator<Worker> itr = storage.getCollection().iterator();
         Worker oldWorker = null;
@@ -54,7 +76,11 @@ public class StorageInteraction implements InteractionInterface {
         storage.put(worker);
     }
 
-    public void remove_by_id(long id) {
+    /**
+     * Метод, реализующий команду removeById
+     * @param id - ID удаляемого объекта
+     */
+    public void removeById(long id) {
         Iterator<Worker> itr = storage.getCollection().iterator();
         Worker worker = null;
         while (itr.hasNext()) {
@@ -67,10 +93,18 @@ public class StorageInteraction implements InteractionInterface {
         storage.getCollection().remove(worker);
     }
 
+    /**
+     * Метод, реализующий команду clear
+     */
     public void clear() {
         storage.clear();
     }
 
+    /**
+     * Метод, реализующий команду save
+     * @param filePath - путь итогового файла
+     * @throws IOException - в случае некорректного ввода
+     */
     public void save(String filePath) throws IOException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(filePath));
         CSVWriter csvWriter = new CSVWriter(printWriter);
@@ -88,11 +122,18 @@ public class StorageInteraction implements InteractionInterface {
         csvWriter.close();
     }
 
+    /**
+     * Метод, реализующий команду exit
+     */
     public void exit() {
         System.exit(0);
     }
 
-    public void add_if_min(Worker worker) {
+    /**
+     * Метод, реализующий команду addIfMin
+     * @param worker - добавляемый объект
+     */
+    public void addIfMin(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
         List<Worker> toBeSortedWorkers = new ArrayList<>(workers);
         toBeSortedWorkers.sort(Comparator.comparing(Worker::getSalary));
@@ -100,7 +141,11 @@ public class StorageInteraction implements InteractionInterface {
             storage.put(worker);
     }
 
-    public void remove_greater(Worker worker) {
+    /**
+     * Метод, реализующий команду removeGreater
+     * @param worker - объект для сравнения
+     */
+    public void removeGreater(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
         Integer comparisonSalary = worker.getSalary();
         List<Worker> toBeSortedWorkers = new ArrayList<>(workers);
@@ -115,7 +160,11 @@ public class StorageInteraction implements InteractionInterface {
         }
     }
 
-    public void remove_lower(Worker worker) {
+    /**
+     * Метод, реализующий команду removeLower
+     * @param worker - объект для сравнения
+     */
+    public void removeLower(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
         Integer comparisonSalary = worker.getSalary();
         List<Worker> toBeSortedWorkers = new ArrayList<>(workers);
@@ -130,7 +179,12 @@ public class StorageInteraction implements InteractionInterface {
         }
     }
 
-    public int count_by_status(Status status) {
+    /**
+     * Метод, реализующий команду countByStatus
+     * @param status - статус
+     * @return - число объектов с указанным статусом
+     */
+    public int countByStatus(Status status) {
         Iterator<Worker> itr = storage.getCollection().iterator();
         int counter = 0;
         while (itr.hasNext()) {
@@ -143,7 +197,11 @@ public class StorageInteraction implements InteractionInterface {
         return counter;
     }
 
-    public List<String> print_ascending() {
+    /**
+     * Метод, реализующий команду printAscending
+     * @return - отсортированное строковое представление коллекции
+     */
+    public List<String> printAscending() {
         HashSet<Worker> workers = storage.getCollection();
         List<Worker> toBeSortedWorkers = new ArrayList<>(workers);
         toBeSortedWorkers.sort(Comparator.comparing(Worker::getSalary));
@@ -153,7 +211,11 @@ public class StorageInteraction implements InteractionInterface {
         return null;
     }
 
-    public List<String> print_unique_organization() {
+    /**
+     * Метод, реализующий команду printUniqueOrganization
+     * @return - список всех уникальных организаций
+     */
+    public List<String> printUniqueOrganization() {
         List<String> organizations = new ArrayList<>();
         for (Worker w : storage.getCollection()) {
             if (!(w.getOrganization() == null)) {
@@ -165,10 +227,19 @@ public class StorageInteraction implements InteractionInterface {
         return organizations;
     }
 
+    /**
+     * Метод, возвращающий размер коллекции
+     * @return - размер коллекции
+     */
     public int getSize() {
         return storage.getCollection().size();
     }
 
+    /**
+     * Метод, проверяющий наличие объекта по ID
+     * @param id - ID для поиска
+     * @return - true если объект существует, иначе false
+     */
     public boolean findById(long id) {
         return storage.getIdList().contains(id);
     }

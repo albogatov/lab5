@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Интерфейс для классов для хранения коллекции
+ * @param <T> - тип объектов коллекции
+ */
 public interface StorageInterface<T> {
     void clear();
 
