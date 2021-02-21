@@ -46,7 +46,7 @@ public class Worker {
         return this.coordinates;
     }
 
-    public java.time.ZonedDateTime getCreationDate() {
+    public ZonedDateTime getCreationDate() {
         return this.creationDate;
     }
 
@@ -60,8 +60,11 @@ public class Worker {
         return this.salary;
     }
 
-    public java.time.LocalDate getEndDate() {
-        return this.endDate;
+    public String getEndDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        if(this.endDate == null)
+            return null;
+        return this.endDate.format(formatter);
     }
 
     public Position getPosition() {
@@ -96,6 +99,24 @@ public class Worker {
         return this.organization.toString();
     }
 
+    public Long getAnnualTurnover() {
+        if (organization == null || organization.getAnnualTurnover() == null)
+            return null;
+        else return organization.getAnnualTurnover();
+    }
+
+    public String getOrganizationType() {
+        if (organization == null || organization.getOrganizationType() == null)
+            return null;
+        else return organization.getOrganizationType().toString();
+    }
+
+    public String getPostalAddress() {
+        if (organization == null || organization.getPostalAddress() == null)
+            return null;
+        else return organization.getPostalAddress().toString();
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -112,6 +133,9 @@ public class Worker {
                 "Контракт истекает - " + this.getEndDate() + "\n" +
                 "Должность - " + this.getPositionString() + "\n" +
                 "Статус - " + this.getStatusString() + "\n" +
-                "Организация - " + this.getOrganizationName());
+                "Организация - " + this.getOrganizationName() + "\n" +
+                "Тип организации - " + this.getOrganizationType()+ "\n" +
+                "Годовая выручка организации - " + this.getAnnualTurnover()+ "\n" +
+                "Адрес организации - " + this.getPostalAddress());
     }
 }

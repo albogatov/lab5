@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.opencsv.CSVWriter;
+
 public class Save extends Command {
 
     public Save() {
@@ -17,6 +19,7 @@ public class Save extends Command {
 
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         String filePath = arguments[1];
-        PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));
+        interactiveStorage.save(filePath);
+        ui.displayMessage("Коллекция сохранена в файл");
     }
 }

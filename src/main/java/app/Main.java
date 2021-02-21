@@ -57,6 +57,8 @@ public class Main {
                         userInteraction.displayMessage("Ввод некорректен");
                     } catch (StackOverflowError e) {
                         userInteraction.displayMessage("Дальнейшее исполнение скрипта приведет к рекурсии");
+                    } catch (DateTimeParseException e) {
+                        userInteraction.displayMessage("Дата указана неверно, повторите ввод команды");
                     } catch (Exception e) {
                         userInteraction.displayMessage("Ох не повезло, не повезло");
                         e.printStackTrace();

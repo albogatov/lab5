@@ -1,9 +1,15 @@
 package interaction;
 
+import com.opencsv.CSVWriter;
 import interaction.InteractionInterface;
 import elements.Status;
 import elements.Worker;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class StorageInteraction implements InteractionInterface {
@@ -65,8 +71,21 @@ public class StorageInteraction implements InteractionInterface {
         storage.clear();
     }
 
-    public void save() {
-
+    public void save(String filePath) throws IOException {
+        PrintWriter printWriter = new PrintWriter(new FileOutputStream(filePath));
+        CSVWriter csvWriter = new CSVWriter(printWriter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String[] keyLine = { "name", "coordinates", "salary", "endDate", "position", "status", "organization", "orgType", "annualTurnover", "postalAddress" };
+        csvWriter.writeNext(keyLine);
+        HashSet<Worker> collection = storage.getCollection();
+        for(Worker w : collection) {
+            csvWriter.writeNext(new String[] {
+                    w.getName(), w.getCoordinates().toString(), String.valueOf(w.getSalary()), String.valueOf(w.getEndDate()),
+                    String.valueOf(w.getPositionString()), String.valueOf(w.getStatusString()), String.valueOf(w.getOrganizationName()),
+                    String.valueOf(w.getOrganizationType()), String.valueOf(w.getAnnualTurnover()), String.valueOf(w.getPostalAddress())
+            });
+        }
+        csvWriter.close();
     }
 
     public void exit() {

@@ -13,6 +13,24 @@ public class Organization {
         this.name = name;
     }
 
+    public Long getAnnualTurnover() {
+        if (annualTurnover == null)
+            return null;
+        else return annualTurnover;
+    }
+
+    public OrganizationType getOrganizationType() {
+        if (type == null)
+            return null;
+        else return type;
+    }
+
+    public Address getPostalAddress() {
+        if (postalAddress == null)
+            return null;
+        else return postalAddress;
+    }
+
     @Override
     public String toString() {
         if (this.name == null)

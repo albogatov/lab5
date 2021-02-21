@@ -3,6 +3,8 @@ package interaction;
 import elements.Status;
 import elements.Worker;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface InteractionInterface {
@@ -19,8 +21,7 @@ public interface InteractionInterface {
 
     void clear();
 
-    void save();
-
+    void save(String filePath) throws IOException;
 
     void exit();
 
