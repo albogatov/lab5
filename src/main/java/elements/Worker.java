@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Класс Worker
  */
-public class Worker {
+public class Worker implements Comparable<Worker> {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -94,13 +94,13 @@ public class Worker {
     public String getPositionString() {
         if (this.position == null)
             return null;
-        else return this.position.toString();
+        else return this.position.toDisplay();
     }
 
     public String getStatusString() {
         if (getStatus() == null)
             return null;
-        else return this.status.toString();
+        else return this.status.toDisplay();
     }
 
     public Organization getOrganization() {
@@ -122,7 +122,7 @@ public class Worker {
     public String getOrganizationType() {
         if (organization == null || organization.getOrganizationType() == null)
             return null;
-        else return organization.getOrganizationType().toString();
+        else return organization.getOrganizationType().toDisplay();
     }
 
     public String getPostalAddress() {
@@ -151,5 +151,9 @@ public class Worker {
                 "Тип организации - " + this.getOrganizationType()+ "\n" +
                 "Годовая выручка организации - " + this.getAnnualTurnover()+ "\n" +
                 "Адрес организации - " + this.getPostalAddress());
+    }
+    @Override
+    public int compareTo(Worker comparedWorker) {
+        return this.getSalary() - comparedWorker.getSalary();
     }
 }

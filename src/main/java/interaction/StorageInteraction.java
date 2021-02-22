@@ -18,8 +18,8 @@ public class StorageInteraction implements InteractionInterface {
     private static Storage storage;
 
     /**
-     * Стандартный конструктор, задает коллекцию, с которой будет работа
-     * @param storage
+     * Стандартный конструктор, задает хранилище, с которым будет работа
+     * @param storage - хранилище
      */
     public StorageInteraction(Storage storage) {
         StorageInteraction.storage = storage;
@@ -62,16 +62,7 @@ public class StorageInteraction implements InteractionInterface {
      * @param worker - новый объект коллекции
      */
     public void update(long id, Worker worker) {
-        Iterator<Worker> itr = storage.getCollection().iterator();
-        Worker oldWorker = null;
-        while (itr.hasNext()) {
-            Worker w = itr.next();
-            if (w.getId() == id) {
-                oldWorker = w;
-                break;
-            }
-        }
-        storage.getCollection().remove(oldWorker);
+        removeById(id);
         worker.setId(id);
         storage.put(worker);
     }
@@ -108,7 +99,6 @@ public class StorageInteraction implements InteractionInterface {
     public void save(String filePath) throws IOException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(filePath));
         CSVWriter csvWriter = new CSVWriter(printWriter);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String[] keyLine = { "name", "coordinates", "salary", "endDate", "position", "status", "organization", "orgType", "annualTurnover", "postalAddress" };
         csvWriter.writeNext(keyLine);
         HashSet<Worker> collection = storage.getCollection();
@@ -147,12 +137,11 @@ public class StorageInteraction implements InteractionInterface {
      */
     public void removeGreater(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
-        Integer comparisonSalary = worker.getSalary();
         List<Worker> toBeSortedWorkers = new ArrayList<>(workers);
         List<Worker> toBeRemovedWorkers = new ArrayList<>();
         toBeSortedWorkers.sort(Comparator.comparing(Worker::getSalary));
         for (Worker w : toBeSortedWorkers) {
-            if (w.getSalary() > comparisonSalary)
+            if (w.compareTo(worker) > 0)
                 toBeRemovedWorkers.add(w);
         }
         for (Worker w : toBeRemovedWorkers) {
@@ -166,12 +155,11 @@ public class StorageInteraction implements InteractionInterface {
      */
     public void removeLower(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
-        Integer comparisonSalary = worker.getSalary();
         List<Worker> toBeSortedWorkers = new ArrayList<>(workers);
         List<Worker> toBeRemovedWorkers = new ArrayList<>();
         toBeSortedWorkers.sort(Comparator.comparing(Worker::getSalary));
         for (Worker w : toBeSortedWorkers) {
-            if (w.getSalary() < comparisonSalary)
+            if (w.compareTo(worker) < 0)
                 toBeRemovedWorkers.add(w);
         }
         for (Worker w : toBeRemovedWorkers) {

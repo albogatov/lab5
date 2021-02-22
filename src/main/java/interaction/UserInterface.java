@@ -9,6 +9,7 @@ import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -22,8 +23,9 @@ public class UserInterface {
 
     /**
      * Стандартный конструктор
-     * @param r - откуда считывать
-     * @param w - куда записывать
+     *
+     * @param r  - откуда считывать
+     * @param w  - куда записывать
      * @param im - режим взаимодействия (true - интерактивный)
      */
     public UserInterface(Reader r, Writer w, boolean im) {
@@ -35,6 +37,7 @@ public class UserInterface {
 
     /**
      * Метод, считывающий введенную пользователем строку
+     *
      * @return - введенная строка
      */
     public String read() {
@@ -43,6 +46,7 @@ public class UserInterface {
 
     /**
      * Метод, проверяющий наличие несчитанных строк
+     *
      * @return - true, если они есть, иначе false
      */
     public boolean hasNextLine() {
@@ -51,6 +55,7 @@ public class UserInterface {
 
     /**
      * Метод, пишущий сообщение на вывод
+     *
      * @param message - сообшение
      * @throws IOException - в случае некорректного ввода
      */
@@ -61,6 +66,7 @@ public class UserInterface {
 
     /**
      * Метод, демонстрирующий сообщение пользователю
+     *
      * @param message - сообщение
      * @throws IOException - в случае некорректного ввода
      */
@@ -70,6 +76,7 @@ public class UserInterface {
 
     /**
      * Метод, принимающий от пользователя необходимый для ввода аргумент
+     *
      * @param message - сообщение для пользователя
      * @return - введенный аргумент
      * @throws IOException - в случае некорректного ввода
@@ -93,9 +100,10 @@ public class UserInterface {
 
     /**
      * Метод, принимающий от пользователя необходимый для ввода численный и ограниченный условиями аргумент
+     *
      * @param message - сообщение для пользователя
-     * @param min - минимальное значение
-     * @param max - максимальное значение
+     * @param min     - минимальное значение
+     * @param max     - максимальное значение
      * @return - введенный аргумент
      * @throws IOException - в случае некорректного ввода
      */
@@ -118,6 +126,7 @@ public class UserInterface {
 
     /**
      * Метод, принимающий от пользователя необязательный для ввода аргумент (возможно значение null)
+     *
      * @param message - сообщение для пользователя
      * @return - введенный аргумент
      * @throws IOException - в случае некорректного ввода
@@ -137,9 +146,10 @@ public class UserInterface {
 
     /**
      * Метод, принимающий от пользователя необязательный для ввода, численный, ограниченный условиями аргумент (возможно значение null)
+     *
      * @param message - сообщение для пользователя
-     * @param min - минимальное значение
-     * @param max - максимальное значение
+     * @param min     - минимальное значение
+     * @param max     - максимальное значение
      * @return - введенный аргумнент
      * @throws IOException - в случае некорректного ввода
      */
@@ -161,8 +171,9 @@ public class UserInterface {
 
     /**
      * Метод, считывающий сотрудника (объект коллекции) из строки
+     *
      * @param arguments - слова строки, введенной пользователем
-     * @param start - номер первого аргумента
+     * @param start     - номер первого аргумента
      * @return - объект коллекции
      * @throws IOException - в случае некорректного ввода
      */
@@ -170,28 +181,59 @@ public class UserInterface {
         if (arguments[start].isEmpty())
             throw new InvalidParameterException("Неверный ввод");
         String name = arguments[start]; //Поле не может быть null, Строка не может быть пустой
-        java.time.ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+        ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
         if (arguments[start + 1].isEmpty() || Integer.parseInt(arguments[start + 1]) <= 0)
             throw new InvalidParameterException("Неверный ввод");
         Integer salary = Integer.parseInt(arguments[start + 1]); //Поле не может быть null, Значение поля должно быть больше 0
-        java.time.LocalDate endDate;
-        String endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
-        if (endDateLine != null)
-            endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
-        else endDate = null;
-        int x = Integer.parseInt(readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627));
-        long y = Long.parseLong(readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990));
+        LocalDate endDate;
+        try {
+            String endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
+            if (endDateLine != null)
+                endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
+            else endDate = null;
+        } catch (DateTimeParseException e) {
+            String endDateLine = readOtherArgument("Допушена ошибка, повторите ввод");
+            if (endDateLine != null)
+                endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
+            else endDate = null;
+        }
+        int x;
+        long y;
+        try {
+            x = Integer.parseInt(readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627));
+        } catch (NumberFormatException e) {
+            x = Integer.parseInt(readNecessaryArgument("Допущена ошибка, повторите ввод", Integer.MIN_VALUE, 627));
+        }
+        try {
+            y = Long.parseLong(readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990));
+        } catch (NumberFormatException e) {
+            y = Long.parseLong(readNecessaryArgument("Допущена ошибка, повторите ввод", Long.MIN_VALUE, 990));
+        }
         Coordinates coordinates = new Coordinates(x, y); //Поле не может быть null
         Status status;
-        String statusLine = readOtherArgument("Введите статус сотрудника:");
-        if (statusLine != null)
-            status = Status.valueOf(statusLine.toUpperCase()); //Поле может быть null
-        else status = null;
+        try {
+            String statusLine = readOtherArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues());
+            if (statusLine != null)
+                status = Status.valueOf(statusLine.toUpperCase()); //Поле может быть null
+            else status = null;
+        } catch (IllegalArgumentException e) {
+            String statusLine = readOtherArgument("Допущена ошибка, повторите ввод");
+            if (statusLine != null)
+                status = Status.valueOf(statusLine.toUpperCase()); //Поле может быть null
+            else status = null;
+        }
         Position position;
-        String positionLine = readOtherArgument("Введите должность сотрудника:");
-        if (positionLine != null)
-            position = Position.valueOf(positionLine.toUpperCase()); //Поле может быть null
-        else position = null;
+        try {
+            String positionLine = readOtherArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues());
+            if (positionLine != null)
+                position = Position.valueOf(positionLine.toUpperCase()); //Поле может быть null
+            else position = null;
+        } catch (IllegalArgumentException e) {
+            String positionLine = readOtherArgument("Допущена ошибка, повторите ввод");
+            if (positionLine != null)
+                position = Position.valueOf(positionLine.toUpperCase()); //Поле может быть null
+            else position = null;
+        }
         String orgName = readOtherArgument("Укажите организацию сотрудника:");
         Organization organization;
         if (orgName != null) {
@@ -199,7 +241,12 @@ public class UserInterface {
             while (annualTurnover == 0) {
                 annualTurnover = Long.parseLong(readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE));
             }
-            OrganizationType type = OrganizationType.valueOf(readOtherArgument("Введите тип организации:").toUpperCase()); //Поле может быть null
+            OrganizationType type = null;
+            try {
+                type = OrganizationType.valueOf(readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues()).toUpperCase()); //Поле может быть null
+            } catch (IllegalArgumentException e) {
+                type = OrganizationType.valueOf(readOtherArgument("Допущена ошибка, повторите ввод").toUpperCase()); //Поле может быть null
+            }
             String street = readNecessaryArgument("Укажите улицу расположения организации:");
             String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
             Address postalAddress = new Address(street, zipCode); //Поле не может быть null
@@ -210,6 +257,7 @@ public class UserInterface {
 
     /**
      * Метод, принимающий аргументы от пользователя во время выполнения команды
+     *
      * @param message - сообщение для пользователя
      * @return - аргументы
      * @throws IOException - в случае некорректного ввода

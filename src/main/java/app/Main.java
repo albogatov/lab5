@@ -1,5 +1,6 @@
 package app;
 
+import elements.Status;
 import exceptions.NonExistingCommandException;
 import interaction.Storage;
 import interaction.StorageInteraction;
@@ -57,9 +58,9 @@ public class Main {
                     } catch (NonExistingCommandException e) {
                         userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения");
+                        userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
                     } catch (NumberFormatException e) {
-                        userInteraction.displayMessage("Неправильно введены числовые данные");
+                        userInteraction.displayMessage("Неправильно введены числовые данные, повторите ввод команды");
                     } catch(FileNotFoundException e) {
                         userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу или доступ к файлу закрыт");
                     } catch (IOException e) {
@@ -68,6 +69,8 @@ public class Main {
                         userInteraction.displayMessage("Дальнейшее исполнение скрипта приведет к рекурсии");
                     } catch (DateTimeParseException e) {
                         userInteraction.displayMessage("Дата указана неверно, повторите ввод команды");
+                    } catch (IllegalArgumentException e) {
+                        userInteraction.displayMessage("Указано неверное значение поля, повторите ввод команды");
                     } catch (Exception e) {
                         userInteraction.displayMessage("Ох не повезло, не повезло");
                         e.printStackTrace();

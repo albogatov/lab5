@@ -29,7 +29,7 @@ public class Exit extends Command {
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         String confirmation = ui.readNecessaryArgument("Запрошен выход из приложения без сохранения, вы хотите продолжить?");
         if (confirmation.equals("yes")) {
-            System.out.println("До новых встреч");
+            ui.displayMessage("До новых встреч");
             System.exit(0);
         }
     }
