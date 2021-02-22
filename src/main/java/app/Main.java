@@ -60,8 +60,6 @@ public class Main {
                         userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
                     } catch (ArrayIndexOutOfBoundsException e) {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
-                        e.printStackTrace();
-                        System.exit(0);
                     } catch (NumberFormatException e) {
                         userInteraction.displayMessage("Неправильно введены числовые данные, повторите ввод команды");
                     } catch(FileNotFoundException e) {

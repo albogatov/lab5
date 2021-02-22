@@ -60,6 +60,10 @@ public class CommandCenter {
         return commands.getOrDefault(cmdLine, null);
     }
 
+    /**
+     * Метод, возвращающий единственный объект класса. Реализация шаблона "Синглтон".
+     * @return - объект класса
+     */
     public static CommandCenter getInstance() {
         if (commandCenter == null)
             return new CommandCenter();
