@@ -1,6 +1,5 @@
 package app;
 
-import elements.Status;
 import exceptions.NonExistingCommandException;
 import interaction.Storage;
 import interaction.StorageInteraction;
@@ -26,7 +25,7 @@ public class Main {
         boolean firstOpening = true;
         try {
             if (args[0] == null) {
-                System.out.println("Путь к исходным данным не задан");
+                userInteraction.displayMessage("Путь к исходным данным не задан");
             } else {
                 while (true) {
                     try {
@@ -41,10 +40,12 @@ public class Main {
                         } catch (DateTimeParseException e) {
                             userInteraction.displayMessage("Неверное форматирование дат");
                             System.exit(0);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            userInteraction.displayMessage("Некорректный файл, проверьте наличие пустых строк");
+                            System.exit(0);
                         }
                         if (storage.getCollection().size() < 1) {
-                            System.out.println("Пустая коллекция" + "\n");
-                            System.exit(0);
+                            userInteraction.displayMessage("Пустая коллекция");
                         }
                         if (firstOpening)
                             userInteraction.displayMessage("Введите команду, полный список команд можно получить с помощью команды help.");
@@ -59,6 +60,8 @@ public class Main {
                         userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
                     } catch (ArrayIndexOutOfBoundsException e) {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
+                        e.printStackTrace();
+                        System.exit(0);
                     } catch (NumberFormatException e) {
                         userInteraction.displayMessage("Неправильно введены числовые данные, повторите ввод команды");
                     } catch(FileNotFoundException e) {

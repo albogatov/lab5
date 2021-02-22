@@ -180,76 +180,96 @@ public class UserInterface {
     public Worker readWorker(String[] arguments, int start) throws IOException {
         if (arguments[start].isEmpty())
             throw new InvalidParameterException("Неверный ввод");
-        String name = arguments[start]; //Поле не может быть null, Строка не может быть пустой
-        ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+        String name = arguments[start];
+        ZonedDateTime creationDate = ZonedDateTime.now();
         if (arguments[start + 1].isEmpty() || Integer.parseInt(arguments[start + 1]) <= 0)
             throw new InvalidParameterException("Неверный ввод");
-        Integer salary = Integer.parseInt(arguments[start + 1]); //Поле не может быть null, Значение поля должно быть больше 0
+        Integer salary = Integer.parseInt(arguments[start + 1]);
         LocalDate endDate;
-        try {
-            String endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
-            if (endDateLine != null)
-                endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
-            else endDate = null;
-        } catch (DateTimeParseException e) {
-            String endDateLine = readOtherArgument("Допушена ошибка, повторите ввод");
-            if (endDateLine != null)
-                endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
-            else endDate = null;
+        while (true) {
+            try {
+                String endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
+                if (endDateLine != null) {
+                    endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
+                    break;
+                }
+                else {
+                    endDate = null;
+                    break;
+                }
+            } catch (DateTimeParseException e) {
+                displayMessage("Допущена ошибка, повторите ввод");
+            }
         }
         int x;
         long y;
-        try {
-            x = Integer.parseInt(readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627));
-        } catch (NumberFormatException e) {
-            x = Integer.parseInt(readNecessaryArgument("Допущена ошибка, повторите ввод", Integer.MIN_VALUE, 627));
+        while (true) {
+            try {
+                x = Integer.parseInt(readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627));
+                break;
+            } catch (NumberFormatException e) {
+                displayMessage("Допущена ошибка, повторите ввод");
+            }
         }
-        try {
-            y = Long.parseLong(readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990));
-        } catch (NumberFormatException e) {
-            y = Long.parseLong(readNecessaryArgument("Допущена ошибка, повторите ввод", Long.MIN_VALUE, 990));
+        while (true) {
+            try {
+                y = Long.parseLong(readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990));
+                break;
+            } catch (NumberFormatException e) {
+                displayMessage("Допущена ошибка, повторите ввод");
+            }
         }
-        Coordinates coordinates = new Coordinates(x, y); //Поле не может быть null
+        Coordinates coordinates = new Coordinates(x, y);
         Status status;
-        try {
-            String statusLine = readOtherArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues());
-            if (statusLine != null)
-                status = Status.valueOf(statusLine.toUpperCase()); //Поле может быть null
-            else status = null;
-        } catch (IllegalArgumentException e) {
-            String statusLine = readOtherArgument("Допущена ошибка, повторите ввод");
-            if (statusLine != null)
-                status = Status.valueOf(statusLine.toUpperCase()); //Поле может быть null
-            else status = null;
+        while (true) {
+            try {
+                String statusLine = readOtherArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues());
+                if (statusLine != null) {
+                    status = Status.valueOf(statusLine.toUpperCase());
+                    break;
+                }
+                else {
+                    status = null;
+                    break;
+                }
+            } catch (IllegalArgumentException e) {
+                displayMessage("Допущена ошибка, повторите ввод");
+            }
         }
         Position position;
-        try {
-            String positionLine = readOtherArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues());
-            if (positionLine != null)
-                position = Position.valueOf(positionLine.toUpperCase()); //Поле может быть null
-            else position = null;
-        } catch (IllegalArgumentException e) {
-            String positionLine = readOtherArgument("Допущена ошибка, повторите ввод");
-            if (positionLine != null)
-                position = Position.valueOf(positionLine.toUpperCase()); //Поле может быть null
-            else position = null;
+        while (true) {
+            try {
+                String positionLine = readOtherArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues());
+                if (positionLine != null) {
+                    position = Position.valueOf(positionLine.toUpperCase());
+                    break;
+                } else {
+                    position = null;
+                    break;
+                }
+            } catch (IllegalArgumentException e) {
+                displayMessage("Допущена ошибка, повторите ввод");
+            }
         }
         String orgName = readOtherArgument("Укажите организацию сотрудника:");
         Organization organization;
         if (orgName != null) {
-            Long annualTurnover = Long.parseLong("0"); //Поле может быть null, Значение поля должно быть больше 0
+            Long annualTurnover = Long.parseLong("0");
             while (annualTurnover == 0) {
                 annualTurnover = Long.parseLong(readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE));
             }
             OrganizationType type = null;
-            try {
-                type = OrganizationType.valueOf(readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues()).toUpperCase()); //Поле может быть null
-            } catch (IllegalArgumentException e) {
-                type = OrganizationType.valueOf(readOtherArgument("Допущена ошибка, повторите ввод").toUpperCase()); //Поле может быть null
+            while (true) {
+                try {
+                    type = OrganizationType.valueOf(readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues()).toUpperCase());
+                    break;
+                } catch (IllegalArgumentException e) {
+                    displayMessage("Допущена ошибка, повторите ввод");
+                }
             }
             String street = readNecessaryArgument("Укажите улицу расположения организации:");
             String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
-            Address postalAddress = new Address(street, zipCode); //Поле не может быть null
+            Address postalAddress = new Address(street, zipCode);
             organization = new Organization(annualTurnover, type, postalAddress, orgName);
         } else organization = null;
         return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);
