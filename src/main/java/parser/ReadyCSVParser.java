@@ -25,6 +25,7 @@ public class ReadyCSVParser {
 
     /**
      * Метод, считывающий ключевую строку для определения порядка значений
+     *
      * @param line - строка
      * @throws IOException - в случае некорректного ввода
      */
@@ -37,6 +38,7 @@ public class ReadyCSVParser {
 
     /**
      * Метод, считывающий строку
+     *
      * @param line - строка
      * @return - список слов строки после парсинга
      * @throws IOException - в случае некорректного ввода
@@ -47,6 +49,7 @@ public class ReadyCSVParser {
 
     /**
      * Статический метод для создания объекта по значениям строки
+     *
      * @param line - строки
      * @return - объект коллекции
      * @throws IOException - в случае некорректного ввода
@@ -96,7 +99,8 @@ public class ReadyCSVParser {
 
     /**
      * Статический метод, считывающий все объекты коллекции в файле
-     * @param file - файл
+     *
+     * @param file    - файл
      * @param workers - коллекция, в которую помещаются объекты
      * @param storage - объект класса для хранения коллекции
      * @return - заполненная коллекция

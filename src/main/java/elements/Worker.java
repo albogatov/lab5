@@ -60,6 +60,14 @@ public class Worker implements Comparable<Worker> {
         return this.coordinates;
     }
 
+    public int getCoordinateX() {
+        return coordinates.getX();
+    }
+
+    public long getCoordinateY() {
+        return coordinates.getY();
+    }
+
     public ZonedDateTime getCreationDate() {
         return this.creationDate;
     }
@@ -74,8 +82,15 @@ public class Worker implements Comparable<Worker> {
         return this.salary;
     }
 
+    public String getEndDateString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if(this.endDate == null)
+            return "";
+        return this.endDate.format(formatter);
+    }
+
     public String getEndDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         if(this.endDate == null)
             return null;
         return this.endDate.format(formatter);
@@ -93,14 +108,14 @@ public class Worker implements Comparable<Worker> {
 
     public String getPositionString() {
         if (this.position == null)
-            return null;
-        else return this.position.toDisplay();
+            return "";
+        else return this.position.toString();
     }
 
     public String getStatusString() {
         if (getStatus() == null)
-            return null;
-        else return this.status.toDisplay();
+            return "";
+        else return this.status.toString();
     }
 
     public Organization getOrganization() {
@@ -108,27 +123,57 @@ public class Worker implements Comparable<Worker> {
     }
 
     public String getOrganizationName() {
-        if (getOrganization() == null)
+        if (organization == null || organization.toString() == null)
             return null;
-        return this.organization.toString();
+        else return this.organization.toString();
     }
 
-    public Long getAnnualTurnover() {
+    public String getOrganizationNameString() {
+        if (organization == null || organization.toString() == null)
+            return "";
+        else return this.organization.toString();
+    }
+
+    public String getAnnualTurnover() {
         if (organization == null || organization.getAnnualTurnover() == null)
             return null;
-        else return organization.getAnnualTurnover();
+        else return String.valueOf(organization.getAnnualTurnover());
+    }
+
+    public String getAnnualTurnoverString() {
+        if (organization == null || organization.getAnnualTurnover() == null)
+            return "";
+        else return String.valueOf(organization.getAnnualTurnover());
     }
 
     public String getOrganizationType() {
         if (organization == null || organization.getOrganizationType() == null)
             return null;
-        else return organization.getOrganizationType().toDisplay();
+        else return organization.getOrganizationType().toString();
+    }
+
+    public String getOrganizationTypeString() {
+        if (organization == null || organization.getOrganizationType() == null)
+            return "";
+        else return organization.getOrganizationType().toString();
     }
 
     public String getPostalAddress() {
         if (organization == null || organization.getPostalAddress() == null)
             return null;
         else return organization.getPostalAddress().toString();
+    }
+
+    public String getAddressStreet() {
+        if (organization == null || organization.getPostalAddress() == null)
+            return "";
+        else return organization.getPostalAddress().getStreet();
+    }
+
+    public String getAddressZipCode() {
+        if (organization == null || organization.getPostalAddress() == null)
+            return "";
+        else return organization.getPostalAddress().getZipCode();
     }
 
     public void setId(long id) {
@@ -145,8 +190,8 @@ public class Worker implements Comparable<Worker> {
                 "Добавлен в базу - " + this.getCreationDateString() + "\n" +
                 "Зарплата рабочего - " + this.getSalary().toString() + "\n" +
                 "Контракт истекает - " + this.getEndDate() + "\n" +
-                "Должность - " + this.getPositionString() + "\n" +
-                "Статус - " + this.getStatusString() + "\n" +
+                "Должность - " + this.getPosition() + "\n" +
+                "Статус - " + this.getStatus() + "\n" +
                 "Организация - " + this.getOrganizationName() + "\n" +
                 "Тип организации - " + this.getOrganizationType()+ "\n" +
                 "Годовая выручка организации - " + this.getAnnualTurnover()+ "\n" +

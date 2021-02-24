@@ -27,4 +27,12 @@ public class Coordinates {
         String texty = String.valueOf(y);
         return textx + " " + texty;
     }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public long getY() {
+        return this.y;
+    }
 }
