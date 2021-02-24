@@ -1,7 +1,6 @@
 package interaction;
 
 import elements.Worker;
-import interaction.StorageInteraction;
 
 import java.util.*;
 

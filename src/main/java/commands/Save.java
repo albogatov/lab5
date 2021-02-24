@@ -26,8 +26,7 @@ public class Save extends Command {
      * @throws IOException - в случае некорректного ввода
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
-        String filePath = arguments[1];
-        interactiveStorage.save(filePath);
+        interactiveStorage.save();
         ui.displayMessage("Коллекция сохранена в файл");
     }
 }

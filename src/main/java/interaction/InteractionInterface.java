@@ -23,7 +23,7 @@ public interface InteractionInterface {
 
     void clear();
 
-    void save(String filePath) throws IOException;
+    void save() throws IOException;
 
     void exit();
 

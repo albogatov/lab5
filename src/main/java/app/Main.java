@@ -31,7 +31,7 @@ public class Main {
                     try {
                         File dataFile = new File(args[0]);
                         Storage storage = new Storage();
-                        StorageInteraction interactiveStorage = new StorageInteraction(storage);
+                        StorageInteraction interactiveStorage = new StorageInteraction(storage, args[0]);
                         try {
                             ReadyCSVParser.readWorkers(dataFile, storage.getCollection(), storage);
                         } catch (NullPointerException e) {

@@ -16,13 +16,15 @@ import java.util.*;
 public class StorageInteraction implements InteractionInterface {
 
     private static Storage storage;
+    private static String originPath;
 
     /**
      * Стандартный конструктор, задает хранилище, с которым будет работа
      * @param storage - хранилище
      */
-    public StorageInteraction(Storage storage) {
+    public StorageInteraction(Storage storage, String originPath) {
         StorageInteraction.storage = storage;
+        StorageInteraction.originPath = originPath;
     }
 
     /**
@@ -93,23 +95,28 @@ public class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду save
-     * @param filePath - путь итогового файла
      * @throws IOException - в случае некорректного ввода
      */
-    public void save(String filePath) throws IOException {
-        PrintWriter printWriter = new PrintWriter(new FileOutputStream(filePath));
-        CSVWriter csvWriter = new CSVWriter(printWriter);
-        String[] keyLine = { "name", "coordinates", "salary", "endDate", "position", "status", "organization", "orgType", "annualTurnover", "postalAddress" };
-        csvWriter.writeNext(keyLine);
+    public void save() throws IOException {
+        PrintWriter printWriter = new PrintWriter(new FileOutputStream(StorageInteraction.originPath));
+        String keyLine = "name,x,y,salary,endDate,position,status,organization,orgType,annualTurnover,street,postalCode" + "\n";
+        printWriter.write(keyLine);
         HashSet<Worker> collection = storage.getCollection();
         for(Worker w : collection) {
-            csvWriter.writeNext(new String[] {
-                    w.getName(), w.getCoordinates().toString(), String.valueOf(w.getSalary()), String.valueOf(w.getEndDate()),
-                    String.valueOf(w.getPositionString()), String.valueOf(w.getStatusString()), String.valueOf(w.getOrganizationName()),
-                    String.valueOf(w.getOrganizationType()), String.valueOf(w.getAnnualTurnover()), String.valueOf(w.getPostalAddress())
-            });
+            printWriter.write(w.getName() + ",");
+            printWriter.write(w.getCoordinateX() + ",");
+            printWriter.write(w.getCoordinateY() + ",");
+            printWriter.write(w.getSalary() + ",");
+            printWriter.write(w.getEndDateString() + ',');
+            printWriter.write(w.getPositionString() + ",");
+            printWriter.write(w.getStatusString() + ",");
+            printWriter.write(w.getOrganizationNameString() + ",");
+            printWriter.write(w.getOrganizationTypeString() + ",");
+            printWriter.write(w.getAnnualTurnoverString() + ",");
+            printWriter.write(w.getAddressStreet() + ",");
+            printWriter.write(w.getAddressZipCode() + "\n");
+            printWriter.flush();
         }
-        csvWriter.close();
     }
 
     /**

@@ -1,6 +1,5 @@
 package elements;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,24 +7,21 @@ import java.util.List;
  * Перечисляемый тип Position
  */
 public enum Position {
-    LABORER("LABORER", "Разнорабочий"),
-    ENGINEER("ENGINEER", "Инженер"),
-    CLEANER("CLEANER", "Уборщик");
+    LABORER("LABORER"),
+    ENGINEER("ENGINEER"),
+    CLEANER("CLEANER");
 
 
     private String text;
-    private String displayText;
     private static List<Position> possibleValues = Arrays.asList(Position.values());
 
     /**
      * Метод для задания параметров перечисления
      *
      * @param text        - перечисление в виде строки
-     * @param displayText - перевод для отображения пользователю
      */
-    public void setText(String text, String displayText) {
+    public void setText(String text) {
         this.text = text;
-        this.displayText = displayText;
     }
 
     /**
@@ -41,10 +37,9 @@ public enum Position {
      * Стандартный конструктор
      *
      * @param text        - перечисление в виде строки
-     * @param displayText - перевод для отображения пользователю
      */
-    Position(String text, String displayText) {
-        setText(text, displayText);
+    Position(String text) {
+        setText(text);
     }
 
     /**
@@ -55,14 +50,6 @@ public enum Position {
     @Override
     public String toString() {
         return this.text;
-    }
-
-    /**
-     * Метод, возвращающий понятное пользователю представление значения перечисления
-     * @return - строка
-     */
-    public String toDisplay() {
-        return this.displayText;
     }
 }
 

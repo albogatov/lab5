@@ -7,23 +7,20 @@ import java.util.List;
  * Перечисляемый тип OrganizationType
  */
 public enum OrganizationType {
-    COMMERCIAL("COMMERCIAL", "Коммерческая"),
-    PRIVATE_LIMITED_COMPANY("PRIVATE_LIMITED_COMPANY", "Общество с ограниченной ответственностью"),
-    OPEN_JOINT_STOCK_COMPANY("OPEN_JOINT_STOCK_COMPANY", "Открытое акционерное общество");
+    COMMERCIAL("COMMERCIAL"),
+    PRIVATE_LIMITED_COMPANY("PRIVATE_LIMITED_COMPANY"),
+    OPEN_JOINT_STOCK_COMPANY("OPEN_JOINT_STOCK_COMPANY");
 
     private String text;
-    private String displayText;
     private static List<OrganizationType> possibleValues = Arrays.asList(OrganizationType.values());
 
     /**
      * Метод для задания параметров перечисления
      *
      * @param text        - перечисление в виде строки
-     * @param displayText - перевод для отображения пользователю
      */
-    public void setText(String text, String displayText) {
+    public void setText(String text) {
         this.text = text;
-        this.displayText = displayText;
     }
 
     /**
@@ -37,10 +34,9 @@ public enum OrganizationType {
      * Стандартный конструктор
      *
      * @param text        - перечисление в виде строки
-     * @param displayText - перевод для отображения пользователю
      */
-    OrganizationType(String text, String displayText) {
-        setText(text, displayText);
+    OrganizationType(String text) {
+        setText(text);
     }
 
     /**
@@ -52,13 +48,4 @@ public enum OrganizationType {
     public String toString() {
         return this.text;
     }
-
-    /**
-     * Метод, возвращающий понятное пользователю представление значения перечисления
-     * @return - строка
-     */
-    public String toDisplay() {
-        return this.displayText;
-    }
-
 }
