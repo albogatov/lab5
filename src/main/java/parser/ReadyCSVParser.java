@@ -13,8 +13,8 @@ import com.opencsv.CSVParser;
  * Класс, отвечающий за парсинг данных из изначального файла
  */
 public class ReadyCSVParser {
-    protected static CSVParser parser = new CSVParser();
-    protected static HashMap<String, Integer> keySet = new HashMap<>();
+    protected CSVParser parser = new CSVParser();
+    protected HashMap<String, Integer> keySet = new HashMap<>();
 
     /**
      * Стандартный конструктор
@@ -29,7 +29,7 @@ public class ReadyCSVParser {
      * @param line - строка
      * @throws IOException - в случае некорректного ввода
      */
-    public static void readKeyLine(String line) throws IOException {
+    public void readKeyLine(String line) throws IOException {
         List<String> keyLineValues = Arrays.asList(parser.parseLine(line));
         for (String s : keyLineValues) {
             keySet.put(s.toLowerCase(), keyLineValues.indexOf(s));
@@ -43,7 +43,7 @@ public class ReadyCSVParser {
      * @return - список слов строки после парсинга
      * @throws IOException - в случае некорректного ввода
      */
-    public static List<String> readLine(String line) throws IOException {
+    public List<String> readLine(String line) throws IOException {
         return Arrays.asList(parser.parseLine(line));
     }
 
@@ -54,8 +54,8 @@ public class ReadyCSVParser {
      * @return - объект коллекции
      * @throws IOException - в случае некорректного ввода
      */
-    public static Worker readWorker(String line) throws IOException {
-        List<String> values = ReadyCSVParser.readLine(line);
+    public Worker readWorker(String line) throws IOException {
+        List<String> values = readLine(line);
         String name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
         Coordinates coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
         ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -106,12 +106,12 @@ public class ReadyCSVParser {
      * @return - заполненная коллекция
      * @throws IOException - в случае некорректного ввода
      */
-    public static HashSet<Worker> readWorkers(File file, HashSet<Worker> workers, Storage storage) throws IOException {
+    public HashSet<Worker> readWorkers(File file, HashSet<Worker> workers, Storage storage) throws IOException {
         FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = new BufferedInputStream(fis);
         BufferedReader br = new BufferedReader(new InputStreamReader(bis));
         String line;
-        ReadyCSVParser.readKeyLine(br.readLine());
+        readKeyLine(br.readLine());
         while ((line = br.readLine()) != null) {
             Worker worker = readWorker(line);
             if (worker != null) workers.add(worker);

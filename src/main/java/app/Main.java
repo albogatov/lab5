@@ -32,8 +32,9 @@ public class Main {
                         File dataFile = new File(args[0]);
                         Storage storage = new Storage();
                         StorageInteraction interactiveStorage = new StorageInteraction(storage, args[0]);
+                        ReadyCSVParser parser = new ReadyCSVParser();
                         try {
-                            ReadyCSVParser.readWorkers(dataFile, storage.getCollection(), storage);
+                            parser.readWorkers(dataFile, storage.getCollection(), storage);
                         } catch (NullPointerException e) {
                             userInteraction.displayMessage("Ключевая строка введена неверно");
                             System.exit(0);

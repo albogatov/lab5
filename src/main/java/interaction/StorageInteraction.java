@@ -1,19 +1,17 @@
 package interaction;
 
-import com.opencsv.CSVWriter;
 import elements.Status;
 import elements.Worker;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
  * Класс-реализация взаимодействия с коллекцией
  */
-public class StorageInteraction implements InteractionInterface {
+public final class StorageInteraction implements InteractionInterface {
 
     private static Storage storage;
     private static String originPath;
@@ -21,6 +19,7 @@ public class StorageInteraction implements InteractionInterface {
     /**
      * Стандартный конструктор, задает хранилище, с которым будет работа
      * @param storage - хранилище
+     * @param originPath - путь к данным
      */
     public StorageInteraction(Storage storage, String originPath) {
         StorageInteraction.storage = storage;

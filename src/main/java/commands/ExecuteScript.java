@@ -12,7 +12,8 @@ import java.util.HashSet;
  * Класс команды executeScript
  */
 public class ExecuteScript extends Command {
-    private static final HashSet<String> paths = new HashSet<>();
+    private static HashSet<String> paths = new HashSet<>();
+    private static boolean success;
 
     /**
      * Стандартный конструктор, добавляющий строку вызова и описание команды
@@ -33,7 +34,7 @@ public class ExecuteScript extends Command {
             UserInterface scriptInteraction = new UserInterface(new FileReader(new File(arguments[1])), new OutputStreamWriter(System.out), false);
             String line;
             String path = arguments[1];
-            boolean success = true;
+            success = true;
             while (scriptInteraction.hasNextLine()) {
                 line = scriptInteraction.read();
                 String cmd = line.split(" ")[0];
@@ -55,10 +56,13 @@ public class ExecuteScript extends Command {
             else ui.displayMessage("Скрипт не выполнен");
         } catch (FileNotFoundException e) {
             ui.displayMessage("В качестве аргумента указан путь к несуществуюшему файлу");
+            success = false;
             paths.clear();
         } catch (Exception e) {
             ui.displayMessage("Произошла неизвестная ошибка");
+            success = false;
             paths.clear();
+            e.printStackTrace();
         }
     }
 }
