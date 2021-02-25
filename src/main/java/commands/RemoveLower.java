@@ -18,6 +18,7 @@ public class RemoveLower extends Command {
         cmdLine = "removeLower";
         description = "удалить из коллекции все элементы, меньшие, чем заданный";
     }
+
     /**
      * Метод исполнения
      *

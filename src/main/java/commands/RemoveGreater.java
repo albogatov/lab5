@@ -18,6 +18,7 @@ public class RemoveGreater extends Command {
         cmdLine = "removeGreater";
         description = "удалить из коллекции все элементы, превышающие заданный";
     }
+
     /**
      * Метод исполнения
      *

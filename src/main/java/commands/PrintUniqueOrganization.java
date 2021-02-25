@@ -5,7 +5,6 @@ import interaction.InteractionInterface;
 import interaction.UserInterface;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -19,6 +18,7 @@ public class PrintUniqueOrganization extends Command {
         cmdLine = "printUniqueOrganization";
         description = "вывести уникальные значения поля organization всех элементов в коллекции";
     }
+
     /**
      * Метод исполнения
      *
@@ -29,9 +29,8 @@ public class PrintUniqueOrganization extends Command {
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         List<String> result = interactiveStorage.printUniqueOrganization();
-        Iterator itr = result.iterator();
-        while (itr.hasNext()) {
-            ui.displayMessage(itr.next().toString());
+        for (String s : result) {
+            ui.displayMessage(s);
         }
     }
 }

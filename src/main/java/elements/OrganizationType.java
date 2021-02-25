@@ -12,12 +12,12 @@ public enum OrganizationType {
     OPEN_JOINT_STOCK_COMPANY("OPEN_JOINT_STOCK_COMPANY");
 
     private String text;
-    private static List<OrganizationType> possibleValues = Arrays.asList(OrganizationType.values());
+    private static final List<OrganizationType> possibleValues = Arrays.asList(OrganizationType.values());
 
     /**
      * Метод для задания параметров перечисления
      *
-     * @param text        - перечисление в виде строки
+     * @param text - перечисление в виде строки
      */
     public void setText(String text) {
         this.text = text;
@@ -25,15 +25,17 @@ public enum OrganizationType {
 
     /**
      * Метод, возвращающий возможные для ввода значения перечисления
+     *
      * @return - список значений
      */
     public static List<OrganizationType> getPossibleValues() {
         return possibleValues;
     }
+
     /**
      * Стандартный конструктор
      *
-     * @param text        - перечисление в виде строки
+     * @param text - перечисление в виде строки
      */
     OrganizationType(String text) {
         setText(text);

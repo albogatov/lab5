@@ -18,16 +18,18 @@ public class CountByStatus extends Command {
         cmdLine = "countByStatus";
         description = "вывести количество элементов, значение поля status которых равно заданному";
     }
+
     /**
      * Метод исполнения
-     * @param ui - объект, через который ведется взаимодействие с пользователем
-     * @param arguments - необходимые для исполнения аргументы
+     *
+     * @param ui                 - объект, через который ведется взаимодействие с пользователем
+     * @param arguments          - необходимые для исполнения аргументы
      * @param interactiveStorage - объект для взаимодействия с коллекцией
      * @throws IOException - в случае некорректного ввода
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         Status status = Status.valueOf(arguments[1].toUpperCase());
         int result = interactiveStorage.countByStatus(status);
-        ui.displayMessage("Элементов с таким статусом: " + String.valueOf(result));
+        ui.displayMessage("Элементов с таким статусом: " + result);
     }
 }

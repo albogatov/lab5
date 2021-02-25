@@ -11,10 +11,11 @@ public class Organization {
 
     /**
      * Стандартный конструктор, задающий основные параметры
+     *
      * @param annualTurnover - годовая выручка
-     * @param type - типа организации
-     * @param postalAddress - адрес
-     * @param name - название организации
+     * @param type           - типа организации
+     * @param postalAddress  - адрес
+     * @param name           - название организации
      */
     public Organization(Long annualTurnover, OrganizationType type, Address postalAddress, String name) {
         this.annualTurnover = annualTurnover;
@@ -25,6 +26,7 @@ public class Organization {
 
     /**
      * Метод, который возвращает годовую выручку
+     *
      * @return - годовая выручка
      */
     public Long getAnnualTurnover() {
@@ -32,8 +34,10 @@ public class Organization {
             return null;
         else return annualTurnover;
     }
+
     /**
      * Метод, который возвращает тип организации
+     *
      * @return - тип
      */
     public OrganizationType getOrganizationType() {
@@ -41,8 +45,10 @@ public class Organization {
             return null;
         else return type;
     }
+
     /**
      * Метод, который возвращает адрес
+     *
      * @return - адрес
      */
     public Address getPostalAddress() {
@@ -50,8 +56,10 @@ public class Organization {
             return null;
         else return postalAddress;
     }
+
     /**
      * Метод, который возвращает имя организации
+     *
      * @return - имя организации
      */
     @Override

@@ -17,7 +17,6 @@ import java.util.Scanner;
  */
 public class UserInterface {
     private Scanner scanner;
-    private Reader reader;
     private Writer writer;
     private boolean interactionMode;
 
@@ -29,7 +28,6 @@ public class UserInterface {
      * @param im - режим взаимодействия (true - интерактивный)
      */
     public UserInterface(Reader r, Writer w, boolean im) {
-        this.reader = r;
         this.writer = w;
         this.interactionMode = im;
         this.scanner = new Scanner(r);
@@ -192,8 +190,7 @@ public class UserInterface {
                 if (endDateLine != null) {
                     endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
                     break;
-                }
-                else {
+                } else {
                     endDate = null;
                     break;
                 }
@@ -227,8 +224,7 @@ public class UserInterface {
                 if (statusLine != null) {
                     status = Status.valueOf(statusLine.toUpperCase());
                     break;
-                }
-                else {
+                } else {
                     status = null;
                     break;
                 }

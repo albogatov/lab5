@@ -29,6 +29,7 @@ public class Storage implements StorageInterface<Worker> {
 
     /**
      * Метод, возвращающий дату создания коллекции
+     *
      * @return - дата создания
      */
     public Date getInitializationDate() {
@@ -37,6 +38,7 @@ public class Storage implements StorageInterface<Worker> {
 
     /**
      * Метод, возвращающий число элементов коллекции
+     *
      * @return - размер
      */
     public int size() {
@@ -45,6 +47,7 @@ public class Storage implements StorageInterface<Worker> {
 
     /**
      * Метод, помещающий объект в коллекцию
+     *
      * @param worker - помещаемый объект
      */
     public void put(Worker worker) {
@@ -53,6 +56,7 @@ public class Storage implements StorageInterface<Worker> {
 
     /**
      * Метод, возвращающий коллекцию
+     *
      * @return - коллекция
      */
     public HashSet<Worker> getCollection() {
@@ -61,6 +65,7 @@ public class Storage implements StorageInterface<Worker> {
 
     /**
      * Метод генерации идентификатора
+     *
      * @param worker - объект, для которого генерируется ID
      * @return - объект с установленным ID
      */
@@ -79,6 +84,7 @@ public class Storage implements StorageInterface<Worker> {
 
     /**
      * Метод, возвращающий список ID
+     *
      * @return - список ID
      */
     public List<Long> getIdList() {

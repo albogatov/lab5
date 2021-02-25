@@ -41,6 +41,7 @@ public class CommandCenter {
 
     /**
      * Метод передачи команды в конструктор
+     *
      * @param cmd - команда
      */
     public void addCmd(Command cmd) {
@@ -49,6 +50,7 @@ public class CommandCenter {
 
     /**
      * Метод, распознающий команду в строке, введенной пользователем
+     *
      * @param cmdLine - строка, содержащая команду
      * @return - объект класса соответсвующей команды
      * @throws NonExistingCommandException - в случае ввода несуществующей команды
@@ -62,6 +64,7 @@ public class CommandCenter {
 
     /**
      * Метод, возвращающий единственный объект класса. Реализация шаблона "Синглтон".
+     *
      * @return - объект класса
      */
     public static CommandCenter getInstance() {
@@ -72,6 +75,7 @@ public class CommandCenter {
 
     /**
      * Метод, возврашающий полный список всех команд
+     *
      * @return - список команд
      */
     public List<Command> retrieveAllCommands() {
@@ -80,11 +84,12 @@ public class CommandCenter {
 
     /**
      * Метод, вызывающий исполнение команды
-     * @param ui - объект, через который ведется взаимодействие с пользователем
-     * @param line - часть строки пользовательского ввода, содержающая команду
-     * @param fullLine - полная строка ввода с аргументами
+     *
+     * @param ui                 - объект, через который ведется взаимодействие с пользователем
+     * @param line               - часть строки пользовательского ввода, содержающая команду
+     * @param fullLine           - полная строка ввода с аргументами
      * @param interactiveStorage - объект для взаимодействия с коллекцией
-     * @throws IOException - в случае некорректного ввода
+     * @throws IOException                 - в случае некорректного ввода
      * @throws NonExistingCommandException - в случае вызова не существующей программы
      */
     public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException {

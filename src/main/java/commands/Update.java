@@ -18,6 +18,7 @@ public class Update extends Command {
         cmdLine = "update";
         description = "обновить значение элемента коллекции, id которого равен заданному";
     }
+
     /**
      * Метод исполнения
      *
@@ -39,7 +40,6 @@ public class Update extends Command {
             worker = ui.readWorker(arguments, 0);
             interactiveStorage.update(id, worker);
             ui.displayMessage("Сотрудник обновлен");
-        }
-        else System.out.println("Сотрудника с таким идентификатором нет");
+        } else System.out.println("Сотрудника с таким идентификатором нет");
     }
 }

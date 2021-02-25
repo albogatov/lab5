@@ -18,7 +18,8 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Стандартный конструктор, задает хранилище, с которым будет работа
-     * @param storage - хранилище
+     *
+     * @param storage    - хранилище
      * @param originPath - путь к данным
      */
     public StorageInteraction(Storage storage, String originPath) {
@@ -28,6 +29,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду info
+     *
      * @return - информация о коллекции
      */
     public String info() {
@@ -39,6 +41,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду show
+     *
      * @return - строковое представление объектов коллекции
      */
     public String show() {
@@ -50,6 +53,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду add
+     *
      * @param worker - добавляемый объект
      */
     public void add(Worker worker) {
@@ -59,7 +63,8 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду update
-     * @param id - ID обновляемого объекта
+     *
+     * @param id     - ID обновляемого объекта
      * @param worker - новый объект коллекции
      */
     public void update(long id, Worker worker) {
@@ -70,6 +75,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду removeById
+     *
      * @param id - ID удаляемого объекта
      */
     public void removeById(long id) {
@@ -94,6 +100,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду save
+     *
      * @throws IOException - в случае некорректного ввода
      */
     public void save() throws IOException {
@@ -101,7 +108,7 @@ public final class StorageInteraction implements InteractionInterface {
         String keyLine = "name,x,y,salary,endDate,position,status,organization,orgType,annualTurnover,street,postalCode" + "\n";
         printWriter.write(keyLine);
         HashSet<Worker> collection = storage.getCollection();
-        for(Worker w : collection) {
+        for (Worker w : collection) {
             printWriter.write(w.getName() + ",");
             printWriter.write(w.getCoordinateX() + ",");
             printWriter.write(w.getCoordinateY() + ",");
@@ -127,6 +134,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду addIfMin
+     *
      * @param worker - добавляемый объект
      */
     public void addIfMin(Worker worker) {
@@ -139,6 +147,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду removeGreater
+     *
      * @param worker - объект для сравнения
      */
     public void removeGreater(Worker worker) {
@@ -157,6 +166,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду removeLower
+     *
      * @param worker - объект для сравнения
      */
     public void removeLower(Worker worker) {
@@ -175,6 +185,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду countByStatus
+     *
      * @param status - статус
      * @return - число объектов с указанным статусом
      */
@@ -193,6 +204,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду printAscending
+     *
      * @return - отсортированное строковое представление коллекции
      */
     public List<String> printAscending() {
@@ -207,6 +219,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, реализующий команду printUniqueOrganization
+     *
      * @return - список всех уникальных организаций
      */
     public List<String> printUniqueOrganization() {
@@ -223,6 +236,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, возвращающий размер коллекции
+     *
      * @return - размер коллекции
      */
     public int getSize() {
@@ -231,6 +245,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, проверяющий наличие объекта по ID
+     *
      * @param id - ID для поиска
      * @return - true если объект существует, иначе false
      */

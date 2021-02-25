@@ -57,9 +57,15 @@ public class ReadyCSVParser {
     public Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
         String name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
-        Coordinates coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
+        Coordinates coordinates;
+        if(values.get(keySet.get("x")).equals("") || values.get(keySet.get("y")).equals(""))
+            coordinates = null;
+        else coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
         ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-        Integer salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
+        Integer salary;
+        if(values.get(keySet.get("salary")).equals(""))
+            salary = null;
+        else salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
         LocalDate endDate;
         if (values.get(keySet.get("enddate")).equals(""))
             endDate = null;

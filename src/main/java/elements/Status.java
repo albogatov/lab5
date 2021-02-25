@@ -14,12 +14,12 @@ public enum Status {
     PROBATION("PROBATION");
 
     private String text;
-    private static List<Status> possibleValues = Arrays.asList(Status.values());
+    private static final List<Status> possibleValues = Arrays.asList(Status.values());
 
     /**
      * Метод для задания параметров перечисления
      *
-     * @param text        - перечисление в виде строки
+     * @param text - перечисление в виде строки
      */
     public void setText(String text) {
         this.text = text;
@@ -37,7 +37,7 @@ public enum Status {
     /**
      * Стандартный конструктор
      *
-     * @param text        - перечисление в виде строки
+     * @param text - перечисление в виде строки
      */
     Status(String text) {
         setText(text);

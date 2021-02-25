@@ -13,12 +13,12 @@ public enum Position {
 
 
     private String text;
-    private static List<Position> possibleValues = Arrays.asList(Position.values());
+    private static final List<Position> possibleValues = Arrays.asList(Position.values());
 
     /**
      * Метод для задания параметров перечисления
      *
-     * @param text        - перечисление в виде строки
+     * @param text - перечисление в виде строки
      */
     public void setText(String text) {
         this.text = text;
@@ -36,7 +36,7 @@ public enum Position {
     /**
      * Стандартный конструктор
      *
-     * @param text        - перечисление в виде строки
+     * @param text - перечисление в виде строки
      */
     Position(String text) {
         setText(text);

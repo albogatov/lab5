@@ -11,12 +11,14 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Главный класс консольного приложения.
+ *
  * @author Alexandr Bogatov
  */
 
 public class Main {
     /**
      * Метод, запускающий приложение.
+     *
      * @param args - путь к изначальному файлу с данными
      * @throws IOException - в случае неверного пользовательского ввода
      */
@@ -36,7 +38,7 @@ public class Main {
                         try {
                             parser.readWorkers(dataFile, storage.getCollection(), storage);
                         } catch (NullPointerException e) {
-                            userInteraction.displayMessage("Ключевая строка введена неверно");
+                            userInteraction.displayMessage("Данные в файле введены некорректно");
                             System.exit(0);
                         } catch (DateTimeParseException e) {
                             userInteraction.displayMessage("Неверное форматирование дат");
@@ -63,7 +65,7 @@ public class Main {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
                     } catch (NumberFormatException e) {
                         userInteraction.displayMessage("Неправильно введены числовые данные, повторите ввод команды");
-                    } catch(FileNotFoundException e) {
+                    } catch (FileNotFoundException e) {
                         userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу или доступ к файлу закрыт");
                     } catch (IOException e) {
                         userInteraction.displayMessage("Ввод некорректен");

@@ -1,7 +1,6 @@
 package commands;
 
 import app.Command;
-import elements.Worker;
 import interaction.InteractionInterface;
 
 import interaction.UserInterface;
@@ -19,6 +18,7 @@ public class RemoveById extends Command {
         cmdLine = "removeById";
         description = "удалить элемент из коллекции по его id";
     }
+
     /**
      * Метод исполнения
      *
@@ -29,7 +29,6 @@ public class RemoveById extends Command {
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         long id = Long.parseLong(arguments[1]);
-        Worker worker;
         if (interactiveStorage.findById(id)) {
             interactiveStorage.removeById(id);
             ui.displayMessage("Сотрудник удален");

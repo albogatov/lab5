@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Интерфейс для классов для хранения коллекции
+ *
  * @param <T> - тип объектов коллекции
  */
 public interface StorageInterface<T> {

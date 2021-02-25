@@ -20,13 +20,14 @@ public class Worker implements Comparable<Worker> {
 
     /**
      * Стандартный конструктор
-     * @param name - имя рабочего
-     * @param coordinates - координаты
+     *
+     * @param name         - имя рабочего
+     * @param coordinates  - координаты
      * @param creationDate - дата добавления в базу
-     * @param salary - оклад
-     * @param endDate - дата расторжения контракта
-     * @param position - должность
-     * @param status - статус
+     * @param salary       - оклад
+     * @param endDate      - дата расторжения контракта
+     * @param position     - должность
+     * @param status       - статус
      * @param organization - организация
      */
     public Worker(String name, Coordinates coordinates, java.time.ZonedDateTime creationDate, Integer salary, java.time.LocalDate endDate, Position position, Status status, Organization organization) {
@@ -74,8 +75,7 @@ public class Worker implements Comparable<Worker> {
 
     public String getCreationDateString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z");
-        String formattedString = creationDate.format(formatter);
-        return formattedString;
+        return creationDate.format(formatter);
     }
 
     public Integer getSalary() {
@@ -84,14 +84,14 @@ public class Worker implements Comparable<Worker> {
 
     public String getEndDateString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        if(this.endDate == null)
+        if (this.endDate == null)
             return "";
         return this.endDate.format(formatter);
     }
 
     public String getEndDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        if(this.endDate == null)
+        if (this.endDate == null)
             return null;
         return this.endDate.format(formatter);
     }
@@ -193,10 +193,11 @@ public class Worker implements Comparable<Worker> {
                 "Должность - " + this.getPosition() + "\n" +
                 "Статус - " + this.getStatus() + "\n" +
                 "Организация - " + this.getOrganizationName() + "\n" +
-                "Тип организации - " + this.getOrganizationType()+ "\n" +
-                "Годовая выручка организации - " + this.getAnnualTurnover()+ "\n" +
+                "Тип организации - " + this.getOrganizationType() + "\n" +
+                "Годовая выручка организации - " + this.getAnnualTurnover() + "\n" +
                 "Адрес организации - " + this.getPostalAddress());
     }
+
     @Override
     public int compareTo(Worker comparedWorker) {
         return this.getSalary() - comparedWorker.getSalary();
