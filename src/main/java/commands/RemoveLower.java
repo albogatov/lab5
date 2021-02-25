@@ -29,7 +29,7 @@ public class RemoveLower extends Command {
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         int size1 = interactiveStorage.getSize();
-        Worker worker = ui.readWorker(arguments, 1);
+        Worker worker = ui.readWorker();
         interactiveStorage.removeLower(worker);
         int size2 = interactiveStorage.getSize();
         if (size2 < size1)
