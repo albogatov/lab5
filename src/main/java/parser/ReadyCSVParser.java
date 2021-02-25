@@ -48,7 +48,7 @@ public class ReadyCSVParser {
     }
 
     /**
-     * Статический метод для создания объекта по значениям строки
+     * Метод для создания объекта по значениям строки
      *
      * @param line строки
      * @return объект коллекции
@@ -106,15 +106,14 @@ public class ReadyCSVParser {
     }
 
     /**
-     * Статический метод, считывающий все объекты коллекции в файле
+     * Метод, считывающий все объекты коллекции в файле
      *
      * @param file    файл
      * @param workers коллекция, в которую помещаются объекты
      * @param storage объект класса для хранения коллекции
-     * @return заполненная коллекция
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public HashSet<Worker> readWorkers(File file, HashSet<Worker> workers, Storage storage) throws IOException {
+    public void readWorkers(File file, HashSet<Worker> workers, Storage storage) throws IOException {
         FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = new BufferedInputStream(fis);
         BufferedReader br = new BufferedReader(new InputStreamReader(bis));
@@ -122,9 +121,10 @@ public class ReadyCSVParser {
         readKeyLine(br.readLine());
         while ((line = br.readLine()) != null) {
             Worker worker = readWorker(line);
-            if (worker != null) workers.add(worker);
-            storage.generateId(worker);
+            if (worker != null) {
+                workers.add(worker);
+                storage.generateId(worker);
+            }
         }
-        return workers;
     }
 }

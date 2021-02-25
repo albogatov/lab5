@@ -130,15 +130,12 @@ public class UserInterface {
      * @throws IOException в случае ошибки ввода/вывода
      */
     public String readOtherArgument(String message) throws IOException {
-        String line = null;
+        String line;
         if (interactionMode) {
             displayMessage(message);
-            line = scanner.nextLine();
-            line = line.isEmpty() ? null : line;
-        } else {
-            line = scanner.nextLine();
-            line = line.isEmpty() ? null : line;
         }
+        line = scanner.nextLine();
+        line = line.isEmpty() ? null : line;
         return line;
     }
 
@@ -152,7 +149,7 @@ public class UserInterface {
      * @throws IOException в случае ошибки ввода/вывода
      */
     public String readOtherArgument(String message, long min, long max) throws IOException {
-        String line = null;
+        String line;
         if (interactionMode) {
             do {
                 displayMessage(message);
@@ -183,11 +180,10 @@ public class UserInterface {
                 String endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
                 if (endDateLine != null) {
                     endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
-                    break;
                 } else {
                     endDate = null;
-                    break;
                 }
+                break;
             } catch (DateTimeParseException e) {
                 displayMessage("Допущена ошибка, повторите ввод");
             }
@@ -217,11 +213,10 @@ public class UserInterface {
                 String statusLine = readOtherArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues());
                 if (statusLine != null) {
                     status = Status.valueOf(statusLine.toUpperCase());
-                    break;
                 } else {
                     status = null;
-                    break;
                 }
+                break;
             } catch (IllegalArgumentException e) {
                 displayMessage("Допущена ошибка, повторите ввод");
             }
@@ -232,11 +227,10 @@ public class UserInterface {
                 String positionLine = readOtherArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues());
                 if (positionLine != null) {
                     position = Position.valueOf(positionLine.toUpperCase());
-                    break;
                 } else {
                     position = null;
-                    break;
                 }
+                break;
             } catch (IllegalArgumentException e) {
                 displayMessage("Допущена ошибка, повторите ввод");
             }
@@ -248,7 +242,7 @@ public class UserInterface {
             while (annualTurnover == 0) {
                 annualTurnover = Long.parseLong(readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE));
             }
-            OrganizationType type = null;
+            OrganizationType type;
             while (true) {
                 try {
                     type = OrganizationType.valueOf(readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues()).toUpperCase());

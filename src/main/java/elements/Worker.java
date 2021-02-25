@@ -241,7 +241,7 @@ public class Worker implements Comparable<Worker> {
     /**
      * Метод, возвращаюший годовую выручку организации сотрудника и пустую строку, если она не указана
      *
-     * @return
+     * @return годовая выручка
      */
     public String getAnnualTurnoverString() {
         if (organization == null || organization.getAnnualTurnover() == null)

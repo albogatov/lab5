@@ -6,7 +6,6 @@ import interaction.InteractionInterface;
 import interaction.UserInterface;
 
 import java.io.*;
-import java.nio.file.NoSuchFileException;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
