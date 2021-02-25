@@ -16,11 +16,11 @@ public abstract class Command {
     /**
      * Метод исполнения команды
      *
-     * @param ui                 - объект, через который ведется взаимодействие с пользователем
-     * @param arguments          - необходимые для исполнения аргументы
-     * @param interactiveStorage - объект для взаимодействия с коллекцией
-     * @throws IOException                 - в случае некорректного ввода
-     * @throws NonExistingCommandException - в случае ввода несуществующей команды
+     * @param ui                 объект, через который ведется взаимодействие с пользователем
+     * @param arguments          необходимые для исполнения аргументы
+     * @param interactiveStorage объект для взаимодействия с коллекцией
+     * @throws IOException                 в случае ошибки ввода/вывода
+     * @throws NonExistingCommandException в случае ввода несуществующей команды
      */
     public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException;
 
@@ -34,7 +34,7 @@ public abstract class Command {
     /**
      * Возвращает строку, вызывающую команду
      *
-     * @return - строка
+     * @return строка
      */
     public String getCommand() {
         return cmdLine;
@@ -43,7 +43,7 @@ public abstract class Command {
     /**
      * Возвращает описание команды
      *
-     * @return - описание
+     * @return описание
      */
     public String getHelp() {
         return description;

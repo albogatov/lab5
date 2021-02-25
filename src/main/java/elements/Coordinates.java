@@ -10,8 +10,8 @@ public class Coordinates {
     /**
      * Стандартный конструктор
      *
-     * @param x - координата x
-     * @param y - координата y
+     * @param x координата x
+     * @param y координата y
      */
     public Coordinates(int x, long y) {
         this.x = x;
@@ -21,7 +21,7 @@ public class Coordinates {
     /**
      * Переопределенный метод toString для корректного строкового представления координат
      *
-     * @return - координаты в строковом виде
+     * @return координаты в строковом виде
      */
     @Override
     public String toString() {
@@ -30,10 +30,20 @@ public class Coordinates {
         return textx + " " + texty;
     }
 
+    /**
+     * Метод, возвращающий отдельно координату X
+     *
+     * @return координата X
+     */
     public int getX() {
         return this.x;
     }
 
+    /**
+     * Метод, возвращающий отдельно координату X
+     *
+     * @return координата Y
+     */
     public long getY() {
         return this.y;
     }

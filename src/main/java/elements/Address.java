@@ -10,18 +10,28 @@ public class Address {
     /**
      * Стандартный конструктор, в котором задаются обязательные параметры
      *
-     * @param street  - улица
-     * @param zipCode - почтовый индекс
+     * @param street  улица
+     * @param zipCode почтовый индекс
      */
     public Address(String street, String zipCode) {
         this.street = street;
         this.zipCode = zipCode;
     }
 
+    /**
+     * Метод, возвращающий название улицы
+     *
+     * @return название
+     */
     public String getStreet() {
         return this.street;
     }
 
+    /**
+     * Метод, возвращающий индекс
+     *
+     * @return индекс
+     */
     public String getZipCode() {
         return this.zipCode;
     }
@@ -29,7 +39,7 @@ public class Address {
     /**
      * Переопределение метода toString, возвращает параметры объекта только если оба параметра заданы
      *
-     * @return - строковое представление адреса
+     * @return строковое представление адреса
      */
     @Override
     public String toString() {

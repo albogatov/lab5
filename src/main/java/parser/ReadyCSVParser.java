@@ -26,8 +26,8 @@ public class ReadyCSVParser {
     /**
      * Метод, считывающий ключевую строку для определения порядка значений
      *
-     * @param line - строка
-     * @throws IOException - в случае некорректного ввода
+     * @param line строка
+     * @throws IOException в случае ошибки ввода/вывода
      */
     public void readKeyLine(String line) throws IOException {
         List<String> keyLineValues = Arrays.asList(parser.parseLine(line));
@@ -39,9 +39,9 @@ public class ReadyCSVParser {
     /**
      * Метод, считывающий строку
      *
-     * @param line - строка
-     * @return - список слов строки после парсинга
-     * @throws IOException - в случае некорректного ввода
+     * @param line строка
+     * @return список слов строки после парсинга
+     * @throws IOException в случае ошибки ввода/вывода
      */
     public List<String> readLine(String line) throws IOException {
         return Arrays.asList(parser.parseLine(line));
@@ -50,22 +50,24 @@ public class ReadyCSVParser {
     /**
      * Статический метод для создания объекта по значениям строки
      *
-     * @param line - строки
-     * @return - объект коллекции
-     * @throws IOException - в случае некорректного ввода
+     * @param line строки
+     * @return объект коллекции
+     * @throws IOException в случае ошибки ввода/вывода
      */
     public Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
         String name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
         Coordinates coordinates;
-        if(values.get(keySet.get("x")).equals("") || values.get(keySet.get("y")).equals(""))
+        if (values.get(keySet.get("x")).equals("") || values.get(keySet.get("y")).equals(""))
             coordinates = null;
-        else coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
+        else
+            coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
         ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
         Integer salary;
-        if(values.get(keySet.get("salary")).equals(""))
+        if (values.get(keySet.get("salary")).equals(""))
             salary = null;
-        else salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
+        else
+            salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
         LocalDate endDate;
         if (values.get(keySet.get("enddate")).equals(""))
             endDate = null;
@@ -106,11 +108,11 @@ public class ReadyCSVParser {
     /**
      * Статический метод, считывающий все объекты коллекции в файле
      *
-     * @param file    - файл
-     * @param workers - коллекция, в которую помещаются объекты
-     * @param storage - объект класса для хранения коллекции
-     * @return - заполненная коллекция
-     * @throws IOException - в случае некорректного ввода
+     * @param file    файл
+     * @param workers коллекция, в которую помещаются объекты
+     * @param storage объект класса для хранения коллекции
+     * @return заполненная коллекция
+     * @throws IOException в случае ошибки ввода/вывода
      */
     public HashSet<Worker> readWorkers(File file, HashSet<Worker> workers, Storage storage) throws IOException {
         FileInputStream fis = new FileInputStream(file);

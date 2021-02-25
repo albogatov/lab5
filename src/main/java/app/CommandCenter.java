@@ -42,7 +42,7 @@ public class CommandCenter {
     /**
      * Метод передачи команды в конструктор
      *
-     * @param cmd - команда
+     * @param cmd команда
      */
     public void addCmd(Command cmd) {
         commands.put(cmd.getCommand(), cmd);
@@ -51,9 +51,9 @@ public class CommandCenter {
     /**
      * Метод, распознающий команду в строке, введенной пользователем
      *
-     * @param cmdLine - строка, содержащая команду
-     * @return - объект класса соответсвующей команды
-     * @throws NonExistingCommandException - в случае ввода несуществующей команды
+     * @param cmdLine строка, содержащая команду
+     * @return объект класса соответсвующей команды
+     * @throws NonExistingCommandException в случае ввода несуществующей команды
      */
     public Command getCmd(String cmdLine) throws NonExistingCommandException {
         if (!commands.containsKey(cmdLine)) {
@@ -65,7 +65,7 @@ public class CommandCenter {
     /**
      * Метод, возвращающий единственный объект класса. Реализация шаблона "Синглтон".
      *
-     * @return - объект класса
+     * @return объект класса
      */
     public static CommandCenter getInstance() {
         if (commandCenter == null)
@@ -76,7 +76,7 @@ public class CommandCenter {
     /**
      * Метод, возврашающий полный список всех команд
      *
-     * @return - список команд
+     * @return список команд
      */
     public List<Command> retrieveAllCommands() {
         return commands.keySet().stream().map(commands::get).collect(Collectors.toList());
@@ -85,12 +85,12 @@ public class CommandCenter {
     /**
      * Метод, вызывающий исполнение команды
      *
-     * @param ui                 - объект, через который ведется взаимодействие с пользователем
-     * @param line               - часть строки пользовательского ввода, содержающая команду
-     * @param fullLine           - полная строка ввода с аргументами
-     * @param interactiveStorage - объект для взаимодействия с коллекцией
-     * @throws IOException                 - в случае некорректного ввода
-     * @throws NonExistingCommandException - в случае вызова не существующей программы
+     * @param ui                 объект, через который ведется взаимодействие с пользователем
+     * @param line               часть строки пользовательского ввода, содержающая команду
+     * @param fullLine           полная строка ввода с аргументами
+     * @param interactiveStorage объект для взаимодействия с коллекцией
+     * @throws IOException                 в случае ошибки ввода/вывода
+     * @throws NonExistingCommandException в случае вызова не существующей программы
      */
     public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException {
         Command cmd = getCmd(line);

@@ -18,7 +18,7 @@ public enum Position {
     /**
      * Метод для задания параметров перечисления
      *
-     * @param text - перечисление в виде строки
+     * @param text перечисление в виде строки
      */
     public void setText(String text) {
         this.text = text;
@@ -27,7 +27,7 @@ public enum Position {
     /**
      * Метод, возвращающий возможные для ввода значения перечисления
      *
-     * @return - список значений
+     * @return список значений
      */
     public static List<Position> getPossibleValues() {
         return possibleValues;
@@ -36,7 +36,7 @@ public enum Position {
     /**
      * Стандартный конструктор
      *
-     * @param text - перечисление в виде строки
+     * @param text перечисление в виде строки
      */
     Position(String text) {
         setText(text);
@@ -45,7 +45,7 @@ public enum Position {
     /**
      * Переопределенный метод, возвращающий возможное для ввода значение
      *
-     * @return - текст
+     * @return текст
      */
     @Override
     public String toString() {

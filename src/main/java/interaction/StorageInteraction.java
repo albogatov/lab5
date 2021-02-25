@@ -19,8 +19,8 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Стандартный конструктор, задает хранилище, с которым будет работа
      *
-     * @param storage    - хранилище
-     * @param originPath - путь к данным
+     * @param storage    хранилище
+     * @param originPath путь к данным
      */
     public StorageInteraction(Storage storage, String originPath) {
         StorageInteraction.storage = storage;
@@ -30,7 +30,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду info
      *
-     * @return - информация о коллекции
+     * @return информация о коллекции
      */
     public String info() {
         System.out.println("Дата создания коллекции: " + storage.getInitializationDate() + "\n"
@@ -42,7 +42,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду show
      *
-     * @return - строковое представление объектов коллекции
+     * @return строковое представление объектов коллекции
      */
     public String show() {
         for (Worker w : storage.getCollection()) {
@@ -54,7 +54,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду add
      *
-     * @param worker - добавляемый объект
+     * @param worker добавляемый объект
      */
     public void add(Worker worker) {
         worker = storage.generateId(worker);
@@ -64,8 +64,8 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду update
      *
-     * @param id     - ID обновляемого объекта
-     * @param worker - новый объект коллекции
+     * @param id     ID обновляемого объекта
+     * @param worker новый объект коллекции
      */
     public void update(long id, Worker worker) {
         removeById(id);
@@ -76,7 +76,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду removeById
      *
-     * @param id - ID удаляемого объекта
+     * @param id ID удаляемого объекта
      */
     public void removeById(long id) {
         Iterator<Worker> itr = storage.getCollection().iterator();
@@ -101,7 +101,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду save
      *
-     * @throws IOException - в случае некорректного ввода
+     * @throws IOException в случае ошибки ввода/вывода
      */
     public void save() throws IOException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(StorageInteraction.originPath));
@@ -135,7 +135,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду addIfMin
      *
-     * @param worker - добавляемый объект
+     * @param worker добавляемый объект
      */
     public void addIfMin(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
@@ -148,7 +148,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду removeGreater
      *
-     * @param worker - объект для сравнения
+     * @param worker объект для сравнения
      */
     public void removeGreater(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
@@ -167,7 +167,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду removeLower
      *
-     * @param worker - объект для сравнения
+     * @param worker объект для сравнения
      */
     public void removeLower(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
@@ -186,8 +186,8 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду countByStatus
      *
-     * @param status - статус
-     * @return - число объектов с указанным статусом
+     * @param status статус
+     * @return число объектов с указанным статусом
      */
     public int countByStatus(Status status) {
         Iterator<Worker> itr = storage.getCollection().iterator();
@@ -205,7 +205,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду printAscending
      *
-     * @return - отсортированное строковое представление коллекции
+     * @return отсортированное строковое представление коллекции
      */
     public List<String> printAscending() {
         HashSet<Worker> workers = storage.getCollection();
@@ -220,7 +220,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду printUniqueOrganization
      *
-     * @return - список всех уникальных организаций
+     * @return список всех уникальных организаций
      */
     public List<String> printUniqueOrganization() {
         List<String> organizations = new ArrayList<>();
@@ -237,7 +237,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, возвращающий размер коллекции
      *
-     * @return - размер коллекции
+     * @return размер коллекции
      */
     public int getSize() {
         return storage.getCollection().size();
@@ -246,8 +246,8 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, проверяющий наличие объекта по ID
      *
-     * @param id - ID для поиска
-     * @return - true если объект существует, иначе false
+     * @param id ID для поиска
+     * @return true если объект существует, иначе false
      */
     public boolean findById(long id) {
         return storage.getIdList().contains(id);

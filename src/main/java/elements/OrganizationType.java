@@ -17,7 +17,7 @@ public enum OrganizationType {
     /**
      * Метод для задания параметров перечисления
      *
-     * @param text - перечисление в виде строки
+     * @param text перечисление в виде строки
      */
     public void setText(String text) {
         this.text = text;
@@ -26,7 +26,7 @@ public enum OrganizationType {
     /**
      * Метод, возвращающий возможные для ввода значения перечисления
      *
-     * @return - список значений
+     * @return список значений
      */
     public static List<OrganizationType> getPossibleValues() {
         return possibleValues;
@@ -35,7 +35,7 @@ public enum OrganizationType {
     /**
      * Стандартный конструктор
      *
-     * @param text - перечисление в виде строки
+     * @param text перечисление в виде строки
      */
     OrganizationType(String text) {
         setText(text);
@@ -44,7 +44,7 @@ public enum OrganizationType {
     /**
      * Переопределенный метод, возвращающий возможное для ввода значение
      *
-     * @return - текст
+     * @return текст
      */
     @Override
     public String toString() {

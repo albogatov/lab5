@@ -19,7 +19,7 @@ public enum Status {
     /**
      * Метод для задания параметров перечисления
      *
-     * @param text - перечисление в виде строки
+     * @param text перечисление в виде строки
      */
     public void setText(String text) {
         this.text = text;
@@ -28,7 +28,7 @@ public enum Status {
     /**
      * Метод, возвращающий возможные для ввода значения перечисления
      *
-     * @return - список значений
+     * @return список значений
      */
     public static List<Status> getPossibleValues() {
         return possibleValues;
@@ -37,7 +37,7 @@ public enum Status {
     /**
      * Стандартный конструктор
      *
-     * @param text - перечисление в виде строки
+     * @param text перечисление в виде строки
      */
     Status(String text) {
         setText(text);
@@ -46,7 +46,7 @@ public enum Status {
     /**
      * Переопределенный метод, возвращающий возможное для ввода значение
      *
-     * @return - текст
+     * @return текст
      */
     @Override
     public String toString() {

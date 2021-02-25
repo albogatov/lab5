@@ -19,8 +19,8 @@ public class Main {
     /**
      * Метод, запускающий приложение.
      *
-     * @param args - путь к изначальному файлу с данными
-     * @throws IOException - в случае неверного пользовательского ввода
+     * @param args путь к изначальному файлу с данными
+     * @throws IOException в случае ошибки ввода/вывода
      */
     public static void main(String[] args) throws IOException {
         UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);
@@ -68,7 +68,7 @@ public class Main {
                     } catch (FileNotFoundException e) {
                         userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу или доступ к файлу закрыт");
                     } catch (IOException e) {
-                        userInteraction.displayMessage("Ввод некорректен");
+                        userInteraction.displayMessage("Произошла ошибка ввода/вывода");
                     } catch (StackOverflowError e) {
                         userInteraction.displayMessage("Дальнейшее исполнение скрипта приведет к рекурсии");
                     } catch (DateTimeParseException e) {
