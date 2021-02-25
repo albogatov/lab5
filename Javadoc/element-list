@@ -1,6 +1,5 @@
 app
 commands
 elements
-exceptions
 interaction
 parser
