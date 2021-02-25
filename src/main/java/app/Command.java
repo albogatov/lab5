@@ -1,6 +1,5 @@
 package app;
 
-import exceptions.NonExistingCommandException;
 import interaction.InteractionInterface;
 import interaction.UserInterface;
 
@@ -20,9 +19,8 @@ public abstract class Command {
      * @param arguments          необходимые для исполнения аргументы
      * @param interactiveStorage объект для взаимодействия с коллекцией
      * @throws IOException                 в случае ошибки ввода/вывода
-     * @throws NonExistingCommandException в случае ввода несуществующей команды
      */
-    public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException;
+    public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException;
 
     /**
      * Стандартный конструктор

@@ -1,7 +1,6 @@
 package app;
 
 import commands.*;
-import exceptions.NonExistingCommandException;
 import interaction.InteractionInterface;
 import interaction.UserInterface;
 
@@ -53,12 +52,8 @@ public class CommandCenter {
      *
      * @param cmdLine строка, содержащая команду
      * @return объект класса соответсвующей команды
-     * @throws NonExistingCommandException в случае ввода несуществующей команды
      */
-    public Command getCmd(String cmdLine) throws NonExistingCommandException {
-        if (!commands.containsKey(cmdLine)) {
-            throw new NonExistingCommandException("Такой команды не существует");
-        }
+    public Command getCmd(String cmdLine) {
         return commands.getOrDefault(cmdLine, null);
     }
 
@@ -90,9 +85,8 @@ public class CommandCenter {
      * @param fullLine           полная строка ввода с аргументами
      * @param interactiveStorage объект для взаимодействия с коллекцией
      * @throws IOException                 в случае ошибки ввода/вывода
-     * @throws NonExistingCommandException в случае вызова не существующей программы
      */
-    public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException, NonExistingCommandException {
+    public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException {
         Command cmd = getCmd(line);
         String[] args = fullLine.split(" ");
         cmd.execute(ui, args, interactiveStorage);

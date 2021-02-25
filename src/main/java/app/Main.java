@@ -1,6 +1,5 @@
 package app;
 
-import exceptions.NonExistingCommandException;
 import interaction.Storage;
 import interaction.StorageInteraction;
 import interaction.UserInterface;
@@ -59,7 +58,7 @@ public class Main {
                             String cmd = line.split(" ")[0];
                             CommandCenter.getInstance().executeCommand(userInteraction, cmd, line, interactiveStorage);
                         } while (userInteraction.hasNextLine());
-                    } catch (NonExistingCommandException e) {
+                    } catch (NullPointerException e) {
                         userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
                     } catch (ArrayIndexOutOfBoundsException e) {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
