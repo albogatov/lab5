@@ -6,7 +6,9 @@ import interaction.InteractionInterface;
 import interaction.UserInterface;
 
 import java.io.*;
+import java.nio.file.NoSuchFileException;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 /**
  * Класс команды executeScript
@@ -46,7 +48,7 @@ public class ExecuteScript extends Command {
                         CommandCenter.getInstance().executeCommand(scriptInteraction, cmd, line, interactiveStorage);
                     } else {
                         paths.clear();
-                        throw new StackOverflowError("Выполнение скрипта приостановлено, т.к. возможна рекурсия");
+                        throw new StackOverflowError("Выполнение скрипта остановлено, т.к. возможна рекурсия");
                     }
                 } else CommandCenter.getInstance().executeCommand(scriptInteraction, cmd, line, interactiveStorage);
             }
@@ -58,11 +60,14 @@ public class ExecuteScript extends Command {
             ui.displayMessage("В качестве аргумента указан путь к несуществуюшему файлу");
             success = false;
             paths.clear();
+        } catch (NoSuchElementException e) {
+            ui.displayMessage("Скрипт некорректен, проверьте верность введенных команд");
+            success = false;
+            paths.clear();
         } catch (Exception e) {
             ui.displayMessage("Произошла неизвестная ошибка");
             success = false;
             paths.clear();
-            e.printStackTrace();
         }
     }
 }
