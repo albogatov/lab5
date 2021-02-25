@@ -72,9 +72,10 @@ public class Storage implements StorageInterface<Worker> {
     public Worker generateId(Worker worker) {
         long id;
         int bound = 1 + workers.size() * 10;
+        Random addition = new Random();
         Random multiplier = new Random();
         do {
-            id = worker.getCreationDate().toInstant().toEpochMilli() * multiplier.nextInt(bound);
+            id = addition.nextInt(bound) + worker.getCreationDate().toInstant().toEpochMilli() * multiplier.nextInt(bound);
         }
         while (idList.contains(id));
         worker.setId(id);

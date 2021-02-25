@@ -29,7 +29,7 @@ public class Add extends Command {
      * @throws IOException в случае ошибки ввода/вывода
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
-        Worker worker = ui.readWorker(arguments, 1);
+        Worker worker = ui.readWorker();
         interactiveStorage.add(worker);
         ui.displayMessage("Сотрудник успешно добавлен");
     }

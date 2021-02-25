@@ -170,19 +170,13 @@ public class UserInterface {
     /**
      * Метод, считывающий сотрудника (объект коллекции) из строки
      *
-     * @param arguments слова строки, введенной пользователем
-     * @param start     номер первого аргумента
      * @return объект коллекции
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public Worker readWorker(String[] arguments, int start) throws IOException {
-        if (arguments[start].isEmpty())
-            throw new InvalidParameterException("Неверный ввод");
-        String name = arguments[start];
+    public Worker readWorker() throws IOException {
+        String name = readNecessaryArgument("Введите имя рабочего:");
         ZonedDateTime creationDate = ZonedDateTime.now();
-        if (arguments[start + 1].isEmpty() || Integer.parseInt(arguments[start + 1]) <= 0)
-            throw new InvalidParameterException("Неверный ввод");
-        Integer salary = Integer.parseInt(arguments[start + 1]);
+        Integer salary = Integer.parseInt(readNecessaryArgument("Введите оклад рабочего:"));
         LocalDate endDate;
         while (true) {
             try {
@@ -269,18 +263,5 @@ public class UserInterface {
             organization = new Organization(annualTurnover, type, postalAddress, orgName);
         } else organization = null;
         return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);
-    }
-
-    /**
-     * Метод, принимающий аргументы от пользователя во время выполнения команды
-     *
-     * @param message сообщение для пользователя
-     * @return аргументы
-     * @throws IOException в случае ошибки ввода/вывода
-     */
-    public String[] reReadArguments(String message) throws IOException {
-        displayMessage(message);
-        String[] arguments = scanner.nextLine().split(" ");
-        return arguments;
     }
 }

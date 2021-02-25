@@ -31,13 +31,7 @@ public class Update extends Command {
         long id = Long.parseLong(arguments[1]);
         Worker worker;
         if (interactiveStorage.findById(id)) {
-            arguments = ui.reReadArguments("Введите имя и оклад сотрудника: ");
-            if (arguments[0].isEmpty() || arguments[1].isEmpty()) {
-                do {
-                    arguments = ui.reReadArguments("Введите имя и оклад сотрудника: ");
-                } while (arguments[0].isEmpty() || arguments[1].isEmpty());
-            }
-            worker = ui.readWorker(arguments, 0);
+            worker = ui.readWorker();
             interactiveStorage.update(id, worker);
             ui.displayMessage("Сотрудник обновлен");
         } else System.out.println("Сотрудника с таким идентификатором нет");
