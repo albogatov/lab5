@@ -97,9 +97,8 @@ public class ReadyCSVParser {
             address = null;
         else address = new Address(values.get(keySet.get("street")), values.get(keySet.get("postalcode")));
         Organization organization = new Organization(annualTurnover, orgType, address, orgName);
-        if (name == null || name.equals("") || coordinates == null || salary == null || salary <= 0) {
-            System.out.println("Данные неверны");
-            return null;
+        if (name == null || name.equals("") || coordinates == null || salary == null || salary <= 0 || coordinates.getX() > 627 || coordinates.getY() > 990) {
+            throw new NullPointerException("Данные неверны");
         }
         return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);
 
