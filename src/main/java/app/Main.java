@@ -60,6 +60,7 @@ public class Main {
                         } while (userInteraction.hasNextLine());
                     } catch (NullPointerException e) {
                         userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
+                        e.printStackTrace();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
                     } catch (NumberFormatException e) {

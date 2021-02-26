@@ -1,5 +1,7 @@
 package interaction;
 
+import elements.Organization;
+import elements.OrganizationType;
 import elements.Status;
 import elements.Worker;
 
@@ -226,9 +228,9 @@ public final class StorageInteraction implements InteractionInterface {
         List<String> organizations = new ArrayList<>();
         for (Worker w : storage.getCollection()) {
             if (!(w.getOrganization() == null)) {
-                String orgName = w.getOrganizationName();
-                if (!organizations.contains(orgName))
-                    organizations.add(orgName);
+                String organizationDepiction = w.getOrganization().toString();
+                if (!organizations.contains(organizationDepiction))
+                    organizations.add(organizationDepiction);
             }
         }
         return organizations;

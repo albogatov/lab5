@@ -1,6 +1,7 @@
 package commands;
 
 import app.Command;
+import elements.Organization;
 import interaction.InteractionInterface;
 import interaction.UserInterface;
 
@@ -29,8 +30,8 @@ public class PrintUniqueOrganization extends Command {
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         List<String> result = interactiveStorage.printUniqueOrganization();
-        for (String s : result) {
-            ui.displayMessage(s);
+        for (String o : result) {
+            ui.displayMessage(o);
         }
     }
 }

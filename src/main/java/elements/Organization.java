@@ -1,5 +1,6 @@
 package elements;
 
+
 /**
  * Класс Organization
  */
@@ -58,14 +59,21 @@ public class Organization {
     }
 
     /**
-     * Метод, который возвращает имя организации
+     * Метод, возврающий название организации
+     * @return название организации
+     */
+    public String getOrganizationName() {
+        if(this.name == null)
+            return null;
+        else return name;
+    }
+    /**
+     * Метод, который возвращает организацию в строковом представлении
      *
-     * @return имя организации
+     * @return организация
      */
     @Override
     public String toString() {
-        if (this.name == null)
-            return null;
-        return this.name;
+        return name + " " + type + " " + annualTurnover + " " + postalAddress;
     }
 }

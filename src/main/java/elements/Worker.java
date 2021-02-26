@@ -211,9 +211,9 @@ public class Worker implements Comparable<Worker> {
      * @return название организации
      */
     public String getOrganizationName() {
-        if (organization == null || organization.toString() == null)
+        if (organization == null || organization.getOrganizationName() == null)
             return null;
-        else return this.organization.toString();
+        else return this.organization.getOrganizationName();
     }
 
     /**
@@ -224,7 +224,7 @@ public class Worker implements Comparable<Worker> {
     public String getOrganizationNameString() {
         if (organization == null || organization.toString() == null)
             return "";
-        else return this.organization.toString();
+        else return this.organization.getOrganizationName();
     }
 
     /**
