@@ -21,6 +21,10 @@ public final class StorageInteraction implements InteractionInterface {
      */
     private static String originPath;
     /**
+     * Статическое поле, содержит разделитель значений в оригинальном файле с коллекцией
+     */
+    private static char separator;
+    /**
      * Статическое поле, отображающее наличие внесенных несохраненных изменений в хранимую коллекцию
      */
     private static boolean changesMade = false;
@@ -31,9 +35,10 @@ public final class StorageInteraction implements InteractionInterface {
      * @param storage    хранилище
      * @param originPath путь к данным
      */
-    public StorageInteraction(Storage storage, String originPath) {
+    public StorageInteraction(Storage storage, String originPath, char separator) {
         StorageInteraction.storage = storage;
         StorageInteraction.originPath = originPath;
+        StorageInteraction.separator = separator;
     }
 
     /**
@@ -122,17 +127,17 @@ public final class StorageInteraction implements InteractionInterface {
         printWriter.write(keyLine);
         HashSet<Worker> collection = storage.getCollection();
         for (Worker w : collection) {
-            printWriter.write(w.getName() + ",");
-            printWriter.write(w.getCoordinateX() + ",");
-            printWriter.write(w.getCoordinateY() + ",");
-            printWriter.write(w.getSalary() + ",");
-            printWriter.write(w.getEndDateString() + ',');
-            printWriter.write(w.getPositionString() + ",");
-            printWriter.write(w.getStatusString() + ",");
-            printWriter.write(w.getOrganizationNameString() + ",");
-            printWriter.write(w.getOrganizationTypeString() + ",");
-            printWriter.write(w.getAnnualTurnoverString() + ",");
-            printWriter.write(w.getAddressStreet() + ",");
+            printWriter.write(w.getName() + returnSeparator());
+            printWriter.write(w.getCoordinateX() + returnSeparator());
+            printWriter.write(w.getCoordinateY() + returnSeparator());
+            printWriter.write(w.getSalary() + returnSeparator());
+            printWriter.write(w.getEndDateString() + returnSeparator());
+            printWriter.write(w.getPositionString() + returnSeparator());
+            printWriter.write(w.getStatusString() + returnSeparator());
+            printWriter.write(w.getOrganizationNameString() + returnSeparator());
+            printWriter.write(w.getOrganizationTypeString() + returnSeparator());
+            printWriter.write(w.getAnnualTurnoverString() + returnSeparator());
+            printWriter.write(w.getAddressStreet() + returnSeparator());
             printWriter.write(w.getAddressZipCode() + "\n");
             printWriter.flush();
         }
@@ -277,5 +282,13 @@ public final class StorageInteraction implements InteractionInterface {
      */
     public boolean checkChanges() {
         return changesMade;
+    }
+
+    /**
+     * Метод, возвращающий разделитель, используемый в оригинальном файле с коллекцией
+     * @return Разделитель
+     */
+    public String returnSeparator() {
+        return Character.toString(separator);
     }
 }

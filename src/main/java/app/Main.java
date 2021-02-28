@@ -38,7 +38,7 @@ public class Main {
                             char separator = userInteraction.readNecessaryArgument("Введите разделитель значений в файле").charAt(0);
                             dataFile = new File(args[0]);
                             storage = new Storage();
-                            interactiveStorage = new StorageInteraction(storage, args[0]);
+                            interactiveStorage = new StorageInteraction(storage, args[0], separator);
                             parser = new ReadyCSVParser(separator);
                             try {
                                 parser.readWorkers(dataFile, storage.getCollection(), storage);
