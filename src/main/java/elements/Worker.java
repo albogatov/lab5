@@ -57,32 +57,7 @@ public class Worker implements Comparable<Worker> {
      * @param status       статус
      * @param organization организация
      */
-    public Worker(String name, Coordinates coordinates, java.time.ZonedDateTime creationDate, Integer salary, java.time.LocalDate endDate, Position position, Status status, Organization organization) {
-        this.name = name;
-        this.coordinates = coordinates;
-        this.creationDate = creationDate;
-        this.salary = salary;
-        this.endDate = endDate;
-        this.position = position;
-        this.status = status;
-        this.organization = organization;
-    }
-
-    /**
-     * Конструктор, создающий объект с заранее известным ID
-     *
-     * @param id           ID
-     * @param name         имя рабочего
-     * @param coordinates  координаты
-     * @param creationDate дата добавления в базу
-     * @param salary       оклад
-     * @param endDate      дата расторжения контракта
-     * @param position     должность
-     * @param status       статус
-     * @param organization организация
-     */
-    public Worker(long id, String name, Coordinates coordinates, java.time.ZonedDateTime creationDate, Integer salary, java.time.LocalDate endDate, Position position, Status status, Organization organization) {
-        this.id = id;
+    public Worker(String name, Coordinates coordinates, ZonedDateTime creationDate, Integer salary, LocalDate endDate, Position position, Status status, Organization organization) {
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
