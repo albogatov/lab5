@@ -35,14 +35,15 @@ public class Main {
                 while (true) {
                     try {
                         if(firstOpening) {
+                            char separator = userInteraction.readNecessaryArgument("Введите разделитель значений в файле").charAt(0);
                             dataFile = new File(args[0]);
                             storage = new Storage();
                             interactiveStorage = new StorageInteraction(storage, args[0]);
-                            parser = new ReadyCSVParser();
+                            parser = new ReadyCSVParser(separator);
                             try {
                                 parser.readWorkers(dataFile, storage.getCollection(), storage);
                             } catch (NullPointerException e) {
-                                userInteraction.displayMessage("Данные в файле введены некорректно");
+                                userInteraction.displayMessage("Данные в файле введены некорректно или указан неверный разделитель значений");
                                 System.exit(1);
                             } catch (DateTimeParseException e) {
                                 userInteraction.displayMessage("Неверное форматирование дат");

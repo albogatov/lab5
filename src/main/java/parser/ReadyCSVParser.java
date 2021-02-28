@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+import com.opencsv.CSVParserBuilder;
 import elements.*;
 import interaction.Storage;
 import com.opencsv.CSVParser;
@@ -16,7 +17,7 @@ public class ReadyCSVParser {
     /**
      * Объект CSVParser
      */
-    protected CSVParser parser = new CSVParser();
+    protected CSVParser parser;
     /**
      * Значения ключевой и их порядковый номер
      */
@@ -25,8 +26,8 @@ public class ReadyCSVParser {
     /**
      * Стандартный конструктор
      */
-    public ReadyCSVParser() {
-
+    public ReadyCSVParser(char separator) {
+        parser = new CSVParserBuilder().withSeparator(separator).build();
     }
 
     /**
