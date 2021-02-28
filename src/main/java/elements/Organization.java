@@ -63,7 +63,7 @@ public class Organization {
      * @return название организации
      */
     public String getOrganizationName() {
-        if(this.name == null)
+        if(name == null)
             return null;
         else return name;
     }

@@ -222,7 +222,7 @@ public class Worker implements Comparable<Worker> {
      * @return название организации
      */
     public String getOrganizationNameString() {
-        if (organization == null || organization.toString() == null)
+        if (organization == null || organization.getOrganizationName() == null)
             return "";
         else return this.organization.getOrganizationName();
     }
