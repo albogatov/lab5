@@ -3,6 +3,7 @@ package interaction;
 import elements.*;
 
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.security.InvalidParameterException;
@@ -199,7 +200,11 @@ public class UserInterface {
                 }
                 break;
             } catch (DateTimeParseException e) {
-                displayMessage("Допущена ошибка, повторите ввод");
+                if (interactionMode)
+                    displayMessage("Допущена ошибка, повторите ввод");
+                else {
+                    throw new InterruptedIOException();
+                }
             }
         }
         int x;
@@ -209,7 +214,11 @@ public class UserInterface {
                 x = Integer.parseInt(readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627));
                 break;
             } catch (NumberFormatException e) {
-                displayMessage("Допущена ошибка, повторите ввод");
+                if (interactionMode)
+                    displayMessage("Допущена ошибка, повторите ввод");
+                else {
+                    throw new InterruptedIOException();
+                }
             }
         }
         while (true) {
@@ -217,7 +226,11 @@ public class UserInterface {
                 y = Long.parseLong(readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990));
                 break;
             } catch (NumberFormatException e) {
-                displayMessage("Допущена ошибка, повторите ввод");
+                if (interactionMode)
+                    displayMessage("Допущена ошибка, повторите ввод");
+                else {
+                    throw new InterruptedIOException();
+                }
             }
         }
         Coordinates coordinates = new Coordinates(x, y);
@@ -232,7 +245,11 @@ public class UserInterface {
                 }
                 break;
             } catch (IllegalArgumentException e) {
-                displayMessage("Допущена ошибка, повторите ввод");
+                if (interactionMode)
+                    displayMessage("Допущена ошибка, повторите ввод");
+                else {
+                    throw new InterruptedIOException();
+                }
             }
         }
         Position position;
@@ -246,10 +263,16 @@ public class UserInterface {
                 }
                 break;
             } catch (IllegalArgumentException e) {
-                displayMessage("Допущена ошибка, повторите ввод");
+                if (interactionMode)
+                    displayMessage("Допущена ошибка, повторите ввод");
+                else {
+                    throw new InterruptedIOException();
+                }
             }
         }
         String orgName = readOtherArgument("Укажите организацию сотрудника:");
+        if(orgName != null)
+            orgName = orgName.toUpperCase();
         Organization organization;
         if (orgName != null) {
             Long annualTurnover = Long.parseLong("0");
@@ -261,8 +284,11 @@ public class UserInterface {
                         break;
                     } else annualTurnover = Long.parseLong(annualTurnoverLine);
                 } catch (NumberFormatException e) {
-                    displayMessage("Допущена ошибка формата данных, повторите ввод");
-                    e.printStackTrace();
+                    if (interactionMode)
+                        displayMessage("Допущена ошибка, повторите ввод");
+                    else {
+                        throw new InterruptedIOException();
+                    }
                 }
             }
             OrganizationType type;
@@ -271,7 +297,11 @@ public class UserInterface {
                     type = OrganizationType.valueOf(readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues()).toUpperCase());
                     break;
                 } catch (IllegalArgumentException e) {
-                    displayMessage("Допущена ошибка, повторите ввод");
+                    if (interactionMode)
+                        displayMessage("Допущена ошибка, повторите ввод");
+                    else {
+                        throw new InterruptedIOException();
+                    }
                 } catch (NullPointerException e) {
                     type = null;
                     break;

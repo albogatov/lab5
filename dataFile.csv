@@ -1,7 +1,10 @@
 name,x,y,salary,endDate,position,status,organization,orgType,annualTurnover,street,postalCode
+Ronald,111,111,21,,ENGINEER,HIRED,,,,,
+Donald,111,111,27,,ENGINEER,HIRED,,,,,
 Jennie,11,11,100,,CLEANER,FIRED,ITMO,COMMERCIAL,,Mos,1999
+Las,11,11,100,,,,ITMO,,,Mos,10000
+Laura,11,11,1000,,,,ITMO,,,Mos,10000
+Rosalia,111,111,21,,ENGINEER,HIRED,,,,,
 Nike,11,11,11,,,,,,,,
-Rick,203,250,44,,LABORER,FIRED,ITMOO,COMMERCIAL,100,Venice,664092
-Nik,11,11,1000,,,HIRED,,,,,
 Steven,204,206,22,,,,,,,,
-Las,11,11,100,,,,itmo,,,Mos,10000
+Alexis,11,11,100,,,,,,,,

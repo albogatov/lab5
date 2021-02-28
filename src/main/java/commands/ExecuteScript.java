@@ -42,6 +42,8 @@ public class ExecuteScript extends Command {
         try {
             UserInterface scriptInteraction = new UserInterface(new FileReader(arguments[1]), new OutputStreamWriter(System.out), false);
             String line;
+            if(arguments.length < 2)
+                throw new ArrayIndexOutOfBoundsException("Недостаточно аргументов");
             String path = arguments[1];
             success = true;
             while (scriptInteraction.hasNextLine()) {
@@ -69,8 +71,8 @@ public class ExecuteScript extends Command {
             ui.displayMessage("Скрипт некорректен, проверьте верность введенных команд");
             success = false;
             paths.clear();
-        } catch (Exception e) {
-            ui.displayMessage("Произошла неизвестная ошибка");
+        } catch (InterruptedIOException e) {
+            ui.displayMessage("Скрипт содержит некорректный ввод данных");
             success = false;
             paths.clear();
         }

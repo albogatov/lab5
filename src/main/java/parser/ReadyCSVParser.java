@@ -93,7 +93,7 @@ public class ReadyCSVParser {
         String orgName;
         if (values.get(keySet.get("organization")).equals(""))
             orgName = null;
-        else orgName = values.get(keySet.get("organization"));
+        else orgName = values.get(keySet.get("organization")).toUpperCase();
         Long annualTurnover;
         if (values.get(keySet.get("annualturnover")).equals(""))
             annualTurnover = null;
