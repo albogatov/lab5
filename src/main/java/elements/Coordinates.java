@@ -4,14 +4,20 @@ package elements;
  * Класс Coordinates
  */
 public class Coordinates {
-    private int x; //Максимальное значение поля: 627
-    private long y; //Максимальное значение поля: 990
+    /**
+     * Поле, содержащее координату X. Максимальное значение - 627
+     */
+    private int x;
+    /**
+     * Поле, содержащее координату Y. Максимальное значение - 990
+     */
+    private long y;
 
     /**
      * Стандартный конструктор
      *
-     * @param x координата x
-     * @param y координата y
+     * @param x Координата x
+     * @param y Координата y
      */
     public Coordinates(int x, long y) {
         this.x = x;
@@ -21,7 +27,7 @@ public class Coordinates {
     /**
      * Переопределенный метод toString для корректного строкового представления координат
      *
-     * @return координаты в строковом виде
+     * @return Координаты в строковом виде
      */
     @Override
     public String toString() {
@@ -33,7 +39,7 @@ public class Coordinates {
     /**
      * Метод, возвращающий отдельно координату X
      *
-     * @return координата X
+     * @return Координата X
      */
     public int getX() {
         return this.x;
@@ -42,7 +48,7 @@ public class Coordinates {
     /**
      * Метод, возвращающий отдельно координату X
      *
-     * @return координата Y
+     * @return Координата Y
      */
     public long getY() {
         return this.y;

@@ -1,6 +1,5 @@
 package interaction;
 
-import elements.Organization;
 import elements.Status;
 import elements.Worker;
 

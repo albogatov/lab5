@@ -9,8 +9,17 @@ import java.util.*;
  */
 public class Storage implements StorageInterface<Worker> {
 
+    /**
+     * Хранимая коллекция
+     */
     private final HashSet<Worker> workers = new HashSet<>();
+    /**
+     * Дата создания
+     */
     private final Date creationDate;
+    /**
+     * Список идентификаторов элементов коллекции
+     */
     private final List<Long> idList = new ArrayList<>();
 
     /**

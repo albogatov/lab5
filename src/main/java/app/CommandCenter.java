@@ -13,7 +13,13 @@ import java.util.stream.Collectors;
  * Класс отвечающий за распознование и вызов команд
  */
 public class CommandCenter {
+    /**
+     * Объект центра управления командами
+     */
     public static CommandCenter commandCenter;
+    /**
+     * Список всех возможных команд
+     */
     private final HashMap<String, Command> commands = new HashMap<>();
 
     /**
@@ -41,7 +47,7 @@ public class CommandCenter {
     /**
      * Метод передачи команды в конструктор
      *
-     * @param cmd команда
+     * @param cmd Команда
      */
     public void addCmd(Command cmd) {
         commands.put(cmd.getCommand(), cmd);
@@ -50,8 +56,8 @@ public class CommandCenter {
     /**
      * Метод, распознающий команду в строке, введенной пользователем
      *
-     * @param cmdLine строка, содержащая команду
-     * @return объект класса соответсвующей команды
+     * @param cmdLine Строка, содержащая команду
+     * @return Объект класса соответсвующей команды
      */
     public Command getCmd(String cmdLine) {
         return commands.getOrDefault(cmdLine, null);
@@ -60,7 +66,7 @@ public class CommandCenter {
     /**
      * Метод, возвращающий единственный объект класса. Реализация шаблона "Синглтон".
      *
-     * @return объект класса
+     * @return Объект центра управления командами
      */
     public static CommandCenter getInstance() {
         if (commandCenter == null)
@@ -71,7 +77,7 @@ public class CommandCenter {
     /**
      * Метод, возврашающий полный список всех команд
      *
-     * @return список команд
+     * @return Список команд
      */
     public List<Command> retrieveAllCommands() {
         return commands.keySet().stream().map(commands::get).collect(Collectors.toList());

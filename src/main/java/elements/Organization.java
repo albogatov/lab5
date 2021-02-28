@@ -5,9 +5,21 @@ package elements;
  * Класс Organization
  */
 public class Organization {
-    private Long annualTurnover; //Поле может быть null, Значение поля должно быть больше 0
-    private OrganizationType type; //Поле может быть null
-    private Address postalAddress; //Поле не может быть null
+    /**
+     * Поле, содержащее годовую выручку. Может быть null, Значение поля должно быть больше 0
+     */
+    private Long annualTurnover;
+    /**
+     * Поле, содержащее тип организации. Может быть null
+     */
+    private OrganizationType type;
+    /**
+     * Поле, содержащее адрес. Не может быть null.
+     */
+    private Address postalAddress;
+    /**
+     * Поле, содержащее название организации. Может быть null.
+     */
     private String name;
 
     /**
@@ -28,7 +40,7 @@ public class Organization {
     /**
      * Метод, который возвращает годовую выручку
      *
-     * @return годовая выручка
+     * @return Годовая выручка
      */
     public Long getAnnualTurnover() {
         if (annualTurnover == null)
@@ -39,7 +51,7 @@ public class Organization {
     /**
      * Метод, который возвращает тип организации
      *
-     * @return тип
+     * @return Тип
      */
     public OrganizationType getOrganizationType() {
         if (type == null)
@@ -50,7 +62,7 @@ public class Organization {
     /**
      * Метод, который возвращает адрес
      *
-     * @return адрес
+     * @return Адрес
      */
     public Address getPostalAddress() {
         if (postalAddress == null)
@@ -60,7 +72,7 @@ public class Organization {
 
     /**
      * Метод, возврающий название организации
-     * @return название организации
+     * @return Название организации
      */
     public String getOrganizationName() {
         if(name == null)
@@ -70,7 +82,7 @@ public class Organization {
     /**
      * Метод, который возвращает организацию в строковом представлении
      *
-     * @return организация
+     * @return Организация в строковом представлении
      */
     @Override
     public String toString() {

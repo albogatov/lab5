@@ -16,8 +16,7 @@ public class Add extends Command {
      */
     public Add() {
         cmdLine = "add";
-        description = "Добавить новый элемент в коллекцию. При вызове команды необходимо " +
-                "ввести имя, оклад сотрудника";
+        description = "Добавить новый элемент в коллекцию.";
     }
 
     /**

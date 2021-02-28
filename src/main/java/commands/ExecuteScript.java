@@ -13,7 +13,13 @@ import java.util.NoSuchElementException;
  * Класс команды executeScript
  */
 public class ExecuteScript extends Command {
+    /**
+     * Сет, содержащий пути ко всем скриптам вызванным на разных уровнях
+     */
     private static final HashSet<String> paths = new HashSet<>();
+    /**
+     * Переменная, отображающая результат выполнения скрипта
+     */
     private static boolean success;
 
     /**

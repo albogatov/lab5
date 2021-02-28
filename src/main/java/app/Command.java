@@ -9,7 +9,13 @@ import java.io.IOException;
  * Абстрактный класс, от которого наследуются все команды
  */
 public abstract class Command {
+    /**
+     * Поле, содержащее строку для вызова команды
+     */
     protected String cmdLine;
+    /**
+     * Поле, содержащее описание команды
+     */
     protected String description;
 
     /**
@@ -32,7 +38,7 @@ public abstract class Command {
     /**
      * Возвращает строку, вызывающую команду
      *
-     * @return строка
+     * @return Строка вызова команды
      */
     public String getCommand() {
         return cmdLine;
@@ -41,7 +47,7 @@ public abstract class Command {
     /**
      * Возвращает описание команды
      *
-     * @return описание
+     * @return Описание команды
      */
     public String getHelp() {
         return description;

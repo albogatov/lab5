@@ -8,14 +8,41 @@ import java.time.format.DateTimeFormatter;
  * Класс Worker
  */
 public class Worker implements Comparable<Worker> {
-    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
-    private final ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private Integer salary; //Поле не может быть null, Значение поля должно быть больше 0
-    private LocalDate endDate; //Поле может быть null
-    private Position position; //Поле может быть null
-    private Status status; //Поле может быть null
+    /**
+     * Идентификатор работника. Значение поля больше 0, Значение этого поля уникально, Значение этого поля генерируется автоматически
+     */
+    private long id;
+    /**
+     * Имя работника. Поле не может быть null, Строка не может быть пустой.
+     */
+    private String name;
+    /**
+     * Координаты работника. Поле не может быть null.
+     */
+    private Coordinates coordinates;
+    /**
+     * Дата добавления работника в базу. Поле не может быть null. Значение этого поля генерируется автоматически.
+     */
+    private final ZonedDateTime creationDate;
+    /**
+     * Оклад работника. Поле не может быть null, Значение поля должно быть больше 0.
+     */
+    private Integer salary;
+    /**
+     * Дата расторжения контракта. Может быть null.
+     */
+    private LocalDate endDate;
+    /**
+     * Должность сотрудника. Может быть null.
+     */
+    private Position position;
+    /**
+     * Статус сотрудника. Может быть null.
+     */
+    private Status status;
+    /**
+     * Организация сотрудника. Может быть null.
+     */
     private Organization organization; //Поле может быть null
 
     /**

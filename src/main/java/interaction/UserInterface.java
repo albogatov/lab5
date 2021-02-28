@@ -16,8 +16,17 @@ import java.util.Scanner;
  * Класс, реализующий взаимодействие с пользователем
  */
 public class UserInterface {
+    /**
+     * Сканнер
+     */
     private Scanner scanner;
+    /**
+     * Куда идет запись
+     */
     private Writer writer;
+    /**
+     * Режим взаимодействия
+     */
     private boolean interactionMode;
 
     /**
@@ -174,7 +183,7 @@ public class UserInterface {
      */
     public Worker readWorker() throws IOException {
         String name = "";
-        while(!name.matches("[a-zA-Zа-яА-Я]+")) {
+        while (!name.matches("[a-zA-Zа-яА-Я]+")) {
             name = readNecessaryArgument("Введите имя рабочего:");
         }
         ZonedDateTime creationDate = ZonedDateTime.now();
@@ -250,8 +259,7 @@ public class UserInterface {
                     if (annualTurnoverLine == null) {
                         annualTurnover = null;
                         break;
-                    }
-                    else annualTurnover = Long.parseLong(annualTurnoverLine);
+                    } else annualTurnover = Long.parseLong(annualTurnoverLine);
                 } catch (NumberFormatException e) {
                     displayMessage("Допущена ошибка формата данных, повторите ввод");
                     e.printStackTrace();
@@ -270,12 +278,9 @@ public class UserInterface {
                 }
             }
             Address postalAddress;
-            String street = readOtherArgument("Укажите улицу расположения организации:");
-            if(street != null) {
-                String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
-                postalAddress = new Address(street, zipCode);
-            }
-            else postalAddress = null;
+            String street = readNecessaryArgument("Укажите улицу расположения организации:");
+            String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
+            postalAddress = new Address(street, zipCode);
             organization = new Organization(annualTurnover, type, postalAddress, orgName);
         } else organization = null;
         return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);

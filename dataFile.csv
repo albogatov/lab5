@@ -1,5 +1,7 @@
 name,x,y,salary,endDate,position,status,organization,orgType,annualTurnover,street,postalCode
-Steven,204,206,22,,,,,,,,
-Rick,203,250,44,,LABORER,FIRED,ITMOO,COMMERCIAL,100,Venice,664092
-nik,11,11,100,,,,itmo,,,,
+Jennie,11,11,100,,CLEANER,FIRED,ITMO,COMMERCIAL,,Mos,1999
 Nike,11,11,11,,,,,,,,
+Rick,203,250,44,,LABORER,FIRED,ITMOO,COMMERCIAL,100,Venice,664092
+Nik,11,11,1000,,,HIRED,,,,,
+Steven,204,206,22,,,,,,,,
+Las,11,11,100,,,,itmo,,,Mos,10000

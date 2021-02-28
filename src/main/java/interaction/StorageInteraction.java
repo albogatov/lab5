@@ -1,7 +1,5 @@
 package interaction;
 
-import elements.Organization;
-import elements.OrganizationType;
 import elements.Status;
 import elements.Worker;
 
@@ -14,10 +12,18 @@ import java.util.*;
  * Класс-реализация взаимодействия с коллекцией
  */
 public final class StorageInteraction implements InteractionInterface {
-
+    /**
+     * Статическое поле-хранилище коллекции
+     */
     private static Storage storage;
+    /**
+     * Статическое поле, содержащее путь к файлу с хранимой коллекцией
+     */
     private static String originPath;
-    private boolean changesMade = false;
+    /**
+     * Статическое поле, отображающее наличие внесенных несохраненных изменений в хранимую коллекцию
+     */
+    private static boolean changesMade = false;
 
     /**
      * Стандартный конструктор, задает хранилище, с которым будет работа
@@ -45,7 +51,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду show
      *
-     * @return строковое представление объектов коллекции
+     * @return Строковое представление объектов коллекции
      */
     public String show() {
         for (Worker w : storage.getCollection()) {
@@ -199,7 +205,7 @@ public final class StorageInteraction implements InteractionInterface {
      * Метод, реализующий команду countByStatus
      *
      * @param status статус
-     * @return число объектов с указанным статусом
+     * @return Число объектов с указанным статусом
      */
     public int countByStatus(Status status) {
         Iterator<Worker> itr = storage.getCollection().iterator();
@@ -217,7 +223,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду printAscending
      *
-     * @return отсортированное строковое представление коллекции
+     * @return Отсортированное строковое представление коллекции
      */
     public List<String> printAscending() {
         HashSet<Worker> workers = storage.getCollection();
@@ -232,7 +238,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, реализующий команду printUniqueOrganization
      *
-     * @return список всех уникальных организаций
+     * @return Список всех уникальных организаций
      */
     public List<String> printUniqueOrganization() {
         List<String> organizations = new ArrayList<>();
@@ -249,7 +255,7 @@ public final class StorageInteraction implements InteractionInterface {
     /**
      * Метод, возвращающий размер коллекции
      *
-     * @return размер коллекции
+     * @return Размер коллекции
      */
     public int getSize() {
         return storage.getCollection().size();
@@ -259,13 +265,17 @@ public final class StorageInteraction implements InteractionInterface {
      * Метод, проверяющий наличие объекта по ID
      *
      * @param id ID для поиска
-     * @return true если объект существует, иначе false
+     * @return True если объект существует, иначе false
      */
     public boolean findById(long id) {
         return storage.getIdList().contains(id);
     }
 
+    /**
+     * Метод, проверяюший наличие/отсутсвие несохраненных изменений коллекции
+     * @return True - если есть несохраненные изменения, иначе false
+     */
     public boolean checkChanges() {
-        return this.changesMade;
+        return changesMade;
     }
 }

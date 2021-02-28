@@ -13,7 +13,13 @@ import com.opencsv.CSVParser;
  * Класс, отвечающий за парсинг данных из изначального файла
  */
 public class ReadyCSVParser {
+    /**
+     * Объект CSVParser
+     */
     protected CSVParser parser = new CSVParser();
+    /**
+     * Значения ключевой и их порядковый номер
+     */
     protected HashMap<String, Integer> keySet = new HashMap<>();
 
     /**
@@ -57,32 +63,32 @@ public class ReadyCSVParser {
     public Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
         String name;
-        if(!values.get(keySet.get("name")).matches("[a-zA-Zа-яА-Я]+"))
+        if (!values.get(keySet.get("name")).matches("[a-zA-Zа-яА-Я]+"))
             name = null;
-        else name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
+        else name = values.get(keySet.get("name"));
         Coordinates coordinates;
         if (values.get(keySet.get("x")).equals("") || values.get(keySet.get("y")).equals(""))
             coordinates = null;
         else
-            coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y")))); //Поле не может быть null
-        ZonedDateTime creationDate = ZonedDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+            coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y"))));
+        ZonedDateTime creationDate = ZonedDateTime.now();
         Integer salary;
         if (values.get(keySet.get("salary")).equals(""))
             salary = null;
         else
-            salary = Integer.parseInt(values.get(keySet.get("salary"))); //Поле не может быть null, Значение поля должно быть больше 0
+            salary = Integer.parseInt(values.get(keySet.get("salary")));
         LocalDate endDate;
         if (values.get(keySet.get("enddate")).equals(""))
             endDate = null;
-        else endDate = LocalDate.parse(values.get(keySet.get("enddate")));//Поле может быть null
+        else endDate = LocalDate.parse(values.get(keySet.get("enddate")));
         Position position;
         if (values.get(keySet.get("position")).equals(""))
             position = null;
-        else position = Position.valueOf(values.get(keySet.get("position")).toUpperCase()); //Поле может быть null
+        else position = Position.valueOf(values.get(keySet.get("position")).toUpperCase());
         Status status;
         if (values.get(keySet.get("status")).equals(""))
             status = null;
-        else status = Status.valueOf(values.get(keySet.get("status")).toUpperCase()); //Поле может быть null
+        else status = Status.valueOf(values.get(keySet.get("status")).toUpperCase());
         String orgName;
         if (values.get(keySet.get("organization")).equals(""))
             orgName = null;
@@ -99,7 +105,12 @@ public class ReadyCSVParser {
         if (values.get(keySet.get("street")).equals("") || values.get(keySet.get("postalcode")).equals(""))
             address = null;
         else address = new Address(values.get(keySet.get("street")), values.get(keySet.get("postalcode")));
-        Organization organization = new Organization(annualTurnover, orgType, address, orgName);
+        Organization organization;
+        if (annualTurnover != null || orgType != null || address != null || orgName != null)
+            organization = new Organization(annualTurnover, orgType, address, orgName);
+        else organization = null;
+        if (organization != null && organization.getPostalAddress() == null)
+            throw new NullPointerException("Данные неверны");
         if (name == null || name.equals("") || coordinates == null || salary == null || salary <= 0 || coordinates.getX() > 627 || coordinates.getY() > 990) {
             throw new NullPointerException("Данные неверны");
         }

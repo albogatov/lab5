@@ -4,8 +4,14 @@ package elements;
  * Класс Address
  */
 public class Address {
-    private String street; //Поле не может быть null
-    private String zipCode; //Поле не может быть null
+    /**
+     * Поле, содержащее улицу. Не может быть null.
+     */
+    private String street;
+    /**
+     * Поле, содержащее индекс. Не может быть null.
+     */
+    private String zipCode;
 
     /**
      * Стандартный конструктор, в котором задаются обязательные параметры
