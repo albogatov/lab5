@@ -24,10 +24,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);
         boolean firstOpening = true;
-        File dataFile = null;
-        Storage storage = null;
+        File dataFile;
+        Storage storage;
         StorageInteraction interactiveStorage = null;
-        ReadyCSVParser parser = null;
+        ReadyCSVParser parser;
         try {
             if (args[0] == null) {
                 userInteraction.displayMessage("Путь к исходным данным не задан");
@@ -65,7 +65,6 @@ public class Main {
                         } while (userInteraction.hasNextLine());
                     } catch (NullPointerException e) {
                         userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
-                        e.printStackTrace();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
                     } catch (NumberFormatException e) {

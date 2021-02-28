@@ -44,4 +44,5 @@ public interface InteractionInterface {
 
     boolean findById(long key);
 
+    boolean checkChanges();
 }

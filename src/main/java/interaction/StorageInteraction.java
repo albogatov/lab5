@@ -17,6 +17,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     private static Storage storage;
     private static String originPath;
+    private boolean changesMade = false;
 
     /**
      * Стандартный конструктор, задает хранилище, с которым будет работа
@@ -61,6 +62,7 @@ public final class StorageInteraction implements InteractionInterface {
     public void add(Worker worker) {
         worker = storage.generateId(worker);
         storage.put(worker);
+        changesMade = true;
     }
 
     /**
@@ -73,6 +75,7 @@ public final class StorageInteraction implements InteractionInterface {
         removeById(id);
         worker.setId(id);
         storage.put(worker);
+        changesMade = true;
     }
 
     /**
@@ -91,6 +94,7 @@ public final class StorageInteraction implements InteractionInterface {
             }
         }
         storage.getCollection().remove(worker);
+        changesMade = true;
     }
 
     /**
@@ -98,6 +102,7 @@ public final class StorageInteraction implements InteractionInterface {
      */
     public void clear() {
         storage.clear();
+        changesMade = true;
     }
 
     /**
@@ -125,6 +130,7 @@ public final class StorageInteraction implements InteractionInterface {
             printWriter.write(w.getAddressZipCode() + "\n");
             printWriter.flush();
         }
+        changesMade = false;
     }
 
     /**
@@ -143,8 +149,10 @@ public final class StorageInteraction implements InteractionInterface {
         HashSet<Worker> workers = storage.getCollection();
         List<Worker> toBeSortedWorkers = new ArrayList<>(workers);
         toBeSortedWorkers.sort(Comparator.comparing(Worker::getSalary));
-        if (worker.getSalary() < toBeSortedWorkers.get(0).getSalary())
+        if (worker.getSalary() < toBeSortedWorkers.get(0).getSalary()) {
             storage.put(worker);
+            changesMade = true;
+        }
     }
 
     /**
@@ -164,6 +172,7 @@ public final class StorageInteraction implements InteractionInterface {
         for (Worker w : toBeRemovedWorkers) {
             storage.getCollection().remove(w);
         }
+        changesMade = true;
     }
 
     /**
@@ -183,6 +192,7 @@ public final class StorageInteraction implements InteractionInterface {
         for (Worker w : toBeRemovedWorkers) {
             storage.getCollection().remove(w);
         }
+        changesMade = true;
     }
 
     /**
@@ -253,5 +263,9 @@ public final class StorageInteraction implements InteractionInterface {
      */
     public boolean findById(long id) {
         return storage.getIdList().contains(id);
+    }
+
+    public boolean checkChanges() {
+        return this.changesMade;
     }
 }

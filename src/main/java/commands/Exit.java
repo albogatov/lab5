@@ -27,8 +27,15 @@ public class Exit extends Command {
      * @throws IOException в случае ошибки ввода/вывода
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
-        String confirmation = ui.readNecessaryArgument("Запрошен выход из приложения без сохранения, вы хотите продолжить?");
-        if (confirmation.equals("yes")) {
+        String confirmation;
+        if(interactiveStorage.checkChanges()) {
+            confirmation = ui.readNecessaryArgument("Запрошен выход из приложения без сохранения, вы хотите продолжить?");
+            if (confirmation.equals("yes")) {
+                ui.displayMessage("До новых встреч");
+                System.exit(0);
+            }
+        }
+        else {
             ui.displayMessage("До новых встреч");
             System.exit(0);
         }
