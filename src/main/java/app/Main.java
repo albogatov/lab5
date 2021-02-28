@@ -51,6 +51,9 @@ public class Main {
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 userInteraction.displayMessage("Некорректный файл, проверьте наличие пустых строк");
                                 System.exit(1);
+                            } catch (IllegalArgumentException e) {
+                                userInteraction.displayMessage("Данные в файле некорректны");
+                                System.exit(1);
                             }
                             if (storage.getCollection().size() < 1) {
                                 userInteraction.displayMessage("Пустая коллекция");

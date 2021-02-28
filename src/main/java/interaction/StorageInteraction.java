@@ -123,7 +123,10 @@ public final class StorageInteraction implements InteractionInterface {
      */
     public void save() throws IOException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(StorageInteraction.originPath));
-        String keyLine = "name,x,y,salary,endDate,position,status,organization,orgType,annualTurnover,street,postalCode" + "\n";
+        String keyLine = "name" + returnSeparator() + "x" + returnSeparator() +
+                "y" + returnSeparator() + "salary" + returnSeparator() + "endDate" + returnSeparator() +
+                "position" + returnSeparator() + "status" + returnSeparator() + "organization" + returnSeparator() +
+                "orgType" + returnSeparator() + "annualTurnover" + returnSeparator() + "street" + returnSeparator() + "postalCode" + "\n";
         printWriter.write(keyLine);
         HashSet<Worker> collection = storage.getCollection();
         for (Worker w : collection) {
