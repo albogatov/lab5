@@ -24,34 +24,39 @@ public class Main {
     public static void main(String[] args) throws IOException {
         UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);
         boolean firstOpening = true;
+        File dataFile = null;
+        Storage storage = null;
+        StorageInteraction interactiveStorage = null;
+        ReadyCSVParser parser = null;
         try {
             if (args[0] == null) {
                 userInteraction.displayMessage("Путь к исходным данным не задан");
             } else {
                 while (true) {
                     try {
-                        File dataFile = new File(args[0]);
-                        Storage storage = new Storage();
-                        StorageInteraction interactiveStorage = new StorageInteraction(storage, args[0]);
-                        ReadyCSVParser parser = new ReadyCSVParser();
-                        try {
-                            parser.readWorkers(dataFile, storage.getCollection(), storage);
-                        } catch (NullPointerException e) {
-                            userInteraction.displayMessage("Данные в файле введены некорректно");
-                            System.exit(0);
-                        } catch (DateTimeParseException e) {
-                            userInteraction.displayMessage("Неверное форматирование дат");
-                            System.exit(0);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            userInteraction.displayMessage("Некорректный файл, проверьте наличие пустых строк");
-                            System.exit(0);
-                        }
-                        if (storage.getCollection().size() < 1) {
-                            userInteraction.displayMessage("Пустая коллекция");
-                        }
-                        if (firstOpening)
+                        if(firstOpening) {
+                            dataFile = new File(args[0]);
+                            storage = new Storage();
+                            interactiveStorage = new StorageInteraction(storage, args[0]);
+                            parser = new ReadyCSVParser();
+                            try {
+                                parser.readWorkers(dataFile, storage.getCollection(), storage);
+                            } catch (NullPointerException e) {
+                                userInteraction.displayMessage("Данные в файле введены некорректно");
+                                System.exit(1);
+                            } catch (DateTimeParseException e) {
+                                userInteraction.displayMessage("Неверное форматирование дат");
+                                System.exit(1);
+                            } catch (ArrayIndexOutOfBoundsException e) {
+                                userInteraction.displayMessage("Некорректный файл, проверьте наличие пустых строк");
+                                System.exit(1);
+                            }
+                            if (storage.getCollection().size() < 1) {
+                                userInteraction.displayMessage("Пустая коллекция");
+                            }
                             userInteraction.displayMessage("Введите команду, полный список команд можно получить с помощью команды help.");
-                        firstOpening = false;
+                            firstOpening = false;
+                        }
                         String line;
                         do {
                             line = userInteraction.read();
@@ -83,6 +88,7 @@ public class Main {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             userInteraction.displayMessage("Не указан путь изначального файла");
+            System.exit(1);
         }
     }
 }

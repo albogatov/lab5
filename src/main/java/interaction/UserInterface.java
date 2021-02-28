@@ -154,6 +154,8 @@ public class UserInterface {
             do {
                 displayMessage(message);
                 line = scanner.nextLine();
+                if (line.isEmpty())
+                    break;
             } while (Long.parseLong(line) < min || Long.parseLong(line) > max);
             line = line.isEmpty() ? null : line;
         } else {
@@ -171,7 +173,10 @@ public class UserInterface {
      * @throws IOException в случае ошибки ввода/вывода
      */
     public Worker readWorker() throws IOException {
-        String name = readNecessaryArgument("Введите имя рабочего:");
+        String name = "";
+        while(!name.matches("[a-zA-Zа-яА-Я]+")) {
+            name = readNecessaryArgument("Введите имя рабочего:");
+        }
         ZonedDateTime creationDate = ZonedDateTime.now();
         Integer salary = Integer.parseInt(readNecessaryArgument("Введите оклад рабочего:"));
         LocalDate endDate;
@@ -240,7 +245,17 @@ public class UserInterface {
         if (orgName != null) {
             Long annualTurnover = Long.parseLong("0");
             while (annualTurnover == 0) {
-                annualTurnover = Long.parseLong(readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE));
+                try {
+                    String annualTurnoverLine = readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE);
+                    if (annualTurnoverLine == null) {
+                        annualTurnover = null;
+                        break;
+                    }
+                    else annualTurnover = Long.parseLong(annualTurnoverLine);
+                } catch (NumberFormatException e) {
+                    displayMessage("Допущена ошибка формата данных, повторите ввод");
+                    e.printStackTrace();
+                }
             }
             OrganizationType type;
             while (true) {
@@ -249,11 +264,18 @@ public class UserInterface {
                     break;
                 } catch (IllegalArgumentException e) {
                     displayMessage("Допущена ошибка, повторите ввод");
+                } catch (NullPointerException e) {
+                    type = null;
+                    break;
                 }
             }
-            String street = readNecessaryArgument("Укажите улицу расположения организации:");
-            String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
-            Address postalAddress = new Address(street, zipCode);
+            Address postalAddress;
+            String street = readOtherArgument("Укажите улицу расположения организации:");
+            if(street != null) {
+                String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
+                postalAddress = new Address(street, zipCode);
+            }
+            else postalAddress = null;
             organization = new Organization(annualTurnover, type, postalAddress, orgName);
         } else organization = null;
         return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);

@@ -56,7 +56,10 @@ public class ReadyCSVParser {
      */
     public Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
-        String name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
+        String name;
+        if(!values.get(keySet.get("name")).matches("[a-zA-Zа-яА-Я]+"))
+            name = null;
+        else name = values.get(keySet.get("name")); //Поле не может быть null, Строка не может быть пустой
         Coordinates coordinates;
         if (values.get(keySet.get("x")).equals("") || values.get(keySet.get("y")).equals(""))
             coordinates = null;
