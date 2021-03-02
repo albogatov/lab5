@@ -184,7 +184,7 @@ public class UserInterface {
      */
     public Worker readWorker() throws IOException {
         String name = "";
-        while (!name.matches("[a-zA-Zа-яА-Я]+")) {
+        while (!name.chars().allMatch(Character::isLetter) || name.equals("")) {
             name = readNecessaryArgument("Введите имя рабочего:");
         }
         ZonedDateTime creationDate = ZonedDateTime.now();
