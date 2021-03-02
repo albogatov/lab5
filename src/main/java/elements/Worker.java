@@ -15,11 +15,11 @@ public class Worker implements Comparable<Worker> {
     /**
      * Имя работника. Поле не может быть null, Строка не может быть пустой.
      */
-    private String name;
+    private final String name;
     /**
      * Координаты работника. Поле не может быть null.
      */
-    private Coordinates coordinates;
+    private final Coordinates coordinates;
     /**
      * Дата добавления работника в базу. Поле не может быть null. Значение этого поля генерируется автоматически.
      */
@@ -27,23 +27,23 @@ public class Worker implements Comparable<Worker> {
     /**
      * Оклад работника. Поле не может быть null, Значение поля должно быть больше 0.
      */
-    private Integer salary;
+    private final Integer salary;
     /**
      * Дата расторжения контракта. Может быть null.
      */
-    private LocalDate endDate;
+    private final LocalDate endDate;
     /**
      * Должность сотрудника. Может быть null.
      */
-    private Position position;
+    private final Position position;
     /**
      * Статус сотрудника. Может быть null.
      */
-    private Status status;
+    private final Status status;
     /**
      * Организация сотрудника. Может быть null.
      */
-    private Organization organization; //Поле может быть null
+    private final Organization organization; //Поле может быть null
 
     /**
      * Стандартный конструктор
@@ -171,8 +171,6 @@ public class Worker implements Comparable<Worker> {
      * @return статус
      */
     public Status getStatus() {
-        if (this.status == null)
-            return null;
         return this.status;
     }
 

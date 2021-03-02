@@ -27,7 +27,11 @@ public class Show extends Command {
      * @throws IOException в случае ошибки ввода/вывода
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
-        ui.displayMessage("Коллекция:");
-        interactiveStorage.show();
+        if (interactiveStorage.getSize() == 0)
+            ui.displayMessage("Коллекция пуста");
+        else {
+            ui.displayMessage("Коллекция:");
+            interactiveStorage.show();
+        }
     }
 }
