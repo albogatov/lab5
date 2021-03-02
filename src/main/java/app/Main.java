@@ -63,7 +63,7 @@ public class Main {
                         }
                         String line;
                         do {
-                            line = userInteraction.read();
+                            line = userInteraction.read().trim();
                             String cmd = line.split(" ")[0];
                             CommandCenter.getInstance().executeCommand(userInteraction, cmd, line, interactiveStorage);
                         } while (userInteraction.hasNextLine());

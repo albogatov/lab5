@@ -16,7 +16,7 @@ public class PrintUniqueOrganization extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public PrintUniqueOrganization() {
-        cmdLine = "printUniqueOrganization";
+        cmdLine = "print_unique_organization";
         description = "вывести уникальные значения поля organization всех элементов в коллекции";
     }
 

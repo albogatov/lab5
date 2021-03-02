@@ -15,7 +15,7 @@ public class AddIfMin extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public AddIfMin() {
-        cmdLine = "addIfMin";
+        cmdLine = "add_if_min";
         description = "добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции.";
     }
 

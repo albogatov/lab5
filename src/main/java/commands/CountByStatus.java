@@ -15,7 +15,7 @@ public class CountByStatus extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public CountByStatus() {
-        cmdLine = "countByStatus";
+        cmdLine = "count_by_status";
         description = "вывести количество элементов, значение поля status которых равно заданному";
     }
 

@@ -7,4 +7,4 @@ Donald
 hired
 engineer
 
-executeScript C:\Users\lifep\OneDrive\Documents\Занятия\Прога\lab5\secondScript.txt
+execute_script C:\Users\lifep\OneDrive\Documents\Занятия\Прога\lab5\secondScript.txt

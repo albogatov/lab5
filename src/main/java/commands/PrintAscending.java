@@ -12,7 +12,7 @@ public class PrintAscending extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public PrintAscending() {
-        cmdLine = "printAscending";
+        cmdLine = "print_ascending";
         description = "вывести элементы коллекции в порядке возрастания";
     }
 

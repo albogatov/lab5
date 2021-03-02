@@ -15,7 +15,7 @@ public class RemoveById extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public RemoveById() {
-        cmdLine = "removeById";
+        cmdLine = "remove_by_id";
         description = "удалить элемент из коллекции по его id";
     }
 

@@ -15,7 +15,7 @@ public class RemoveGreater extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public RemoveGreater() {
-        cmdLine = "removeGreater";
+        cmdLine = "remove_greater";
         description = "удалить из коллекции все элементы, превышающие заданный";
     }
 

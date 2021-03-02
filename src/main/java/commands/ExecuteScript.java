@@ -26,7 +26,7 @@ public class ExecuteScript extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public ExecuteScript() {
-        cmdLine = "executeScript";
+        cmdLine = "execute_script";
         description = "считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме";
     }
 

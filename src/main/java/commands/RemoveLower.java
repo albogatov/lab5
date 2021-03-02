@@ -15,7 +15,7 @@ public class RemoveLower extends Command {
      * Стандартный конструктор, добавляющий строку вызова и описание команды
      */
     public RemoveLower() {
-        cmdLine = "removeLower";
+        cmdLine = "remove_lower";
         description = "удалить из коллекции все элементы, меньшие, чем заданный";
     }
 
