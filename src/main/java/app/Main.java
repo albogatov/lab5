@@ -85,8 +85,10 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         userInteraction.displayMessage("Указано неверное значение поля, повторите ввод команды");
                     } catch (Exception e) {
-                        userInteraction.displayMessage("Ох не повезло, не повезло");
-                        e.printStackTrace();
+                        userInteraction.displayMessage("Произошла неизвестная ошибка");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     }
                 }
             }
