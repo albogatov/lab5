@@ -28,14 +28,23 @@ public class Exit extends Command {
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         String confirmation;
-        if(interactiveStorage.checkChanges()) {
-            confirmation = ui.readNecessaryArgument("Запрошен выход из приложения без сохранения, вы хотите продолжить?");
-            if (confirmation.equals("yes")) {
-                ui.displayMessage("До новых встреч");
-                System.exit(0);
+        if (interactiveStorage.checkChanges()) {
+            confirmation = ui.readNecessaryArgument("Запрошен выход из приложения без сохранения. " +
+                    "Введите: yes, если хотите продолжить; no, если хотите продолжить работу; " +
+                    "save, если хотите сохранить коллекцию и выйти");
+            switch (confirmation) {
+                case "yes":
+                    ui.displayMessage("До новых встреч");
+                    System.exit(0);
+                case "no":
+                    ui.displayMessage("Работа с коллекцией возобновлена");
+                    break;
+                case "save":
+                    interactiveStorage.save();
+                    ui.displayMessage("Коллекция сохранена, до новых встреч");
+                    System.exit(0);
             }
-        }
-        else {
+        } else {
             ui.displayMessage("До новых встреч");
             System.exit(0);
         }

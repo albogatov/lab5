@@ -1,7 +1,5 @@
 package interaction;
 
-import elements.Worker;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -20,9 +18,9 @@ public interface StorageInterface<T> {
 
     void put(T worker);
 
-    HashSet<Worker> getCollection();
+    HashSet<T> getCollection();
 
-    Worker generateId(Worker worker);
+    T generateId(T worker);
 
     List<Long> getIdList();
 }

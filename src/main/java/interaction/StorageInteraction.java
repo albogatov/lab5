@@ -125,8 +125,9 @@ public final class StorageInteraction implements InteractionInterface {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(StorageInteraction.originPath));
         String keyLine = "id" + returnSeparator() + "name" + returnSeparator() + "x" + returnSeparator() +
                 "y" + returnSeparator() + "salary" + returnSeparator() + "endDate" + returnSeparator() +
-                "creationDate" + returnSeparator() + "position" + returnSeparator() + "status" + returnSeparator() + "organization" + returnSeparator() +
-                "orgType" + returnSeparator() + "annualTurnover" + returnSeparator() + "street" + returnSeparator() + "postalCode" + "\n";
+                "creationDate" + returnSeparator() + "position" + returnSeparator() + "status" + returnSeparator() +
+                "organization" + returnSeparator() + "orgType" + returnSeparator() + "annualTurnover" + returnSeparator()
+                + "street" + returnSeparator() + "postalCode" + "\n";
         printWriter.write(keyLine);
         HashSet<Worker> collection = storage.getCollection();
         for (Worker w : collection) {
@@ -283,6 +284,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, проверяюший наличие/отсутсвие несохраненных изменений коллекции
+     *
      * @return True - если есть несохраненные изменения, иначе false
      */
     public boolean checkChanges() {
@@ -291,6 +293,7 @@ public final class StorageInteraction implements InteractionInterface {
 
     /**
      * Метод, возвращающий разделитель, используемый в оригинальном файле с коллекцией
+     *
      * @return Разделитель
      */
     public String returnSeparator() {
