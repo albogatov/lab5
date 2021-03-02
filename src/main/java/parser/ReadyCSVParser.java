@@ -70,7 +70,7 @@ public class ReadyCSVParser {
             id = -1;
         else id = Long.parseLong(values.get(keySet.get("id")));
         String name;
-        if (!values.get(keySet.get("name")).matches("[a-zA-Zа-яА-Я]+"))
+        if (!values.get(keySet.get("name")).chars().allMatch(Character::isLetter))
             name = null;
         else name = values.get(keySet.get("name"));
         Coordinates coordinates;
