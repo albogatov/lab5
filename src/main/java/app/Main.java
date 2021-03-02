@@ -44,15 +44,27 @@ public class Main {
                                 parser.readWorkers(dataFile, storage.getCollection(), storage);
                             } catch (NullPointerException e) {
                                 userInteraction.displayMessage("Данные в файле введены некорректно или указан неверный разделитель значений");
+                                PrintWriter pw = new PrintWriter("errorLog.txt");
+                                e.printStackTrace(pw);
+                                pw.close();
                                 System.exit(1);
                             } catch (DateTimeParseException e) {
                                 userInteraction.displayMessage("Неверное форматирование дат");
+                                PrintWriter pw = new PrintWriter("errorLog.txt");
+                                e.printStackTrace(pw);
+                                pw.close();
                                 System.exit(1);
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 userInteraction.displayMessage("Некорректный файл, проверьте наличие пустых строк");
+                                PrintWriter pw = new PrintWriter("errorLog.txt");
+                                e.printStackTrace(pw);
+                                pw.close();
                                 System.exit(1);
                             } catch (IllegalArgumentException e) {
                                 userInteraction.displayMessage("Данные в файле некорректны");
+                                PrintWriter pw = new PrintWriter("errorLog.txt");
+                                e.printStackTrace(pw);
+                                pw.close();
                                 System.exit(1);
                             }
                             if (storage.getCollection().size() < 1) {
@@ -69,20 +81,44 @@ public class Main {
                         } while (userInteraction.hasNextLine());
                     } catch (NullPointerException e) {
                         userInteraction.displayMessage("Такой команды нет, проверьте правильность ввода или посмотрите список команд с помощью help");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         userInteraction.displayMessage("Введенные аргументы не соответсвуют требуемым для выполнения, повторите ввод команды");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (NumberFormatException e) {
                         userInteraction.displayMessage("Неправильно введены числовые данные, повторите ввод команды");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (FileNotFoundException e) {
                         userInteraction.displayMessage("В качестве аргумента указан путь к несуществующему файлу или доступ к файлу закрыт");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (IOException e) {
                         userInteraction.displayMessage("Произошла ошибка ввода/вывода");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (StackOverflowError e) {
                         userInteraction.displayMessage("Дальнейшее исполнение скрипта приведет к рекурсии");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (DateTimeParseException e) {
                         userInteraction.displayMessage("Дата указана неверно, повторите ввод команды");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (IllegalArgumentException e) {
                         userInteraction.displayMessage("Указано неверное значение поля, повторите ввод команды");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
                     } catch (Exception e) {
                         userInteraction.displayMessage("Произошла неизвестная ошибка");
                         PrintWriter pw = new PrintWriter("errorLog.txt");
@@ -93,6 +129,9 @@ public class Main {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             userInteraction.displayMessage("Не указан путь изначального файла");
+            PrintWriter pw = new PrintWriter("errorLog.txt");
+            e.printStackTrace(pw);
+            pw.close();
             System.exit(1);
         }
     }
