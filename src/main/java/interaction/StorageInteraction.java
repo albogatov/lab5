@@ -296,4 +296,8 @@ public final class StorageInteraction implements InteractionInterface {
     public String returnSeparator() {
         return Character.toString(separator);
     }
+
+    public static void implyChange() {
+        changesMade = true;
+    }
 }

@@ -89,6 +89,7 @@ public class Storage implements StorageInterface<Worker> {
         while (idList.contains(id));
         worker.setId(id);
         idList.add(id);
+        StorageInteraction.implyChange();
         return worker;
     }
 

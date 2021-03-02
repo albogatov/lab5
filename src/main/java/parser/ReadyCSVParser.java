@@ -10,6 +10,7 @@ import com.opencsv.CSVParserBuilder;
 import elements.*;
 import interaction.Storage;
 import com.opencsv.CSVParser;
+import interaction.StorageInteraction;
 
 /**
  * Класс, отвечающий за парсинг данных из изначального файла
@@ -79,8 +80,10 @@ public class ReadyCSVParser {
             coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y"))));
         ZonedDateTime creationDate;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z");
-        if(values.get(keySet.get("creationdate")).equals(""))
+        if(values.get(keySet.get("creationdate")).equals("")) {
             creationDate = ZonedDateTime.now();
+            StorageInteraction.implyChange();
+        }
         else creationDate = ZonedDateTime.parse(values.get(keySet.get("creationdate")), formatter);
         Integer salary;
         if (values.get(keySet.get("salary")).equals(""))
