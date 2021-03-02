@@ -44,6 +44,7 @@ public class Main {
                                 parser.readWorkers(dataFile, storage.getCollection(), storage);
                             } catch (NullPointerException e) {
                                 userInteraction.displayMessage("Данные в файле введены некорректно или указан неверный разделитель значений");
+                                e.printStackTrace();
                                 System.exit(1);
                             } catch (DateTimeParseException e) {
                                 userInteraction.displayMessage("Неверное форматирование дат");

@@ -67,7 +67,29 @@ public class Worker implements Comparable<Worker> {
         this.status = status;
         this.organization = organization;
     }
-
+    /**
+     * Стандартный конструктор
+     *
+     * @param name         имя рабочего
+     * @param coordinates  координаты
+     * @param creationDate дата добавления в базу
+     * @param salary       оклад
+     * @param endDate      дата расторжения контракта
+     * @param position     должность
+     * @param status       статус
+     * @param organization организация
+     */
+    public Worker(long id, String name, Coordinates coordinates, ZonedDateTime creationDate, Integer salary, LocalDate endDate, Position position, Status status, Organization organization) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.salary = salary;
+        this.endDate = endDate;
+        this.position = position;
+        this.status = status;
+        this.organization = organization;
+    }
     /**
      * Метод, возвращающий имя рабочего
      *

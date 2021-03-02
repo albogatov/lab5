@@ -123,18 +123,20 @@ public final class StorageInteraction implements InteractionInterface {
      */
     public void save() throws IOException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(StorageInteraction.originPath));
-        String keyLine = "name" + returnSeparator() + "x" + returnSeparator() +
+        String keyLine = "id" + returnSeparator() + "name" + returnSeparator() + "x" + returnSeparator() +
                 "y" + returnSeparator() + "salary" + returnSeparator() + "endDate" + returnSeparator() +
-                "position" + returnSeparator() + "status" + returnSeparator() + "organization" + returnSeparator() +
+                "creationDate" + returnSeparator() + "position" + returnSeparator() + "status" + returnSeparator() + "organization" + returnSeparator() +
                 "orgType" + returnSeparator() + "annualTurnover" + returnSeparator() + "street" + returnSeparator() + "postalCode" + "\n";
         printWriter.write(keyLine);
         HashSet<Worker> collection = storage.getCollection();
         for (Worker w : collection) {
+            printWriter.write(w.getId() + returnSeparator());
             printWriter.write(w.getName() + returnSeparator());
             printWriter.write(w.getCoordinateX() + returnSeparator());
             printWriter.write(w.getCoordinateY() + returnSeparator());
             printWriter.write(w.getSalary() + returnSeparator());
             printWriter.write(w.getEndDateString() + returnSeparator());
+            printWriter.write(w.getCreationDateString() + returnSeparator());
             printWriter.write(w.getPositionString() + returnSeparator());
             printWriter.write(w.getStatusString() + returnSeparator());
             printWriter.write(w.getOrganizationNameString() + returnSeparator());

@@ -3,6 +3,7 @@ package parser;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.opencsv.CSVParserBuilder;
@@ -63,6 +64,10 @@ public class ReadyCSVParser {
      */
     public Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
+        long id;
+        if(values.get(keySet.get("id")).equals(""))
+            id = -1;
+        else id = Long.parseLong(values.get(keySet.get("id")));
         String name;
         if (!values.get(keySet.get("name")).matches("[a-zA-Zа-яА-Я]+"))
             name = null;
@@ -72,7 +77,11 @@ public class ReadyCSVParser {
             coordinates = null;
         else
             coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y"))));
-        ZonedDateTime creationDate = ZonedDateTime.now();
+        ZonedDateTime creationDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z");
+        if(values.get(keySet.get("creationdate")).equals(""))
+            creationDate = ZonedDateTime.now();
+        else creationDate = ZonedDateTime.parse(values.get(keySet.get("creationdate")), formatter);
         Integer salary;
         if (values.get(keySet.get("salary")).equals(""))
             salary = null;
@@ -115,7 +124,7 @@ public class ReadyCSVParser {
         if (name == null || name.equals("") || coordinates == null || salary == null || salary <= 0 || coordinates.getX() > 627 || coordinates.getY() > 990) {
             throw new NullPointerException("Данные неверны");
         }
-        return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);
+        return new Worker(id, name, coordinates, creationDate, salary, endDate, position, status, organization);
 
     }
 
@@ -137,7 +146,9 @@ public class ReadyCSVParser {
             Worker worker = readWorker(line);
             if (worker != null) {
                 workers.add(worker);
-                storage.generateId(worker);
+                if(worker.getId() == -1)
+                    storage.generateId(worker);
+                else storage.checkId(worker);
             }
         }
     }

@@ -1,8 +1,6 @@
-name;x;y;salary;endDate;position;status;organization;orgType;annualTurnover;street;postalCode
-Donald;111;111;27;;ENGINEER;HIRED;;;;;
-Loagjgsdk;111;111;100;;;;;;;;
-Steven;204;206;22;;;;;;;;
-Laura;11;11;1000;;;;ITMO;;;Mos;10000
-Irina;100;100;100;2020-10-12;;FIRED;;;;;
-Alexis;11;11;100;;;;;;;;
-Jennie;11;11;100;;CLEANER;FIRED;ITMO;COMMERCIAL;;Mos;1999
+id;name;x;y;salary;endDate;creationDate;position;status;organization;orgType;annualTurnover;street;postalCode
+20990991200920;Andrey;-1;-1;1;2021-02-03;03/02/2021 - 16:27:10 MSK;CLEANER;FIRED;ITMO;;1;Kronva;9000
+102;Ronald;111;111;21;2021-11-11;03/02/2021 - 16:24:51 MSK;ENGINEER;HIRED;;;;;
+101;Jennie;11;11;100;;03/02/2021 - 16:24:51 MSK;CLEANER;FIRED;ITMO;COMMERCIAL;;Mos;1999
+9688148946022;Steven;204;206;22;;03/02/2021 - 16:24:51 MSK;;;;;;;
+1614691491009;Donald;111;111;27;;03/02/2021 - 16:24:51 MSK;ENGINEER;HIRED;;;;;

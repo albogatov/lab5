@@ -100,4 +100,13 @@ public class Storage implements StorageInterface<Worker> {
     public List<Long> getIdList() {
         return idList;
     }
+
+    public void checkId(Worker worker) {
+        long id = worker.getId();
+        if(idList.contains(id))
+            throw new IllegalArgumentException("Повторяющийся ID");
+        else {
+            idList.add(id);
+        }
+    }
 }
