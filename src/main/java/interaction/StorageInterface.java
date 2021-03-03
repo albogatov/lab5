@@ -16,11 +16,11 @@ public interface StorageInterface<T> {
 
     int size();
 
-    void put(T worker);
+    void put(T type);
 
     HashSet<T> getCollection();
 
-    T generateId(T worker) throws Exception;
+    T generateId(T type) throws Exception;
 
     List<Long> getIdList();
 }
