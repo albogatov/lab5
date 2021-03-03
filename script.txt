@@ -7,4 +7,7 @@ Donald
 hired
 engineer
 
-execute_script C:\Users\lifep\OneDrive\Documents\Занятия\Прога\lab5\secondScript.txt
+100
+
+Venice
+664

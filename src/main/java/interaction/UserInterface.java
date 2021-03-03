@@ -4,14 +4,12 @@ import elements.*;
 import utils.ValueVerificationTool;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -90,21 +88,29 @@ public class UserInterface {
      * @return введенный аргумент
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public String readNecessaryArgument(String message) throws IOException {
+    public String readUnlimitedArgument(String message, boolean nullable) throws IOException {
         String line = null;
-        if (interactionMode) {
-            while (line == null) {
-                displayMessage("Ввод данного поля не может быть пустым");
-                displayMessage(message);
+        if (!nullable) {
+            if (interactionMode) {
+                while (line == null) {
+                    displayMessage("Ввод данного поля не может быть пустым");
+                    displayMessage(message);
+                    line = scanner.nextLine();
+                    line = line.isEmpty() ? null : line;
+                }
+            } else {
                 line = scanner.nextLine();
                 line = line.isEmpty() ? null : line;
             }
+            if (!interactionMode && line == null)
+                throw new InvalidParameterException("Скрипт содержит некорректный ввод данных");
         } else {
+            if (interactionMode) {
+                displayMessage(message);
+            }
             line = scanner.nextLine();
             line = line.isEmpty() ? null : line;
         }
-        if (!interactionMode && line == null)
-            throw new InvalidParameterException("Скрипт содержит некорректный ввод данных");
         return line;
     }
 
@@ -117,64 +123,36 @@ public class UserInterface {
      * @return введенный аргумент
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public String readNecessaryArgument(String message, long min, long max) throws IOException {
+    public String readLimitedArgument(String message, long min, long max, boolean nullable) throws IOException {
         String line = null;
-        if (interactionMode) {
-            while (line == null || Long.parseLong(line) < min || Long.parseLong(line) > max) {
-                displayMessage("Ввод данного поля не может быть пустым и должен быть в указанном диапазоне: [" + min + ":" + max + "]");
-                displayMessage(message);
+        if(!nullable) {
+            if (interactionMode) {
+                while (line == null || Long.parseLong(line) < min || Long.parseLong(line) > max) {
+                    displayMessage("Ввод данного поля не может быть пустым и должен быть в указанном диапазоне: [" + min + ":" + max + "]");
+                    displayMessage(message);
+                    line = scanner.nextLine();
+                    line = line.isEmpty() ? null : line;
+                }
+            } else {
                 line = scanner.nextLine();
                 line = line.isEmpty() ? null : line;
+                if (line == null || Long.parseLong(line) < min || Long.parseLong(line) > max)
+                    throw new InvalidParameterException("Скрипт содержит некорректный ввод данных");
             }
         } else {
-            line = scanner.nextLine();
-            line = line.isEmpty() ? null : line;
-            if (line == null || Long.parseLong(line) < min || Long.parseLong(line) > max)
-                throw new InvalidParameterException("Скрипт содержит некорректный ввод данных");
-        }
-        return line;
-    }
-
-    /**
-     * Метод, принимающий от пользователя необязательный для ввода аргумент (возможно значение null)
-     *
-     * @param message сообщение для пользователя
-     * @return введенный аргумент
-     * @throws IOException в случае ошибки ввода/вывода
-     */
-    public String readOtherArgument(String message) throws IOException {
-        String line;
-        if (interactionMode) {
-            displayMessage(message);
-        }
-        line = scanner.nextLine();
-        line = line.isEmpty() ? null : line;
-        return line;
-    }
-
-    /**
-     * Метод, принимающий от пользователя необязательный для ввода, численный, ограниченный условиями аргумент (возможно значение null)
-     *
-     * @param message сообщение для пользователя
-     * @param min     минимальное значение
-     * @param max     максимальное значение
-     * @return введенный аргумнент
-     * @throws IOException в случае ошибки ввода/вывода
-     */
-    public String readOtherArgument(String message, long min, long max) throws IOException {
-        String line;
-        if (interactionMode) {
-            do {
-                displayMessage(message);
+            if (interactionMode) {
+                do {
+                    displayMessage(message);
+                    line = scanner.nextLine();
+                    if (line.isEmpty())
+                        break;
+                } while (Long.parseLong(line) < min || Long.parseLong(line) > max);
+                line = line.isEmpty() ? null : line;
+            } else {
                 line = scanner.nextLine();
-                if (line.isEmpty())
-                    break;
-            } while (Long.parseLong(line) < min || Long.parseLong(line) > max);
-            line = line.isEmpty() ? null : line;
-        } else {
-            line = scanner.nextLine();
-            if (Long.parseLong(line) < min || Long.parseLong(line) > max)
-                throw new InvalidParameterException("Скрипт содержит некорректный ввод данных");
+                if (Long.parseLong(line) < min || Long.parseLong(line) > max)
+                    throw new InvalidParameterException("Скрипт содержит некорректный ввод данных");
+            }
         }
         return line;
     }
@@ -188,30 +166,30 @@ public class UserInterface {
     public Worker readWorker(UserInterface ui) throws IOException {
         String name;
         do {
-            name = readNecessaryArgument("Введите имя рабочего:");
+            name = readUnlimitedArgument("Введите имя рабочего:", false);
         }
         while (!ValueVerificationTool.verifyName(name, interactionMode, ui, false));
         ZonedDateTime creationDate = ZonedDateTime.now();
         String salaryString;
         do {
-            salaryString = readNecessaryArgument("Введите оклад рабочего:");
+            salaryString = readUnlimitedArgument("Введите оклад рабочего:", false);
         } while (!ValueVerificationTool.verifySalary(salaryString, interactionMode, ui, false));
         Integer salary = Integer.parseInt(salaryString);
         String endDateLine;
         LocalDate endDate;
         do {
-            endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
+            endDateLine = readUnlimitedArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):", true);
         } while (!ValueVerificationTool.verifyDate(endDateLine, interactionMode, ui, false));
         if (endDateLine == null)
             endDate = null;
-        else endDate = LocalDate.parse(endDateLine);
+        else endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
         String xLine;
         String yLine;
         do {
-            xLine = readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627);
+            xLine = readLimitedArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627, false);
         } while (!ValueVerificationTool.verifyIntValue(xLine, interactionMode, ui, false));
         do {
-            yLine = readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990);
+            yLine = readLimitedArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990,false);
         } while (!ValueVerificationTool.verifyLongValue(xLine, interactionMode, ui, false));
         int x = Integer.parseInt(xLine);
         long y = Long.parseLong(yLine);
@@ -219,7 +197,7 @@ public class UserInterface {
         Status status;
         String statusLine;
         do {
-            statusLine = readOtherArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues());
+            statusLine = readUnlimitedArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues(), true);
         } while (!ValueVerificationTool.verifyStatus(statusLine, interactionMode, ui, true));
         if (statusLine == null)
             status = null;
@@ -227,34 +205,34 @@ public class UserInterface {
         Position position;
         String positionLine;
         do {
-            positionLine = readOtherArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues());
+            positionLine = readUnlimitedArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues(),true);
         } while (!ValueVerificationTool.verifyPosition(positionLine, interactionMode, ui, true));
         if (positionLine == null)
             position = null;
         else position = Position.valueOf(positionLine.toUpperCase());
-        String orgName = readOtherArgument("Укажите организацию сотрудника:");
+        String orgName = readUnlimitedArgument("Укажите организацию сотрудника:", true);
         if (orgName != null)
             orgName = orgName.toUpperCase();
         Organization organization;
         String annualTurnoverLine;
         Long annualTurnover;
         do {
-            annualTurnoverLine = readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE);
-        } while(!ValueVerificationTool.verifyLongValue(annualTurnoverLine, interactionMode, ui, true));
-        if(annualTurnoverLine == null)
+            annualTurnoverLine = readLimitedArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE, true);
+        } while (!ValueVerificationTool.verifyLongValue(annualTurnoverLine, interactionMode, ui, true));
+        if (annualTurnoverLine == null)
             annualTurnover = null;
         else annualTurnover = Long.parseLong(annualTurnoverLine);
         OrganizationType type;
         String orgTypeLine;
         do {
-            orgTypeLine = readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues());
-        } while(!ValueVerificationTool.verifyOrgType(orgTypeLine, interactionMode, ui, true));
-        if(orgTypeLine == null)
+            orgTypeLine = readUnlimitedArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues(), true);
+        } while (!ValueVerificationTool.verifyOrgType(orgTypeLine, interactionMode, ui, true));
+        if (orgTypeLine == null)
             type = null;
         else type = OrganizationType.valueOf(orgTypeLine.toUpperCase());
         Address postalAddress;
-        String street = readNecessaryArgument("Укажите улицу расположения организации:");
-        String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
+        String street = readUnlimitedArgument("Укажите улицу расположения организации:", false);
+        String zipCode = readUnlimitedArgument("Укажите почтовый индекс:", false);
         postalAddress = new Address(street, zipCode);
         organization = new Organization(annualTurnover, type, postalAddress, orgName);
         return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);

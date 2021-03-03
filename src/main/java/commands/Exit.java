@@ -29,9 +29,9 @@ public class Exit extends Command {
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
         String confirmation;
         if (interactiveStorage.checkChanges()) {
-            confirmation = ui.readNecessaryArgument("Запрошен выход из приложения без сохранения. " +
+            confirmation = ui.readUnlimitedArgument("Запрошен выход из приложения без сохранения. " +
                     "Введите: yes, если хотите выйти без сохранения; no, если хотите продолжить работу; " +
-                    "save, если хотите сохранить коллекцию и выйти");
+                    "save, если хотите сохранить коллекцию и выйти", false);
             switch (confirmation) {
                 case "yes":
                     ui.displayMessage("До новых встреч");
