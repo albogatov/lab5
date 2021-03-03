@@ -1,4 +1,4 @@
-package parser;
+package utils;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -19,16 +19,13 @@ public class ReadyCSVParser {
     /**
      * Объект CSVParser
      */
-    protected CSVParser parser;
+    protected static CSVParser parser;
     /**
      * Значения ключевой и их порядковый номер
      */
-    protected HashMap<String, Integer> keySet = new HashMap<>();
+    protected static HashMap<String, Integer> keySet = new HashMap<>();
 
-    /**
-     * Стандартный конструктор
-     */
-    public ReadyCSVParser(char separator) {
+    public static void initParser(char separator) {
         parser = new CSVParserBuilder().withSeparator(separator).build();
     }
 
@@ -38,7 +35,7 @@ public class ReadyCSVParser {
      * @param line строка
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public void readKeyLine(String line) throws IOException {
+    public static void readKeyLine(String line) throws IOException {
         List<String> keyLineValues = Arrays.asList(parser.parseLine(line));
         for (String s : keyLineValues) {
             keySet.put(s.toLowerCase(), keyLineValues.indexOf(s));
@@ -52,7 +49,7 @@ public class ReadyCSVParser {
      * @return список слов строки после парсинга
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public List<String> readLine(String line) throws IOException {
+    public static List<String> readLine(String line) throws IOException {
         return Arrays.asList(parser.parseLine(line));
     }
 
@@ -63,7 +60,7 @@ public class ReadyCSVParser {
      * @return объект коллекции
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public Worker readWorker(String line) throws IOException {
+    public static Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
         long id;
         if (values.get(keySet.get("id")).equals(""))
@@ -127,7 +124,6 @@ public class ReadyCSVParser {
             throw new NullPointerException("Данные неверны");
         }
         return new Worker(id, name, coordinates, creationDate, salary, endDate, position, status, organization);
-
     }
 
     /**
@@ -138,7 +134,7 @@ public class ReadyCSVParser {
      * @param storage объект класса для хранения коллекции
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public void readWorkers(File file, HashSet<Worker> workers, Storage storage) throws Exception {
+    public static void readWorkers(File file, HashSet<Worker> workers, Storage storage) throws Exception {
         FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = new BufferedInputStream(fis);
         BufferedReader br = new BufferedReader(new InputStreamReader(bis));
@@ -146,12 +142,10 @@ public class ReadyCSVParser {
         readKeyLine(br.readLine());
         while ((line = br.readLine()) != null) {
             Worker worker = readWorker(line);
-            if (worker != null) {
-                workers.add(worker);
-                if (worker.getId() == -1)
-                    storage.generateId(worker);
-                else storage.checkId(worker);
-            }
+            workers.add(worker);
+            if (worker.getId() == -1)
+                storage.generateId(worker);
+            else storage.checkId(worker);
         }
     }
 }

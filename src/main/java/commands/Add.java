@@ -28,7 +28,7 @@ public class Add extends Command {
      * @throws IOException в случае ошибки ввода/вывода
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws Exception {
-        Worker worker = ui.readWorker();
+        Worker worker = ui.readWorker(ui);
         interactiveStorage.add(worker);
         ui.displayMessage("Сотрудник успешно добавлен");
     }

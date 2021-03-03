@@ -3,7 +3,7 @@ package app;
 import interaction.Storage;
 import interaction.StorageInteraction;
 import interaction.UserInterface;
-import parser.ReadyCSVParser;
+import utils.ReadyCSVParser;
 
 import java.io.*;
 import java.time.format.DateTimeParseException;
@@ -27,7 +27,6 @@ public class Main {
         File dataFile;
         Storage storage;
         StorageInteraction interactiveStorage = null;
-        ReadyCSVParser parser;
         try {
             if (args[0] == null) {
                 userInteraction.displayMessage("Путь к исходным данным не задан");
@@ -39,9 +38,9 @@ public class Main {
                             dataFile = new File(args[0]);
                             storage = new Storage();
                             interactiveStorage = new StorageInteraction(storage, args[0], separator);
-                            parser = new ReadyCSVParser(separator);
+                            ReadyCSVParser.initParser(separator);
                             try {
-                                parser.readWorkers(dataFile, storage.getCollection(), storage);
+                                ReadyCSVParser.readWorkers(dataFile, storage.getCollection(), storage);
                             } catch (NullPointerException e) {
                                 userInteraction.displayMessage("Данные в файле введены некорректно или указан неверный разделитель значений");
                                 PrintWriter pw = new PrintWriter("errorLog.txt");

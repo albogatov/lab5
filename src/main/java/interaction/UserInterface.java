@@ -1,6 +1,7 @@
 package interaction;
 
 import elements.*;
+import utils.ValueVerificationTool;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -93,6 +94,7 @@ public class UserInterface {
         String line = null;
         if (interactionMode) {
             while (line == null) {
+                displayMessage("Ввод данного поля не может быть пустым");
                 displayMessage(message);
                 line = scanner.nextLine();
                 line = line.isEmpty() ? null : line;
@@ -119,6 +121,7 @@ public class UserInterface {
         String line = null;
         if (interactionMode) {
             while (line == null || Long.parseLong(line) < min || Long.parseLong(line) > max) {
+                displayMessage("Ввод данного поля не может быть пустым и должен быть в указанном диапазоне: [" + min + ":" + max + "]");
                 displayMessage(message);
                 line = scanner.nextLine();
                 line = line.isEmpty() ? null : line;
@@ -182,137 +185,78 @@ public class UserInterface {
      * @return объект коллекции
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public Worker readWorker() throws IOException {
-        String name = "";
-        while (!name.chars().allMatch(Character::isLetter) || name.equals("")) {
+    public Worker readWorker(UserInterface ui) throws IOException {
+        String name;
+        do {
             name = readNecessaryArgument("Введите имя рабочего:");
         }
+        while (!ValueVerificationTool.verifyName(name, interactionMode, ui, false));
         ZonedDateTime creationDate = ZonedDateTime.now();
-        Integer salary = Integer.parseInt(readNecessaryArgument("Введите оклад рабочего:"));
+        String salaryString;
+        do {
+            salaryString = readNecessaryArgument("Введите оклад рабочего:");
+        } while (!ValueVerificationTool.verifySalary(salaryString, interactionMode, ui, false));
+        Integer salary = Integer.parseInt(salaryString);
+        String endDateLine;
         LocalDate endDate;
-        while (true) {
-            try {
-                String endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
-                if (endDateLine != null) {
-                    endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
-                } else {
-                    endDate = null;
-                }
-                break;
-            } catch (DateTimeParseException e) {
-                if (interactionMode)
-                    displayMessage("Допущена ошибка, повторите ввод");
-                else {
-                    throw new InterruptedIOException();
-                }
-            }
-        }
-        int x;
-        long y;
-        while (true) {
-            try {
-                x = Integer.parseInt(readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627));
-                break;
-            } catch (NumberFormatException e) {
-                if (interactionMode)
-                    displayMessage("Допущена ошибка, повторите ввод");
-                else {
-                    throw new InterruptedIOException();
-                }
-            }
-        }
-        while (true) {
-            try {
-                y = Long.parseLong(readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990));
-                break;
-            } catch (NumberFormatException e) {
-                if (interactionMode)
-                    displayMessage("Допущена ошибка, повторите ввод");
-                else {
-                    throw new InterruptedIOException();
-                }
-            }
-        }
+        do {
+            endDateLine = readOtherArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):");
+        } while (!ValueVerificationTool.verifyDate(endDateLine, interactionMode, ui, false));
+        if (endDateLine == null)
+            endDate = null;
+        else endDate = LocalDate.parse(endDateLine);
+        String xLine;
+        String yLine;
+        do {
+            xLine = readNecessaryArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627);
+        } while (!ValueVerificationTool.verifyIntValue(xLine, interactionMode, ui, false));
+        do {
+            yLine = readNecessaryArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990);
+        } while (!ValueVerificationTool.verifyLongValue(xLine, interactionMode, ui, false));
+        int x = Integer.parseInt(xLine);
+        long y = Long.parseLong(yLine);
         Coordinates coordinates = new Coordinates(x, y);
         Status status;
-        while (true) {
-            try {
-                String statusLine = readOtherArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues());
-                if (statusLine != null) {
-                    status = Status.valueOf(statusLine.toUpperCase());
-                } else {
-                    status = null;
-                }
-                break;
-            } catch (IllegalArgumentException e) {
-                if (interactionMode)
-                    displayMessage("Допущена ошибка, повторите ввод");
-                else {
-                    throw new InterruptedIOException();
-                }
-            }
-        }
+        String statusLine;
+        do {
+            statusLine = readOtherArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues());
+        } while (!ValueVerificationTool.verifyStatus(statusLine, interactionMode, ui, true));
+        if (statusLine == null)
+            status = null;
+        else status = Status.valueOf(statusLine.toUpperCase());
         Position position;
-        while (true) {
-            try {
-                String positionLine = readOtherArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues());
-                if (positionLine != null) {
-                    position = Position.valueOf(positionLine.toUpperCase());
-                } else {
-                    position = null;
-                }
-                break;
-            } catch (IllegalArgumentException e) {
-                if (interactionMode)
-                    displayMessage("Допущена ошибка, повторите ввод");
-                else {
-                    throw new InterruptedIOException();
-                }
-            }
-        }
+        String positionLine;
+        do {
+            positionLine = readOtherArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues());
+        } while (!ValueVerificationTool.verifyPosition(positionLine, interactionMode, ui, true));
+        if (positionLine == null)
+            position = null;
+        else position = Position.valueOf(positionLine.toUpperCase());
         String orgName = readOtherArgument("Укажите организацию сотрудника:");
         if (orgName != null)
             orgName = orgName.toUpperCase();
         Organization organization;
-        if (orgName != null) {
-            Long annualTurnover = Long.parseLong("0");
-            while (annualTurnover == 0) {
-                try {
-                    String annualTurnoverLine = readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE);
-                    if (annualTurnoverLine == null) {
-                        annualTurnover = null;
-                        break;
-                    } else annualTurnover = Long.parseLong(annualTurnoverLine);
-                } catch (NumberFormatException e) {
-                    if (interactionMode)
-                        displayMessage("Допущена ошибка, повторите ввод");
-                    else {
-                        throw new InterruptedIOException();
-                    }
-                }
-            }
-            OrganizationType type;
-            while (true) {
-                try {
-                    type = OrganizationType.valueOf(readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues()).toUpperCase());
-                    break;
-                } catch (IllegalArgumentException e) {
-                    if (interactionMode)
-                        displayMessage("Допущена ошибка, повторите ввод");
-                    else {
-                        throw new InterruptedIOException();
-                    }
-                } catch (NullPointerException e) {
-                    type = null;
-                    break;
-                }
-            }
-            Address postalAddress;
-            String street = readNecessaryArgument("Укажите улицу расположения организации:");
-            String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
-            postalAddress = new Address(street, zipCode);
-            organization = new Organization(annualTurnover, type, postalAddress, orgName);
-        } else organization = null;
+        String annualTurnoverLine;
+        Long annualTurnover;
+        do {
+            annualTurnoverLine = readOtherArgument("Введите годовую выручку компании:", 1, Long.MAX_VALUE);
+        } while(!ValueVerificationTool.verifyLongValue(annualTurnoverLine, interactionMode, ui, true));
+        if(annualTurnoverLine == null)
+            annualTurnover = null;
+        else annualTurnover = Long.parseLong(annualTurnoverLine);
+        OrganizationType type;
+        String orgTypeLine;
+        do {
+            orgTypeLine = readOtherArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues());
+        } while(!ValueVerificationTool.verifyOrgType(orgTypeLine, interactionMode, ui, true));
+        if(orgTypeLine == null)
+            type = null;
+        else type = OrganizationType.valueOf(orgTypeLine.toUpperCase());
+        Address postalAddress;
+        String street = readNecessaryArgument("Укажите улицу расположения организации:");
+        String zipCode = readNecessaryArgument("Укажите почтовый индекс:");
+        postalAddress = new Address(street, zipCode);
+        organization = new Organization(annualTurnover, type, postalAddress, orgName);
         return new Worker(name, coordinates, creationDate, salary, endDate, position, status, organization);
     }
 }

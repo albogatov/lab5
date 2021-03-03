@@ -31,7 +31,7 @@ public class Update extends Command {
         long id = Long.parseLong(arguments[1]);
         Worker worker;
         if (interactiveStorage.findById(id)) {
-            worker = ui.readWorker();
+            worker = ui.readWorker(ui);
             interactiveStorage.update(id, worker);
             ui.displayMessage("Сотрудник обновлен");
         } else System.out.println("Сотрудника с таким идентификатором нет");
