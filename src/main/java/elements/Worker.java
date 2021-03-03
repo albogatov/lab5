@@ -350,7 +350,8 @@ public class Worker implements Comparable<Worker> {
      * Метод, выводящий пользователю все данные о рабочем
      */
     public void displayWorker() {
-        System.out.println("ID рабочего - " + this.getId() + "\n" + "Имя рабочего - " + this.getName() + "\n" +
+        System.out.println("------------------------------" + "\n" + "ID рабочего - " + this.getId() + "\n"
+                + "Имя рабочего - " + this.getName() + "\n" +
                 "Координаты рабочего - " + this.getCoordinates().toString() + "\n" +
                 "Добавлен в базу - " + this.getCreationDateString() + "\n" +
                 "Зарплата рабочего - " + this.getSalary().toString() + "\n" +
