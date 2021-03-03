@@ -90,7 +90,7 @@ public class CommandCenter {
      * @param line               часть строки пользовательского ввода, содержающая команду
      * @param fullLine           полная строка ввода с аргументами
      * @param interactiveStorage объект для взаимодействия с коллекцией
-     * @throws IOException                 в случае ошибки ввода/вывода
+     * @throws IOException в случае ошибки ввода/вывода
      */
     public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException {
         Command cmd = getCmd(line);

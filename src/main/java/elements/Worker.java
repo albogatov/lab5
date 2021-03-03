@@ -67,6 +67,7 @@ public class Worker implements Comparable<Worker> {
         this.status = status;
         this.organization = organization;
     }
+
     /**
      * Стандартный конструктор
      *
@@ -90,6 +91,7 @@ public class Worker implements Comparable<Worker> {
         this.status = status;
         this.organization = organization;
     }
+
     /**
      * Метод, возвращающий имя рабочего
      *

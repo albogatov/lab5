@@ -30,7 +30,7 @@ public class Exit extends Command {
         String confirmation;
         if (interactiveStorage.checkChanges()) {
             confirmation = ui.readNecessaryArgument("Запрошен выход из приложения без сохранения. " +
-                    "Введите: yes, если хотите продолжить; no, если хотите продолжить работу; " +
+                    "Введите: yes, если хотите выйти без сохранения; no, если хотите продолжить работу; " +
                     "save, если хотите сохранить коллекцию и выйти");
             switch (confirmation) {
                 case "yes":

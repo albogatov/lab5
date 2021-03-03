@@ -271,7 +271,7 @@ public class UserInterface {
             }
         }
         String orgName = readOtherArgument("Укажите организацию сотрудника:");
-        if(orgName != null)
+        if (orgName != null)
             orgName = orgName.toUpperCase();
         Organization organization;
         if (orgName != null) {

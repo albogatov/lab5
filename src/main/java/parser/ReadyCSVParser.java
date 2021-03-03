@@ -66,7 +66,7 @@ public class ReadyCSVParser {
     public Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
         long id;
-        if(values.get(keySet.get("id")).equals(""))
+        if (values.get(keySet.get("id")).equals(""))
             id = -1;
         else id = Long.parseLong(values.get(keySet.get("id")));
         String name;
@@ -80,11 +80,10 @@ public class ReadyCSVParser {
             coordinates = new Coordinates(Integer.parseInt(values.get(keySet.get("x"))), Integer.parseInt(values.get(keySet.get("y"))));
         ZonedDateTime creationDate;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z");
-        if(values.get(keySet.get("creationdate")).equals("")) {
+        if (values.get(keySet.get("creationdate")).equals("")) {
             creationDate = ZonedDateTime.now();
             StorageInteraction.implyChange();
-        }
-        else creationDate = ZonedDateTime.parse(values.get(keySet.get("creationdate")), formatter);
+        } else creationDate = ZonedDateTime.parse(values.get(keySet.get("creationdate")), formatter);
         Integer salary;
         if (values.get(keySet.get("salary")).equals(""))
             salary = null;
@@ -149,7 +148,7 @@ public class ReadyCSVParser {
             Worker worker = readWorker(line);
             if (worker != null) {
                 workers.add(worker);
-                if(worker.getId() == -1)
+                if (worker.getId() == -1)
                     storage.generateId(worker);
                 else storage.checkId(worker);
             }

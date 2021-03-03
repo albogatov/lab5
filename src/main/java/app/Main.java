@@ -34,7 +34,7 @@ public class Main {
             } else {
                 while (true) {
                     try {
-                        if(firstOpening) {
+                        if (firstOpening) {
                             char separator = userInteraction.readNecessaryArgument("Введите разделитель значений в файле").charAt(0);
                             dataFile = new File(args[0]);
                             storage = new Storage();

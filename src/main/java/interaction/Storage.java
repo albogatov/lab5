@@ -104,7 +104,7 @@ public class Storage implements StorageInterface<Worker> {
 
     public void checkId(Worker worker) {
         long id = worker.getId();
-        if(idList.contains(id))
+        if (idList.contains(id))
             throw new IllegalArgumentException("Повторяющийся ID");
         else {
             idList.add(id);

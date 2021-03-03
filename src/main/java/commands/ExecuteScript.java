@@ -42,7 +42,7 @@ public class ExecuteScript extends Command {
         try {
             UserInterface scriptInteraction = new UserInterface(new FileReader(arguments[1]), new OutputStreamWriter(System.out), false);
             String line;
-            if(arguments.length < 2)
+            if (arguments.length < 2)
                 throw new ArrayIndexOutOfBoundsException("Недостаточно аргументов");
             String path = arguments[1];
             success = true;

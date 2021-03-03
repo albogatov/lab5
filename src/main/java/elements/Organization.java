@@ -72,13 +72,15 @@ public class Organization {
 
     /**
      * Метод, возврающий название организации
+     *
      * @return Название организации
      */
     public String getOrganizationName() {
-        if(name == null)
+        if (name == null)
             return null;
         else return name;
     }
+
     /**
      * Метод, который возвращает организацию в строковом представлении
      *
