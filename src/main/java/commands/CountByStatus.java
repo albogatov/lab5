@@ -8,11 +8,11 @@ import interaction.UserInterface;
 import java.io.IOException;
 
 /**
- * Класс команды countByStatus
+ * Класс команды count_by_status.
  */
 public class CountByStatus extends Command {
     /**
-     * Стандартный конструктор, добавляющий строку вызова и описание команды
+     * Стандартный конструктор, добавляющий строку вызова и описание команды.
      */
     public CountByStatus() {
         cmdLine = "count_by_status";

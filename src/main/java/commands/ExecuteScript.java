@@ -10,20 +10,20 @@ import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 /**
- * Класс команды executeScript
+ * Класс команды execute_script.
  */
 public class ExecuteScript extends Command {
     /**
-     * Сет, содержащий пути ко всем скриптам вызванным на разных уровнях
+     * Сет, содержащий пути ко всем скриптам вызванным на разных уровнях.
      */
     private static HashSet<String> paths = new HashSet<>();
     /**
-     * Переменная, отображающая результат выполнения скрипта
+     * Переменная, отображающая результат выполнения скрипта.
      */
     private static boolean success;
 
     /**
-     * Стандартный конструктор, добавляющий строку вызова и описание команды
+     * Стандартный конструктор, добавляющий строку вызова и описание команды.
      */
     public ExecuteScript() {
         cmdLine = "execute_script";
@@ -33,10 +33,10 @@ public class ExecuteScript extends Command {
     /**
      * Метод исполнения
      *
-     * @param ui                 объект, через который ведется взаимодействие с пользователем
-     * @param arguments          необходимые для исполнения аргументы
-     * @param interactiveStorage объект для взаимодействия с коллекцией
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param ui                 объект, через который ведется взаимодействие с пользователем.
+     * @param arguments          необходимые для исполнения аргументы.
+     * @param interactiveStorage объект для взаимодействия с коллекцией.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, Exception {
         try {

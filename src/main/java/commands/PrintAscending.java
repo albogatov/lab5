@@ -5,11 +5,11 @@ import interaction.InteractionInterface;
 import interaction.UserInterface;
 
 /**
- * Класс команды printAscending
+ * Класс команды print_ascending.
  */
 public class PrintAscending extends Command {
     /**
-     * Стандартный конструктор, добавляющий строку вызова и описание команды
+     * Стандартный конструктор, добавляющий строку вызова и описание команды.
      */
     public PrintAscending() {
         cmdLine = "print_ascending";
@@ -19,9 +19,9 @@ public class PrintAscending extends Command {
     /**
      * Метод исполнения
      *
-     * @param ui                 объект, через который ведется взаимодействие с пользователем
-     * @param arguments          необходимые для исполнения аргументы
-     * @param interactiveStorage объект для взаимодействия с коллекцией
+     * @param ui                 объект, через который ведется взаимодействие с пользователем.
+     * @param arguments          необходимые для исполнения аргументы.
+     * @param interactiveStorage объект для взаимодействия с коллекцией.
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) {
         interactiveStorage.printAscending();

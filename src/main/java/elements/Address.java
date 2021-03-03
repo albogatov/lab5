@@ -1,7 +1,7 @@
 package elements;
 
 /**
- * Класс Address
+ * Класс Address.
  */
 public class Address {
     /**
@@ -14,10 +14,10 @@ public class Address {
     private String zipCode;
 
     /**
-     * Стандартный конструктор, в котором задаются обязательные параметры
+     * Стандартный конструктор, в котором задаются обязательные параметры.
      *
-     * @param street  улица
-     * @param zipCode почтовый индекс
+     * @param street  улица.
+     * @param zipCode почтовый индекс.
      */
     public Address(String street, String zipCode) {
         this.street = street;
@@ -25,27 +25,27 @@ public class Address {
     }
 
     /**
-     * Метод, возвращающий название улицы
+     * Метод, возвращающий название улицы.
      *
-     * @return название
+     * @return название.
      */
     public String getStreet() {
         return this.street;
     }
 
     /**
-     * Метод, возвращающий индекс
+     * Метод, возвращающий индекс.
      *
-     * @return индекс
+     * @return индекс.
      */
     public String getZipCode() {
         return this.zipCode;
     }
 
     /**
-     * Переопределение метода toString, возвращает параметры объекта только если оба параметра заданы
+     * Переопределение метода toString, возвращает параметры объекта только если оба параметра заданы.
      *
-     * @return строковое представление адреса
+     * @return строковое представление адреса.
      */
     @Override
     public String toString() {

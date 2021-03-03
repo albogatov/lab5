@@ -5,11 +5,11 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Класс Worker
+ * Класс Worker.
  */
 public class Worker implements Comparable<Worker> {
     /**
-     * Идентификатор работника. Значение поля больше 0, Значение этого поля уникально, Значение этого поля генерируется автоматически
+     * Идентификатор работника. Значение поля больше 0, Значение этого поля уникально, Значение этого поля генерируется автоматически.
      */
     private long id;
     /**
@@ -46,16 +46,16 @@ public class Worker implements Comparable<Worker> {
     private final Organization organization; //Поле может быть null
 
     /**
-     * Стандартный конструктор
+     * Конструктор без ID.
      *
-     * @param name         имя рабочего
-     * @param coordinates  координаты
-     * @param creationDate дата добавления в базу
-     * @param salary       оклад
-     * @param endDate      дата расторжения контракта
-     * @param position     должность
-     * @param status       статус
-     * @param organization организация
+     * @param name         имя рабочего.
+     * @param coordinates  координаты.
+     * @param creationDate дата добавления в базу.
+     * @param salary       оклад.
+     * @param endDate      дата расторжения контракта.
+     * @param position     должность.
+     * @param status       статус.
+     * @param organization организация.
      */
     public Worker(String name, Coordinates coordinates, ZonedDateTime creationDate, Integer salary, LocalDate endDate, Position position, Status status, Organization organization) {
         this.name = name;
@@ -69,16 +69,16 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Стандартный конструктор
+     * Конструктор c ID.
      *
-     * @param name         имя рабочего
-     * @param coordinates  координаты
-     * @param creationDate дата добавления в базу
-     * @param salary       оклад
-     * @param endDate      дата расторжения контракта
-     * @param position     должность
-     * @param status       статус
-     * @param organization организация
+     * @param name         имя рабочего.
+     * @param coordinates  координаты.
+     * @param creationDate дата добавления в базу.
+     * @param salary       оклад.
+     * @param endDate      дата расторжения контракта.
+     * @param position     должность.
+     * @param status       статус.
+     * @param organization организация.
      */
     public Worker(long id, String name, Coordinates coordinates, ZonedDateTime creationDate, Integer salary, LocalDate endDate, Position position, Status status, Organization organization) {
         this.id = id;
@@ -93,54 +93,54 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий имя рабочего
+     * Метод, возвращающий имя рабочего.
      *
-     * @return имя
+     * @return имя.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Метод, возвращающий координаты рабочего
+     * Метод, возвращающий координаты рабочего.
      *
-     * @return координаты
+     * @return координаты.
      */
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
 
     /**
-     * Метод, возвращающий координату X рабочего
+     * Метод, возвращающий координату X рабочего.
      *
-     * @return X
+     * @return X.
      */
     public int getCoordinateX() {
         return coordinates.getX();
     }
 
     /**
-     * Метод, возвращающий координату Y рабочего
+     * Метод, возвращающий координату Y рабочего.
      *
-     * @return Y
+     * @return Y.
      */
     public long getCoordinateY() {
         return coordinates.getY();
     }
 
     /**
-     * Метод, возвращающий дату добавления рабочего в базу
+     * Метод, возвращающий дату добавления рабочего в базу.
      *
-     * @return дата добавления
+     * @return дата добавления.
      */
     public ZonedDateTime getCreationDate() {
         return this.creationDate;
     }
 
     /**
-     * Метод, возвращающий дату добавления рабочего в базу в строковом виде
+     * Метод, возвращающий дату добавления рабочего в базу в строковом виде.
      *
-     * @return дата добавления
+     * @return дата добавления.
      */
     public String getCreationDateString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z");
@@ -148,18 +148,18 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий оклад сотрудника
+     * Метод, возвращающий оклад сотрудника.
      *
-     * @return оклад
+     * @return оклад.
      */
     public Integer getSalary() {
         return this.salary;
     }
 
     /**
-     * Метод, возвращающий дату окончания действия контракта в строковом виде
+     * Метод, возвращающий дату окончания действия контракта в строковом виде.
      *
-     * @return дата окончания действия контракта
+     * @return дата окончания действия контракта.
      */
     public String getEndDateString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -169,9 +169,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий дату окончания действия контракта
+     * Метод, возвращающий дату окончания действия контракта.
      *
-     * @return дата окончания действия контракта
+     * @return дата окончания действия контракта.
      */
     public String getEndDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -181,27 +181,27 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий должность рабочего
+     * Метод, возвращающий должность рабочего.
      *
-     * @return должность
+     * @return должность.
      */
     public Position getPosition() {
         return this.position;
     }
 
     /**
-     * Метод, возвращающий статус рабочего
+     * Метод, возвращающий статус рабочего.
      *
-     * @return статус
+     * @return статус.
      */
     public Status getStatus() {
         return this.status;
     }
 
     /**
-     * Метод, возвращающий должность рабочего в строковом виде
+     * Метод, возвращающий должность рабочего в строковом виде.
      *
-     * @return должность
+     * @return должность.
      */
     public String getPositionString() {
         if (this.position == null)
@@ -210,9 +210,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращаюший статус рабочего в строковом виде
+     * Метод, возвращаюший статус рабочего в строковом виде.
      *
-     * @return статус
+     * @return статус.
      */
     public String getStatusString() {
         if (getStatus() == null)
@@ -221,18 +221,18 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий организацию рабочего
+     * Метод, возвращающий организацию рабочего.
      *
-     * @return организация
+     * @return организация.
      */
     public Organization getOrganization() {
         return this.organization;
     }
 
     /**
-     * Метод, возвращающий название организации сотрудника
+     * Метод, возвращающий название организации сотрудника.
      *
-     * @return название организации
+     * @return название организации.
      */
     public String getOrganizationName() {
         if (organization == null || organization.getOrganizationName() == null)
@@ -241,9 +241,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий название организации сотрудника и пустую строку, если орзанизация сотрудника не указана
+     * Метод, возвращающий название организации сотрудника и пустую строку, если орзанизация сотрудника не указана.
      *
-     * @return название организации
+     * @return название организации.
      */
     public String getOrganizationNameString() {
         if (organization == null || organization.getOrganizationName() == null)
@@ -252,9 +252,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращаюший годовую выручку организации сотрудника
+     * Метод, возвращаюший годовую выручку организации сотрудника.
      *
-     * @return годовая выручка
+     * @return годовая выручка.
      */
     public String getAnnualTurnover() {
         if (organization == null || organization.getAnnualTurnover() == null)
@@ -263,9 +263,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращаюший годовую выручку организации сотрудника и пустую строку, если она не указана
+     * Метод, возвращаюший годовую выручку организации сотрудника и пустую строку, если она не указана.
      *
-     * @return годовая выручка
+     * @return годовая выручка.
      */
     public String getAnnualTurnoverString() {
         if (organization == null || organization.getAnnualTurnover() == null)
@@ -274,9 +274,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий тип организации рабочего
+     * Метод, возвращающий тип организации рабочего.
      *
-     * @return тип организации
+     * @return тип организации.
      */
     public String getOrganizationType() {
         if (organization == null || organization.getOrganizationType() == null)
@@ -285,9 +285,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий тип организации рабочего и пустую строку, если она не указана
+     * Метод, возвращающий тип организации рабочего и пустую строку, если она не указана.
      *
-     * @return тип организации
+     * @return тип организации.
      */
     public String getOrganizationTypeString() {
         if (organization == null || organization.getOrganizationType() == null)
@@ -296,9 +296,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий адрес организации рабочего
+     * Метод, возвращающий адрес организации рабочего.
      *
-     * @return адрес
+     * @return адрес.
      */
     public String getPostalAddress() {
         if (organization == null || organization.getPostalAddress() == null)
@@ -307,9 +307,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий улицу, на которой расположена организация сотрудника
+     * Метод, возвращающий улицу, на которой расположена организация сотрудника.
      *
-     * @return улица
+     * @return улица.
      */
     public String getAddressStreet() {
         if (organization == null || organization.getPostalAddress() == null)
@@ -318,9 +318,9 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, возвращающий индекс адреса, по которому расположена организация сотрудника
+     * Метод, возвращающий индекс адреса, по которому расположена организация сотрудника.
      *
-     * @return улица
+     * @return улица.
      */
     public String getAddressZipCode() {
         if (organization == null || organization.getPostalAddress() == null)
@@ -329,25 +329,25 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод, задающий ID рабочего
+     * Метод, задающий ID рабочего.
      *
-     * @param id идентификатор
+     * @param id идентификатор.
      */
     public void setId(long id) {
         this.id = id;
     }
 
     /**
-     * Метод, возвращающий ID рабочего
+     * Метод, возвращающий ID рабочего.
      *
-     * @return ID рабочего
+     * @return ID рабочего.
      */
     public long getId() {
         return this.id;
     }
 
     /**
-     * Метод, выводящий пользователю все данные о рабочем
+     * Метод, выводящий пользователю все данные о рабочем.
      */
     public void displayWorker() {
         System.out.println("------------------------------" + "\n" + "ID рабочего - " + this.getId() + "\n"
@@ -365,10 +365,10 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Метод сравнения объектов класса по умолчанию
+     * Метод сравнения объектов класса по умолчанию.
      *
-     * @param comparedWorker второй объект сравнения
-     * @return результат сравения
+     * @param comparedWorker второй объект сравнения.
+     * @return результат сравения.
      */
     @Override
     public int compareTo(Worker comparedWorker) {

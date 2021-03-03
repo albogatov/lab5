@@ -13,28 +13,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
- * Класс, реализующий взаимодействие с пользователем
+ * Класс, реализующий взаимодействие с пользователем.
  */
 public class UserInterface {
     /**
-     * Сканнер
+     * Сканнер.
      */
     private Scanner scanner;
     /**
-     * Куда идет запись
+     * Куда идет запись.
      */
     private Writer writer;
     /**
-     * Режим взаимодействия
+     * Режим взаимодействия.
      */
     private boolean interactionMode;
 
     /**
-     * Стандартный конструктор
+     * Стандартный конструктор.
      *
-     * @param r  откуда считывать
-     * @param w  куда записывать
-     * @param im режим взаимодействия (true - интерактивный)
+     * @param r  откуда считывать.
+     * @param w  куда записывать.
+     * @param im режим взаимодействия (true - интерактивный).
      */
     public UserInterface(Reader r, Writer w, boolean im) {
         this.writer = w;
@@ -43,28 +43,28 @@ public class UserInterface {
     }
 
     /**
-     * Метод, считывающий введенную пользователем строку
+     * Метод, считывающий введенную пользователем строку.
      *
-     * @return введенная строка
+     * @return введенная строка.
      */
     public String read() {
         return scanner.nextLine();
     }
 
     /**
-     * Метод, проверяющий наличие несчитанных строк
+     * Метод, проверяющий наличие несчитанных строк.
      *
-     * @return true, если они есть, иначе false
+     * @return true, если они есть, иначе false.
      */
     public boolean hasNextLine() {
         return scanner.hasNextLine();
     }
 
     /**
-     * Метод, пишущий сообщение на вывод
+     * Метод, пишущий сообщение на вывод.
      *
-     * @param message сообшение
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param message сообшение.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public void write(String message) throws IOException {
         writer.write(message);
@@ -72,21 +72,21 @@ public class UserInterface {
     }
 
     /**
-     * Метод, демонстрирующий сообщение пользователю
+     * Метод, демонстрирующий сообщение пользователю.
      *
-     * @param message сообщение
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param message сообщение.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public void displayMessage(String message) throws IOException {
         write(message + "\n");
     }
 
     /**
-     * Метод, принимающий от пользователя необходимый для ввода аргумент
+     * Метод, принимающий от пользователя необходимый для ввода аргумент.
      *
-     * @param message сообщение для пользователя
-     * @return введенный аргумент
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param message сообщение для пользователя.
+     * @return введенный аргумент.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public String readUnlimitedArgument(String message, boolean nullable) throws IOException {
         String line = null;
@@ -117,15 +117,15 @@ public class UserInterface {
     /**
      * Метод, принимающий от пользователя необходимый для ввода численный и ограниченный условиями аргумент
      *
-     * @param message сообщение для пользователя
-     * @param min     минимальное значение
-     * @param max     максимальное значение
-     * @return введенный аргумент
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param message сообщение для пользователя.
+     * @param min     минимальное значение.
+     * @param max     максимальное значение.
+     * @return введенный аргумент.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public String readLimitedArgument(String message, long min, long max, boolean nullable) throws IOException {
         String line = null;
-        if(!nullable) {
+        if (!nullable) {
             if (interactionMode) {
                 while (line == null || Long.parseLong(line) < min || Long.parseLong(line) > max) {
                     displayMessage("Ввод данного поля не может быть пустым и должен быть в указанном диапазоне: [" + min + ":" + max + "]");
@@ -158,28 +158,28 @@ public class UserInterface {
     }
 
     /**
-     * Метод, считывающий сотрудника (объект коллекции) из строки
+     * Метод, считывающий сотрудника (объект коллекции) из строки.
      *
-     * @return объект коллекции
-     * @throws IOException в случае ошибки ввода/вывода
+     * @return объект коллекции.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public Worker readWorker(UserInterface ui) throws IOException {
         String name;
         do {
             name = readUnlimitedArgument("Введите имя рабочего:", false);
         }
-        while (!ValueVerificationTool.verifyName(name, interactionMode, ui, false));
+        while (!ValueVerificationTool.verifyName(name, interactionMode, ui));
         ZonedDateTime creationDate = ZonedDateTime.now();
         String salaryString;
         do {
             salaryString = readUnlimitedArgument("Введите оклад рабочего:", false);
-        } while (!ValueVerificationTool.verifySalary(salaryString, interactionMode, ui, false));
+        } while (!ValueVerificationTool.verifySalary(salaryString, interactionMode, ui));
         Integer salary = Integer.parseInt(salaryString);
         String endDateLine;
         LocalDate endDate;
         do {
             endDateLine = readUnlimitedArgument("Введите дату расторжения контракта (при наличии) в формате (YYYY-MM-DD):", true);
-        } while (!ValueVerificationTool.verifyDate(endDateLine, interactionMode, ui, false));
+        } while (!ValueVerificationTool.verifyDate(endDateLine, interactionMode, ui));
         if (endDateLine == null)
             endDate = null;
         else endDate = LocalDate.parse(endDateLine, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -189,7 +189,7 @@ public class UserInterface {
             xLine = readLimitedArgument("Введите x координату сотрудника:", Integer.MIN_VALUE, 627, false);
         } while (!ValueVerificationTool.verifyIntValue(xLine, interactionMode, ui, false));
         do {
-            yLine = readLimitedArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990,false);
+            yLine = readLimitedArgument("Введите y координату сотрудника:", Long.MIN_VALUE, 990, false);
         } while (!ValueVerificationTool.verifyLongValue(xLine, interactionMode, ui, false));
         int x = Integer.parseInt(xLine);
         long y = Long.parseLong(yLine);
@@ -198,15 +198,15 @@ public class UserInterface {
         String statusLine;
         do {
             statusLine = readUnlimitedArgument("Введите статус сотрудника, возможны значения: " + Status.getPossibleValues(), true);
-        } while (!ValueVerificationTool.verifyStatus(statusLine, interactionMode, ui, true));
+        } while (!ValueVerificationTool.verifyStatus(statusLine, interactionMode, ui));
         if (statusLine == null)
             status = null;
         else status = Status.valueOf(statusLine.toUpperCase());
         Position position;
         String positionLine;
         do {
-            positionLine = readUnlimitedArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues(),true);
-        } while (!ValueVerificationTool.verifyPosition(positionLine, interactionMode, ui, true));
+            positionLine = readUnlimitedArgument("Введите должность сотрудника, возможны значения: " + Position.getPossibleValues(), true);
+        } while (!ValueVerificationTool.verifyPosition(positionLine, interactionMode, ui));
         if (positionLine == null)
             position = null;
         else position = Position.valueOf(positionLine.toUpperCase());
@@ -226,7 +226,7 @@ public class UserInterface {
         String orgTypeLine;
         do {
             orgTypeLine = readUnlimitedArgument("Введите тип организации, возможны значения: " + OrganizationType.getPossibleValues(), true);
-        } while (!ValueVerificationTool.verifyOrgType(orgTypeLine, interactionMode, ui, true));
+        } while (!ValueVerificationTool.verifyOrgType(orgTypeLine, interactionMode, ui));
         if (orgTypeLine == null)
             type = null;
         else type = OrganizationType.valueOf(orgTypeLine.toUpperCase());

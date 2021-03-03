@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Интерфейс для классов, управляющих взаимодействием с коллекцией
+ * Интерфейс для классов, управляющих взаимодействием с коллекцией.
  */
 public interface InteractionInterface {
 

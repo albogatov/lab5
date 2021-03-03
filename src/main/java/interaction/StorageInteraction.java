@@ -9,31 +9,31 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /**
- * Класс-реализация взаимодействия с коллекцией
+ * Класс-реализация взаимодействия с коллекцией.
  */
 public final class StorageInteraction implements InteractionInterface {
     /**
-     * Статическое поле-хранилище коллекции
+     * Статическое поле-хранилище коллекции.
      */
     private static Storage storage;
     /**
-     * Статическое поле, содержащее путь к файлу с хранимой коллекцией
+     * Статическое поле, содержащее путь к файлу с хранимой коллекцией.
      */
     private static String originPath;
     /**
-     * Статическое поле, содержит разделитель значений в оригинальном файле с коллекцией
+     * Статическое поле, содержит разделитель значений в оригинальном файле с коллекцией.
      */
     private static char separator;
     /**
-     * Статическое поле, отображающее наличие внесенных несохраненных изменений в хранимую коллекцию
+     * Статическое поле, отображающее наличие внесенных несохраненных изменений в хранимую коллекцию.
      */
     private static boolean changesMade = false;
 
     /**
-     * Стандартный конструктор, задает хранилище, с которым будет работа
+     * Стандартный конструктор, задает хранилище, с которым будет работа.
      *
-     * @param storage    хранилище
-     * @param originPath путь к данным
+     * @param storage    хранилище.
+     * @param originPath путь к данным.
      */
     public StorageInteraction(Storage storage, String originPath, char separator) {
         StorageInteraction.storage = storage;
@@ -42,9 +42,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду info
+     * Метод, реализующий команду info.
      *
-     * @return информация о коллекции
+     * @return информация о коллекции.
      */
     public String info() {
         System.out.println("Дата создания коллекции: " + storage.getInitializationDate() + "\n"
@@ -54,9 +54,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду show
+     * Метод, реализующий команду show.
      *
-     * @return Строковое представление объектов коллекции
+     * @return Строковое представление объектов коллекции.
      */
     public String show() {
         for (Worker w : storage.getCollection()) {
@@ -66,9 +66,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду add
+     * Метод, реализующий команду add.
      *
-     * @param worker добавляемый объект
+     * @param worker добавляемый объект.
      */
     public void add(Worker worker) throws Exception {
         worker = storage.generateId(worker);
@@ -77,10 +77,10 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду update
+     * Метод, реализующий команду update.
      *
-     * @param id     ID обновляемого объекта
-     * @param worker новый объект коллекции
+     * @param id     ID обновляемого объекта.
+     * @param worker новый объект коллекции.
      */
     public void update(long id, Worker worker) {
         removeById(id);
@@ -90,9 +90,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду removeById
+     * Метод, реализующий команду remove_by_id.
      *
-     * @param id ID удаляемого объекта
+     * @param id ID удаляемого объекта.
      */
     public void removeById(long id) {
         Iterator<Worker> itr = storage.getCollection().iterator();
@@ -109,7 +109,7 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду clear
+     * Метод, реализующий команду clear.
      */
     public void clear() {
         storage.clear();
@@ -117,9 +117,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду save
+     * Метод, реализующий команду save.
      *
-     * @throws IOException в случае ошибки ввода/вывода
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public void save() throws IOException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(StorageInteraction.originPath));
@@ -151,16 +151,16 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду exit
+     * Метод, реализующий команду exit.
      */
     public void exit() {
         System.exit(0);
     }
 
     /**
-     * Метод, реализующий команду addIfMin
+     * Метод, реализующий команду add_if_min.
      *
-     * @param worker добавляемый объект
+     * @param worker добавляемый объект.
      */
     public void addIfMin(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
@@ -173,9 +173,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду removeGreater
+     * Метод, реализующий команду remove_greater.
      *
-     * @param worker объект для сравнения
+     * @param worker объект для сравнения.
      */
     public void removeGreater(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
@@ -193,9 +193,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду removeLower
+     * Метод, реализующий команду remove_lower.
      *
-     * @param worker объект для сравнения
+     * @param worker объект для сравнения.
      */
     public void removeLower(Worker worker) {
         HashSet<Worker> workers = storage.getCollection();
@@ -213,10 +213,10 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду countByStatus
+     * Метод, реализующий команду count_by_status.
      *
      * @param status статус
-     * @return Число объектов с указанным статусом
+     * @return Число объектов с указанным статусом.
      */
     public int countByStatus(Status status) {
         Iterator<Worker> itr = storage.getCollection().iterator();
@@ -232,9 +232,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду printAscending
+     * Метод, реализующий команду print_ascending.
      *
-     * @return Отсортированное строковое представление коллекции
+     * @return Отсортированное строковое представление коллекции.
      */
     public List<String> printAscending() {
         HashSet<Worker> workers = storage.getCollection();
@@ -247,9 +247,9 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, реализующий команду printUniqueOrganization
+     * Метод, реализующий команду print_unique_organization.
      *
-     * @return Список всех уникальных организаций
+     * @return Список всех уникальных организаций.
      */
     public List<String> printUniqueOrganization() {
         List<String> organizations = new ArrayList<>();
@@ -264,42 +264,45 @@ public final class StorageInteraction implements InteractionInterface {
     }
 
     /**
-     * Метод, возвращающий размер коллекции
+     * Метод, возвращающий размер коллекции.
      *
-     * @return Размер коллекции
+     * @return Размер коллекции.
      */
     public int getSize() {
         return storage.getCollection().size();
     }
 
     /**
-     * Метод, проверяющий наличие объекта по ID
+     * Метод, проверяющий наличие объекта по ID.
      *
-     * @param id ID для поиска
-     * @return True если объект существует, иначе false
+     * @param id ID для поиска.
+     * @return True если объект существует, иначе false.
      */
     public boolean findById(long id) {
         return storage.getIdList().contains(id);
     }
 
     /**
-     * Метод, проверяюший наличие/отсутсвие несохраненных изменений коллекции
+     * Метод, проверяюший наличие/отсутсвие несохраненных изменений коллекции.
      *
-     * @return True - если есть несохраненные изменения, иначе false
+     * @return True - если есть несохраненные изменения, иначе false.
      */
     public boolean checkChanges() {
         return changesMade;
     }
 
     /**
-     * Метод, возвращающий разделитель, используемый в оригинальном файле с коллекцией
+     * Метод, возвращающий разделитель, используемый в оригинальном файле с коллекцией.
      *
-     * @return Разделитель
+     * @return Разделитель.
      */
     public String returnSeparator() {
         return Character.toString(separator);
     }
 
+    /**
+     * Метод, для отображения внесения изменений при чтении из файла.
+     */
     public static void implyChange() {
         changesMade = true;
     }

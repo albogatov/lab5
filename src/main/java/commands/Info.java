@@ -5,11 +5,11 @@ import interaction.InteractionInterface;
 import interaction.UserInterface;
 
 /**
- * Класс команды info
+ * Класс команды info.
  */
 public class Info extends Command {
     /**
-     * Стандартный конструктор, добавляющий строку вызова и описание команды
+     * Стандартный конструктор, добавляющий строку вызова и описание команды.
      */
     public Info() {
         cmdLine = "info";
@@ -19,9 +19,9 @@ public class Info extends Command {
     /**
      * Метод исполнения
      *
-     * @param ui                 объект, через который ведется взаимодействие с пользователем
-     * @param arguments          необходимые для исполнения аргументы
-     * @param interactiveStorage объект для взаимодействия с коллекцией
+     * @param ui                 объект, через который ведется взаимодействие с пользователем.
+     * @param arguments          необходимые для исполнения аргументы.
+     * @param interactiveStorage объект для взаимодействия с коллекцией.
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) {
         interactiveStorage.info();

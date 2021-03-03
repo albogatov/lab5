@@ -6,48 +6,48 @@ import interaction.UserInterface;
 import java.io.IOException;
 
 /**
- * Абстрактный класс, от которого наследуются все команды
+ * Абстрактный класс, от которого наследуются все команды.
  */
 public abstract class Command {
     /**
-     * Поле, содержащее строку для вызова команды
+     * Поле, содержащее строку для вызова команды.
      */
     protected String cmdLine;
     /**
-     * Поле, содержащее описание команды
+     * Поле, содержащее описание команды.
      */
     protected String description;
 
     /**
-     * Метод исполнения команды
+     * Метод исполнения команды.
      *
-     * @param ui                 объект, через который ведется взаимодействие с пользователем
-     * @param arguments          необходимые для исполнения аргументы
-     * @param interactiveStorage объект для взаимодействия с коллекцией
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param ui                 объект, через который ведется взаимодействие с пользователем.
+     * @param arguments          необходимые для исполнения аргументы.
+     * @param interactiveStorage объект для взаимодействия с коллекцией.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws Exception;
 
     /**
-     * Стандартный конструктор
+     * Стандартный конструктор.
      */
     public Command() {
 
     }
 
     /**
-     * Возвращает строку, вызывающую команду
+     * Возвращает строку, вызывающую команду.
      *
-     * @return Строка вызова команды
+     * @return Строка вызова команды.
      */
     public String getCommand() {
         return cmdLine;
     }
 
     /**
-     * Возвращает описание команды
+     * Возвращает описание команды.
      *
-     * @return Описание команды
+     * @return Описание команды.
      */
     public String getHelp() {
         return description;

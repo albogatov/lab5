@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Перечисляемый тип Status
+ * Перечисляемый тип Status.
  */
 public enum Status {
     FIRED("FIRED"),
@@ -17,36 +17,36 @@ public enum Status {
     private static final List<Status> possibleValues = Arrays.asList(Status.values());
 
     /**
-     * Метод для задания параметров перечисления
+     * Метод для задания параметров перечисления.
      *
-     * @param text перечисление в виде строки
+     * @param text перечисление в виде строки.
      */
     public void setText(String text) {
         this.text = text;
     }
 
     /**
-     * Метод, возвращающий возможные для ввода значения перечисления
+     * Метод, возвращающий возможные для ввода значения перечисления.
      *
-     * @return список значений
+     * @return список значений.
      */
     public static List<Status> getPossibleValues() {
         return possibleValues;
     }
 
     /**
-     * Стандартный конструктор
+     * Стандартный конструктор.
      *
-     * @param text перечисление в виде строки
+     * @param text перечисление в виде строки.
      */
     Status(String text) {
         setText(text);
     }
 
     /**
-     * Переопределенный метод, возвращающий возможное для ввода значение
+     * Переопределенный метод, возвращающий возможное для ввода значение.
      *
-     * @return текст
+     * @return текст.
      */
     @Override
     public String toString() {

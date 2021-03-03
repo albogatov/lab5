@@ -11,15 +11,15 @@ import java.time.format.DateTimeParseException;
 /**
  * Главный класс консольного приложения.
  *
- * @author Alexandr Bogatov
+ * @author Alexandr Bogatov.
  */
 
 public class Main {
     /**
      * Главный метод.
      *
-     * @param args путь к изначальному файлу с данными
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param args путь к изначальному файлу с данными.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public static void main(String[] args) throws IOException {
         UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);

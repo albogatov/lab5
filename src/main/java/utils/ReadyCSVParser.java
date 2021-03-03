@@ -13,15 +13,15 @@ import com.opencsv.CSVParser;
 import interaction.StorageInteraction;
 
 /**
- * Класс, отвечающий за парсинг данных из изначального файла
+ * Класс, отвечающий за парсинг данных из изначального файла.
  */
 public class ReadyCSVParser {
     /**
-     * Объект CSVParser
+     * Объект CSVParser.
      */
     protected static CSVParser parser;
     /**
-     * Значения ключевой и их порядковый номер
+     * Значения ключевой и их порядковый номер.
      */
     protected static HashMap<String, Integer> keySet = new HashMap<>();
 
@@ -30,10 +30,10 @@ public class ReadyCSVParser {
     }
 
     /**
-     * Метод, считывающий ключевую строку для определения порядка значений
+     * Метод, считывающий ключевую строку для определения порядка значений.
      *
-     * @param line строка
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param line строка.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public static void readKeyLine(String line) throws IOException {
         List<String> keyLineValues = Arrays.asList(parser.parseLine(line));
@@ -43,22 +43,22 @@ public class ReadyCSVParser {
     }
 
     /**
-     * Метод, считывающий строку
+     * Метод, считывающий строку.
      *
-     * @param line строка
-     * @return список слов строки после парсинга
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param line строка.
+     * @return список слов строки после парсинга.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public static List<String> readLine(String line) throws IOException {
         return Arrays.asList(parser.parseLine(line));
     }
 
     /**
-     * Метод для создания объекта по значениям строки
+     * Метод для создания объекта по значениям строки.
      *
-     * @param line строки
-     * @return объект коллекции
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param line строки.
+     * @return объект коллекции.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public static Worker readWorker(String line) throws IOException {
         List<String> values = readLine(line);
@@ -127,12 +127,12 @@ public class ReadyCSVParser {
     }
 
     /**
-     * Метод, считывающий все объекты коллекции в файле
+     * Метод, считывающий все объекты коллекции в файле.
      *
-     * @param file    файл
-     * @param workers коллекция, в которую помещаются объекты
-     * @param storage объект класса для хранения коллекции
-     * @throws IOException в случае ошибки ввода/вывода
+     * @param file    файл.
+     * @param workers коллекция, в которую помещаются объекты.
+     * @param storage объект класса для хранения коллекции.
+     * @throws IOException в случае ошибки ввода/вывода.
      */
     public static void readWorkers(File file, HashSet<Worker> workers, Storage storage) throws Exception {
         FileInputStream fis = new FileInputStream(file);

@@ -2,15 +2,15 @@ package elements;
 
 
 /**
- * Класс Organization
+ * Класс Organization.
  */
 public class Organization {
     /**
-     * Поле, содержащее годовую выручку. Может быть null, Значение поля должно быть больше 0
+     * Поле, содержащее годовую выручку. Может быть null, Значение поля должно быть больше 0.
      */
     private Long annualTurnover;
     /**
-     * Поле, содержащее тип организации. Может быть null
+     * Поле, содержащее тип организации. Может быть null.
      */
     private OrganizationType type;
     /**
@@ -23,12 +23,12 @@ public class Organization {
     private String name;
 
     /**
-     * Стандартный конструктор, задающий основные параметры
+     * Стандартный конструктор, задающий основные параметры.
      *
-     * @param annualTurnover годовая выручка
-     * @param type           типа организации
-     * @param postalAddress  адрес
-     * @param name           название организации
+     * @param annualTurnover годовая выручка.
+     * @param type           типа организации.
+     * @param postalAddress  адрес.
+     * @param name           название организации.
      */
     public Organization(Long annualTurnover, OrganizationType type, Address postalAddress, String name) {
         this.annualTurnover = annualTurnover;
