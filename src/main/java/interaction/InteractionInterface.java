@@ -15,7 +15,7 @@ public interface InteractionInterface {
 
     String show();
 
-    void add(Worker worker);
+    void add(Worker worker) throws Exception;
 
     void update(long id, Worker worker);
 

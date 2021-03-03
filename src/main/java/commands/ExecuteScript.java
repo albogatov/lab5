@@ -38,7 +38,7 @@ public class ExecuteScript extends Command {
      * @param interactiveStorage объект для взаимодействия с коллекцией
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
+    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, Exception {
         try {
             UserInterface scriptInteraction = new UserInterface(new FileReader(arguments[1]), new OutputStreamWriter(System.out), false);
             String line;

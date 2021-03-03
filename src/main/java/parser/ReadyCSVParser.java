@@ -138,7 +138,7 @@ public class ReadyCSVParser {
      * @param storage объект класса для хранения коллекции
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public void readWorkers(File file, HashSet<Worker> workers, Storage storage) throws IOException {
+    public void readWorkers(File file, HashSet<Worker> workers, Storage storage) throws Exception {
         FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = new BufferedInputStream(fis);
         BufferedReader br = new BufferedReader(new InputStreamReader(bis));

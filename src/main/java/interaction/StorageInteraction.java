@@ -70,7 +70,7 @@ public final class StorageInteraction implements InteractionInterface {
      *
      * @param worker добавляемый объект
      */
-    public void add(Worker worker) {
+    public void add(Worker worker) throws Exception {
         worker = storage.generateId(worker);
         storage.put(worker);
         changesMade = true;

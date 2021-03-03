@@ -120,10 +120,14 @@ public class Main {
                         e.printStackTrace(pw);
                         pw.close();
                     } catch (Exception e) {
-                        userInteraction.displayMessage("Произошла неизвестная ошибка");
-                        PrintWriter pw = new PrintWriter("errorLog.txt");
-                        e.printStackTrace(pw);
-                        pw.close();
+                        if(e.getMessage().equals("В коллекции достигнуто максимальное количество элементов"))
+                            userInteraction.displayMessage("Коллекция уже содержит максимальное число элементов");
+                        else {
+                            userInteraction.displayMessage("Произошла неизвестная ошибка");
+                            PrintWriter pw = new PrintWriter("errorLog.txt");
+                            e.printStackTrace(pw);
+                            pw.close();
+                        }
                     }
                 }
             }

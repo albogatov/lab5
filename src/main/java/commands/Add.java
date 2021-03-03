@@ -27,7 +27,7 @@ public class Add extends Command {
      * @param interactiveStorage объект для взаимодействия с коллекцией
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException {
+    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws Exception {
         Worker worker = ui.readWorker();
         interactiveStorage.add(worker);
         ui.displayMessage("Сотрудник успешно добавлен");

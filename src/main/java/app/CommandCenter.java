@@ -92,7 +92,7 @@ public class CommandCenter {
      * @param interactiveStorage объект для взаимодействия с коллекцией
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws IOException {
+    public void executeCommand(UserInterface ui, String line, String fullLine, InteractionInterface interactiveStorage) throws Exception {
         Command cmd = getCmd(line);
         String[] args = fullLine.split(" ");
         cmd.execute(ui, args, interactiveStorage);

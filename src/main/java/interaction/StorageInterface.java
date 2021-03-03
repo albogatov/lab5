@@ -20,7 +20,7 @@ public interface StorageInterface<T> {
 
     HashSet<T> getCollection();
 
-    T generateId(T worker);
+    T generateId(T worker) throws Exception;
 
     List<Long> getIdList();
 }

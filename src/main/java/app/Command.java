@@ -26,7 +26,7 @@ public abstract class Command {
      * @param interactiveStorage объект для взаимодействия с коллекцией
      * @throws IOException в случае ошибки ввода/вывода
      */
-    public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException;
+    public abstract void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws Exception;
 
     /**
      * Стандартный конструктор

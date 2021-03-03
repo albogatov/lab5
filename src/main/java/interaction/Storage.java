@@ -21,7 +21,10 @@ public class Storage implements StorageInterface<Worker> {
      * Список идентификаторов элементов коллекции
      */
     private final List<Long> idList = new ArrayList<>();
-
+    /**
+     * Поле, обозначающее такое максимальное занятое значение ID, которое входит в отрезок от 0 до maxConsecutiveId
+     */
+    private long maxConsecutiveId = 0;
     /**
      * Стандартный конструктор, задает дату создания
      */
@@ -78,15 +81,17 @@ public class Storage implements StorageInterface<Worker> {
      * @param worker объект, для которого генерируется ID
      * @return объект с установленным ID
      */
-    public Worker generateId(Worker worker) {
+    public Worker generateId(Worker worker) throws Exception {
         long id;
-        int bound = 1 + workers.size() * 10;
-        Random addition = new Random();
-        Random multiplier = new Random();
-        do {
-            id = addition.nextInt(bound) + worker.getCreationDate().toInstant().toEpochMilli() * multiplier.nextInt(bound);
+        for(id = maxConsecutiveId + 1; id < Long.MAX_VALUE; id++) {
+            if(!idList.contains(id)) {
+                maxConsecutiveId = id;
+                break;
+            }
+            if(maxConsecutiveId + 1L == Long.MAX_VALUE) {
+                throw new Exception("В коллекции достигнуто максимальное количество элементов");
+            }
         }
-        while (idList.contains(id));
         worker.setId(id);
         idList.add(id);
         StorageInteraction.implyChange();
