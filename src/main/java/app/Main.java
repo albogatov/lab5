@@ -7,6 +7,7 @@ import utils.ReadyCSVParser;
 
 import java.io.*;
 import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
 
 /**
  * Главный класс консольного приложения.
@@ -27,6 +28,7 @@ public class Main {
         File dataFile;
         Storage storage;
         StorageInteraction interactiveStorage = null;
+        Character separator = null;
         try {
             if (args[0] == null) {
                 userInteraction.displayMessage("Путь к исходным данным не задан");
@@ -34,13 +36,27 @@ public class Main {
                 while (true) {
                     try {
                         if (firstOpening) {
-                            char separator = userInteraction.readUnlimitedArgument("Введите разделитель значений в файле", false).charAt(0);
+                            try {
+                                separator = userInteraction.readUnlimitedArgument("Введите разделитель значений в файле", false).charAt(0);
+                            } catch (NoSuchElementException e) {
+                                userInteraction.displayMessage("Ввод недоступен");
+                                PrintWriter pw = new PrintWriter("errorLog.txt");
+                                e.printStackTrace(pw);
+                                pw.close();
+                                System.exit(1);
+                            }
                             dataFile = new File(args[0]);
                             storage = new Storage();
                             interactiveStorage = new StorageInteraction(storage, args[0], separator);
                             ReadyCSVParser.initParser(separator);
                             try {
                                 ReadyCSVParser.readWorkers(dataFile, storage.getCollection(), storage);
+                            } catch (FileNotFoundException e) {
+                                userInteraction.displayMessage("Файл не найден или доступ к нему закрыт");
+                                PrintWriter pw = new PrintWriter("errorLog.txt");
+                                e.printStackTrace(pw);
+                                pw.close();
+                                System.exit(1);
                             } catch (NullPointerException e) {
                                 userInteraction.displayMessage("Данные в файле введены некорректно или указан неверный разделитель значений");
                                 PrintWriter pw = new PrintWriter("errorLog.txt");
@@ -61,6 +77,12 @@ public class Main {
                                 System.exit(1);
                             } catch (IllegalArgumentException e) {
                                 userInteraction.displayMessage("Данные в файле некорректны");
+                                PrintWriter pw = new PrintWriter("errorLog.txt");
+                                e.printStackTrace(pw);
+                                pw.close();
+                                System.exit(1);
+                            } catch (OutOfMemoryError e) {
+                                userInteraction.displayMessage("Вызван парсинг бесконечного файла");
                                 PrintWriter pw = new PrintWriter("errorLog.txt");
                                 e.printStackTrace(pw);
                                 pw.close();
@@ -118,8 +140,14 @@ public class Main {
                         PrintWriter pw = new PrintWriter("errorLog.txt");
                         e.printStackTrace(pw);
                         pw.close();
+                    } catch (NoSuchElementException e) {
+                        userInteraction.displayMessage("Ввод недоступен");
+                        PrintWriter pw = new PrintWriter("errorLog.txt");
+                        e.printStackTrace(pw);
+                        pw.close();
+                        System.exit(1);
                     } catch (Exception e) {
-                        if(e.getMessage().equals("В коллекции достигнуто максимальное количество элементов"))
+                        if (e.getMessage().equals("В коллекции достигнуто максимальное количество элементов"))
                             userInteraction.displayMessage("Коллекция уже содержит максимальное число элементов");
                         else {
                             userInteraction.displayMessage("Произошла неизвестная ошибка");
