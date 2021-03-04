@@ -126,8 +126,8 @@ public final class StorageInteraction implements InteractionInterface {
         String keyLine = "id" + returnSeparator() + "name" + returnSeparator() + "x" + returnSeparator() +
                 "y" + returnSeparator() + "salary" + returnSeparator() + "endDate" + returnSeparator() +
                 "creationDate" + returnSeparator() + "position" + returnSeparator() + "status" + returnSeparator() +
-                "organization" + returnSeparator() + "orgType" + returnSeparator() + "annualTurnover" + returnSeparator()
-                + "street" + returnSeparator() + "postalCode" + "\n";
+                "organization" + returnSeparator() + "orgType" + returnSeparator() + "annualTurnover" + returnSeparator() +
+                "street" + returnSeparator() + "postalCode" + "\n";
         printWriter.write(keyLine);
         HashSet<Worker> collection = storage.getCollection();
         for (Worker w : collection) {

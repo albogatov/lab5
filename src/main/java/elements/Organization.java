@@ -8,19 +8,19 @@ public class Organization {
     /**
      * Поле, содержащее годовую выручку. Может быть null, Значение поля должно быть больше 0.
      */
-    private Long annualTurnover;
+    private final Long annualTurnover;
     /**
      * Поле, содержащее тип организации. Может быть null.
      */
-    private OrganizationType type;
+    private final OrganizationType type;
     /**
      * Поле, содержащее адрес. Не может быть null.
      */
-    private Address postalAddress;
+    private final Address postalAddress;
     /**
      * Поле, содержащее название организации. Может быть null.
      */
-    private String name;
+    private final String name;
 
     /**
      * Стандартный конструктор, задающий основные параметры.
@@ -43,9 +43,7 @@ public class Organization {
      * @return Годовая выручка
      */
     public Long getAnnualTurnover() {
-        if (annualTurnover == null)
-            return null;
-        else return annualTurnover;
+        return annualTurnover;
     }
 
     /**
@@ -54,9 +52,7 @@ public class Organization {
      * @return Тип
      */
     public OrganizationType getOrganizationType() {
-        if (type == null)
-            return null;
-        else return type;
+        return type;
     }
 
     /**
@@ -65,9 +61,7 @@ public class Organization {
      * @return Адрес
      */
     public Address getPostalAddress() {
-        if (postalAddress == null)
-            return null;
-        else return postalAddress;
+        return postalAddress;
     }
 
     /**
@@ -76,9 +70,7 @@ public class Organization {
      * @return Название организации
      */
     public String getOrganizationName() {
-        if (name == null)
-            return null;
-        else return name;
+        return name;
     }
 
     /**

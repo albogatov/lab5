@@ -19,15 +19,15 @@ public class UserInterface {
     /**
      * Сканнер.
      */
-    private Scanner scanner;
+    private final Scanner scanner;
     /**
      * Куда идет запись.
      */
-    private Writer writer;
+    private final Writer writer;
     /**
      * Режим взаимодействия.
      */
-    private boolean interactionMode;
+    private final boolean interactionMode;
 
     /**
      * Стандартный конструктор.

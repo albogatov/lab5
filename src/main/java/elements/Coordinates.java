@@ -7,11 +7,11 @@ public class Coordinates {
     /**
      * Поле, содержащее координату X. Максимальное значение - 627.
      */
-    private int x;
+    private final int x;
     /**
      * Поле, содержащее координату Y. Максимальное значение - 990.
      */
-    private long y;
+    private final long y;
 
     /**
      * Стандартный конструктор.

@@ -6,6 +6,7 @@ import interaction.UserInterface;
 import utils.ReadyCSVParser;
 
 import java.io.*;
+import java.security.InvalidAlgorithmParameterException;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
@@ -30,8 +31,8 @@ public class Main {
         StorageInteraction interactiveStorage = null;
         Character separator = null;
         try {
-            if (args[0] == null) {
-                userInteraction.displayMessage("Путь к исходным данным не задан");
+            if (args[0] == null || args[0].matches("(/dev/)\\w*")) {
+                userInteraction.displayMessage("Путь к исходным данным не задан или некорректен");
             } else {
                 while (true) {
                     try {
@@ -81,12 +82,6 @@ public class Main {
                                 e.printStackTrace(pw);
                                 pw.close();
                                 System.exit(1);
-                            } catch (OutOfMemoryError e) {
-                                userInteraction.displayMessage("Вызван парсинг бесконечного файла");
-                                PrintWriter pw = new PrintWriter("errorLog.txt");
-                                e.printStackTrace(pw);
-                                pw.close();
-                                System.exit(1);
                             }
                             if (storage.getCollection().size() < 1) {
                                 userInteraction.displayMessage("Пустая коллекция");
@@ -125,7 +120,7 @@ public class Main {
                         PrintWriter pw = new PrintWriter("errorLog.txt");
                         e.printStackTrace(pw);
                         pw.close();
-                    } catch (StackOverflowError e) {
+                    } catch (InvalidAlgorithmParameterException e) {
                         userInteraction.displayMessage("Дальнейшее исполнение скрипта приведет к рекурсии");
                         PrintWriter pw = new PrintWriter("errorLog.txt");
                         e.printStackTrace(pw);

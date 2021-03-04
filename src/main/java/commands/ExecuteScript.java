@@ -6,6 +6,7 @@ import interaction.InteractionInterface;
 import interaction.UserInterface;
 
 import java.io.*;
+import java.security.InvalidAlgorithmParameterException;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
@@ -16,7 +17,7 @@ public class ExecuteScript extends Command {
     /**
      * Сет, содержащий пути ко всем скриптам вызванным на разных уровнях.
      */
-    private static HashSet<String> paths = new HashSet<>();
+    private static final HashSet<String> paths = new HashSet<>();
     /**
      * Переменная, отображающая результат выполнения скрипта.
      */
@@ -38,12 +39,10 @@ public class ExecuteScript extends Command {
      * @param interactiveStorage объект для взаимодействия с коллекцией.
      * @throws IOException в случае ошибки ввода/вывода.
      */
-    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws IOException, Exception {
+    public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws Exception {
         try {
             UserInterface scriptInteraction = new UserInterface(new FileReader(arguments[1]), new OutputStreamWriter(System.out), false);
             String line;
-            if (arguments.length < 2)
-                throw new ArrayIndexOutOfBoundsException("Недостаточно аргументов");
             String path = arguments[1];
             success = true;
             while (scriptInteraction.hasNextLine()) {
@@ -55,7 +54,7 @@ public class ExecuteScript extends Command {
                         CommandCenter.getInstance().executeCommand(scriptInteraction, cmd, line, interactiveStorage);
                     } else {
                         paths.clear();
-                        throw new StackOverflowError("Выполнение скрипта остановлено, т.к. возможна рекурсия");
+                        throw new InvalidAlgorithmParameterException("Выполнение скрипта остановлено, т.к. возможна рекурсия");
                     }
                 } else CommandCenter.getInstance().executeCommand(scriptInteraction, cmd, line, interactiveStorage);
             }

@@ -7,11 +7,11 @@ public class Address {
     /**
      * Поле, содержащее улицу. Не может быть null.
      */
-    private String street;
+    private final String street;
     /**
      * Поле, содержащее индекс. Не может быть null.
      */
-    private String zipCode;
+    private final String zipCode;
 
     /**
      * Стандартный конструктор, в котором задаются обязательные параметры.
