@@ -32,7 +32,6 @@
                                 </transformer>
                             </transformers>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
-                            <shadedClassifierName>executable</shadedClassifierName>
                         </configuration>
                     </execution>
                 </executions>

@@ -16,7 +16,7 @@ public class Storage implements StorageInterface<Worker> {
     /**
      * Дата создания.
      */
-    private final Date creationDate;
+    private final Date initDate;
     /**
      * Список идентификаторов элементов коллекции.
      */
@@ -29,7 +29,7 @@ public class Storage implements StorageInterface<Worker> {
      * Стандартный конструктор, задает дату создания.
      */
     public Storage() {
-        creationDate = new Date();
+        initDate = new Date();
     }
 
     /**
@@ -45,7 +45,7 @@ public class Storage implements StorageInterface<Worker> {
      * @return дата создания.
      */
     public Date getInitializationDate() {
-        return creationDate;
+        return initDate;
     }
 
     /**
