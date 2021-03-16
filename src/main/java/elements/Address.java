@@ -1,5 +1,7 @@
 package elements;
 
+import java.util.Objects;
+
 /**
  * Класс Address.
  */
@@ -52,5 +54,15 @@ public class Address {
         if (street == null || zipCode == null)
             return null;
         else return street + " " + zipCode;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass())
+            return false;
+        if (this == obj)
+            return true;
+        Address other = (Address) obj;
+        return Objects.equals(street, other.getStreet()) && Objects.equals(zipCode, other.getZipCode());
     }
 }

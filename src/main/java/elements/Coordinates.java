@@ -1,5 +1,7 @@
 package elements;
 
+import java.util.Objects;
+
 /**
  * Класс Coordinates.
  */
@@ -31,9 +33,9 @@ public class Coordinates {
      */
     @Override
     public String toString() {
-        String textx = String.valueOf(x);
-        String texty = String.valueOf(y);
-        return textx + " " + texty;
+        String textX = String.valueOf(x);
+        String textY = String.valueOf(y);
+        return textX + " " + textY;
     }
 
     /**
@@ -52,5 +54,15 @@ public class Coordinates {
      */
     public long getY() {
         return this.y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass())
+            return false;
+        if (this == obj)
+            return true;
+        Coordinates other = (Coordinates) obj;
+        return Objects.equals(x, other.getX()) && Objects.equals(y, other.getY());
     }
 }

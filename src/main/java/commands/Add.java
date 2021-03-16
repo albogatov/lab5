@@ -29,7 +29,10 @@ public class Add extends Command {
      */
     public void execute(UserInterface ui, String[] arguments, InteractionInterface interactiveStorage) throws Exception {
         Worker worker = ui.readWorker(ui);
+        int initSize = interactiveStorage.getSize();
         interactiveStorage.add(worker);
-        ui.displayMessage("Сотрудник успешно добавлен");
+        if(interactiveStorage.getSize() > initSize)
+            ui.displayMessage("Сотрудник успешно добавлен");
+        else ui.displayMessage("Такой сотрудник уже добавлен");
     }
 }

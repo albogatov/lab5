@@ -1,6 +1,8 @@
 package elements;
 
 
+import java.util.Objects;
+
 /**
  * Класс Organization.
  */
@@ -81,5 +83,16 @@ public class Organization {
     @Override
     public String toString() {
         return name + " " + type + " " + annualTurnover + " " + postalAddress;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass())
+            return false;
+        if (this == obj)
+            return true;
+        Organization other = (Organization) obj;
+        return Objects.equals(name, other.getOrganizationName()) && Objects.equals(postalAddress, other.getPostalAddress())
+                && (type == other.getOrganizationType()) && Objects.equals(annualTurnover, other.getAnnualTurnover());
     }
 }

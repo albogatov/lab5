@@ -34,6 +34,6 @@ public class AddIfMin extends Command {
         int size2 = interactiveStorage.getSize();
         if (size2 > size1)
             ui.displayMessage("Элемент успешно добавлен");
-        else ui.displayMessage("Элемент не добавлен, т.к. он не подходит критерию");
+        else ui.displayMessage("Элемент не добавлен, т.к. он не подходит критерию или уже содержится в базе");
     }
 }

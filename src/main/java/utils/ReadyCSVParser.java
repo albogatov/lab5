@@ -142,10 +142,13 @@ public class ReadyCSVParser {
         readKeyLine(br.readLine());
         while ((line = br.readLine()) != null) {
             Worker worker = readWorker(line);
+            int initSize = workers.size();
             workers.add(worker);
-            if (worker.getId() == -1)
-                storage.generateId(worker);
-            else storage.checkId(worker);
+            if (initSize < workers.size()) {
+                if (worker.getId() == -1)
+                    storage.generateId(worker);
+                else storage.checkId(worker);
+            }
         }
     }
 }

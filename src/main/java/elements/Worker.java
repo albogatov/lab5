@@ -3,6 +3,7 @@ package elements;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Класс Worker.
@@ -126,15 +127,6 @@ public class Worker implements Comparable<Worker> {
      */
     public long getCoordinateY() {
         return coordinates.getY();
-    }
-
-    /**
-     * Метод, возвращающий дату добавления рабочего в базу.
-     *
-     * @return дата добавления.
-     */
-    public ZonedDateTime getCreationDate() {
-        return this.creationDate;
     }
 
     /**
@@ -373,5 +365,24 @@ public class Worker implements Comparable<Worker> {
     @Override
     public int compareTo(Worker comparedWorker) {
         return this.getSalary() - comparedWorker.getSalary();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass())
+            return false;
+        if (this == obj)
+            return true;
+        Worker other = (Worker) obj;
+        return Objects.equals(name, other.getName()) && Objects.equals(coordinates, other.getCoordinates())
+                && Objects.equals(salary, other.getSalary()) && Objects.equals(this.getEndDate(), other.getEndDate())
+                && (position == other.getPosition()) && (status == other.getStatus())
+                && Objects.equals(organization, other.getOrganization());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) + getCoordinateX() + (int) getCoordinateY() + salary + Objects.hashCode(endDate)
+                + Objects.hashCode(status) + Objects.hashCode(position) + Objects.hashCode(organization);
     }
 }
